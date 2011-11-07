@@ -11,9 +11,10 @@ Step 3: Download npm and install
 Step 4: Clone our repo
   Create account on https://github.com
   Visit in_arbys: https://github.com/Jakobo/in_arbys and FORK IT
-  Clone to local repository
+  Clone to local repository: git clone <path from fork>
 
 Step 5: Run server.js to enable Arby-isms
+  only need to run npm install once
   $> cd arbys
   $> sudo npm install
   $> node server.js
