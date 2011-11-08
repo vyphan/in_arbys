@@ -71,7 +71,7 @@ Abstract = klass( function ( element, settings ){
  * Creates an event listener 
  * @method bind
  * @public
- * @param {String} type The type of event 
+ * @param {String} type The type of the event 
  * @param {Function} handler The callback function
  */
 	Abstract.bind = function( type, handler ) {
@@ -79,20 +79,21 @@ Abstract = klass( function ( element, settings ){
 	}
   
   /**
-   * Description 
-   * @method Name
-   * @public|private
-   * @param {Type} Name Description
+   * Removes an event listener 
+   * @method unbind
+   * @public
+   * @param {String} type The type of the event
    */
 	Abstract.unbind = function( type ) {
 		return Event.unbind( type + namespace );;
 	}
 	
 	/**
-   * Description 
-   * @method Name
-   * @public|private
-   * @param {Type} Name Description
+   * Fires a custom event 
+   * @method trigger
+   * @public
+   * @param {String} type The type of the event
+   * @param {Array} parameters Arguments passed through to the callback function
    */
   Abstract.trigger = function( type, parameters ) {
 		notify( type + namespace, parameters );
@@ -100,10 +101,10 @@ Abstract = klass( function ( element, settings ){
 	}
 	
 	/**
-   * Description 
-   * @method Name
-   * @public|private
-   * @param {Type} Name Description
+   * Subscribes to a custom event
+   * @method subscribe
+   * @public
+   * @param {Object} observer A reference to another ui component that wants to respond to some event triggered by the instance.
    */
   Abstract.subscribe = function( observer ) {
 		observers.push( observer );
