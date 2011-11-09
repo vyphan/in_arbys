@@ -43,7 +43,7 @@
 
 		var getResource = false,
 			head = document.getElementsByTagName( 'head' )[0],
-			proxieIds = [ 'gr.in:3000' ],
+			proxieIds = [ 'localhost:3000' ],
 			proxies = [];
 
 		_.each( proxieIds, function( item, index ){
@@ -76,35 +76,62 @@
 
 	<!-- Bootstrap:UI -->
 	<script src="/scripts/libraries/jquery-1.7.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/scripts/libraries/athena/athena-0.0.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/scripts/libraries/athena-0.0.1.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
 
 <body>
 
-	<div id="container">
-		<a id="roast_beef" href="/remote.html" role="ui:Button" data-config="{
+	<div id="container" data-athena="ui:Abstract" data-athena-config="{
+		ui:Abstract: {}
+	}">
+		<button id="play_button" data-athena="ui:Button" data-athena-config="{
 			'ui:Button': {
-				event: 'click',
-				out: 'roast-beef-ify'
+				action: 'play'
 			}
-		}">Click Me</a>
+		}">Play</button>
+
+		<button id="pause_button" data-athena="ui:Button" data-athena-config="{
+			'ui:Button': {
+				action: 'pause'
+			}
+		}">Pause</button>
+
 	</div>
 
 	<script type="text/javascript" charset="utf-8">
 		$( function() {
 
-			$( 'container' ).bind( 'acting', function() {
-				$( '#roast_beef' ).bind( 'roast-beef-ify:before', function() {
-					console.info( 'Before, roast-beef-ified.' );
-				} );
-				$( '#roast_beef' ).bind( 'roast-beef-ify', function() {
-					console.info( 'Now, roast-beef-ified.' );
-				} );
-				$( '#roast_beef' ).bind( 'roast-beef-ify:after', function() {
-					console.info( 'After, roast-beef-ified.' );
-				} );
-				
+			$( '#pause_button' ).on( 'pause:before', function() {
+				console.info(  'before, pause' );
+			} );
+
+			$( '#container' ).on( 'pause', function() {
+				console.info( 'bubbled, pause' );
+			} );
+
+			$( '#pause_button' ).on( 'pause', function() {
+				console.info( 'pause' );
+			} );
+
+			$( '#pause_button' ).on( 'pause:after', function() {
+				console.info( 'after, pause' );
+			} );
+
+			$( '#play_button' ).on( 'play:before', function() {
+				console.info( 'before, play' );
+			} );
+
+			$( '#container' ).on( 'play', function() {
+				console.info( 'bubbled, play' );
+			} );
+
+			$( '#play_button' ).on( 'play', function() {
+				console.info( 'play' );
+			} );
+
+			$( '#play_button' ).on( 'play:after', function() {
+				console.info( 'after, play' );
 			} );
 
 			$( '#container' ).act();

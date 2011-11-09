@@ -1,22 +1,23 @@
-var id = 'ui/Button',
+var id = 'ui:Button',
 	Abstract = li.require( 'ui/Abstract' ),
 	Button;
 
-Button = Abstract.extend( function ( element, settings ){
+Button = Abstract.extend( function ( $element, settings ){
 	var Button = this,
 		defaults = {
-			event: 'click',
-			parameters: []
+			on: 'click'
 		},
-		out;
+		action;
 
 	settings = _.extend( defaults, settings );
 
-	out =  settings.out;
+	action = settings.action;
 
-	element.bind( settings.event, function ( event ) {
-		Button.send( out );
-	} )
+	$element.on( settings.on, function ( event ) {
+		Button.trigger( action );
+	} );
+
+	$element.data( id, Button );
 
 } );
 

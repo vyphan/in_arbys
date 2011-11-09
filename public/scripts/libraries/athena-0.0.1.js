@@ -1,7 +1,7 @@
 
 ( function( $ ){
 
-	var pattern = pattern = '*[role*="ui:"]',
+	var pattern = pattern = '[data-athena*="ui:"]',
 		queues = {},
 		actions = {},
 		required = [];
@@ -27,7 +27,7 @@
 
 		//Instantiate a node's role.
 		function execute( $node, role, Action ) {
-			new Action( $node, new Function ( '$this', 'return ' + $node.data().config + '[\'' + role + '\']'  )( $node ) );
+			new Action( $node, new Function ( '$this', 'return ' + $node.data( 'athenaConfig' ) + '[\'' + role + '\']'  )( $node ) );
 			$node.data( 'acting', true );
 			console.info( 'Action ' + role + ' executed with', $node );
 			count -= 1;
@@ -59,7 +59,7 @@
 			//There are no child UI components, so it's safe to instanceiate it, or queue it up and load nessasary packages
 			if( $actors.length === 0 ) {
 				if( $this.is( pattern ) ) {
-					roles = _.reject( ( $this.attr( 'role' ) || '' ).split( ' ' ), function( role, index ) {
+					roles = _.reject( ( $this.data().athena || '' ).split( ' ' ), function( role, index ) {
 						return ( role.indexOf( 'ui:' ) === -1 );
 					} );
 					_.each( roles, function( role, index ) {
@@ -92,7 +92,7 @@
 				recurse( $( node ) );
 			} );
 
-		} () );
+		} ( $this ) );
 
 	}
 

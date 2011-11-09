@@ -260,7 +260,7 @@
 		{
 			id: 'libraries/klass',
 			version: '1.0.0',
-			path: '/scripts/packages/libraries/klass.js'
+			path: '/scripts/libraries/klass.js'
 		}, {
 			id: 'providers/Event',
 			version: '0.0.1',
@@ -271,6 +271,11 @@
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Abstract.js',
 			requires: ['libraries/klass', 'providers/Event']
+		}, {
+			id: 'ui/Button',
+			version: '0.0.1',
+			path: '/scripts/packages/ui/Button.js',
+			requires: ['ui/Abstract']
 		}
 	] );
 
