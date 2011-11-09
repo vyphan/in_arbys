@@ -1,10 +1,5 @@
-/**
- * @id providers/Event
- * @requires ['libraries/jquery', 'libraries/klass']
- */
-
 var klass = li.require( 'libraries/klass' ),
-	EventProvider;
+  EventProvider;
 
 /**
  * EventProvider library
@@ -13,93 +8,97 @@ var klass = li.require( 'libraries/klass' ),
  * @requires ['libraries/jquery', 'libraries/klass']
  * @param {Object} settings Configuration options for this instance
  */
-var EventProvider = klass( function ( settings ){
+EventProvider = klass( function ( settings ){
 
 /**
  * EventProvider instance
  * @property EventProvider
+ * @private
  * @type {Object}
  */
-	var EventProvider = this,
+  var EventProvider = this,
   /**
-   * Configuration defaults
+   * Default configuration values
    * @property defaults
+   * @private
    * @type {Object}
    */
-		defaults = {
-			proxy: $( {} )
-		},
+    defaults = {
+      /**
+       * A selector used in creating a Jquery collection to proxie events
+       * @property subscribe
+       * @type {String}
+       */
+      proxy: '',
+    },
     /**
-     * TBD
-     * @property cache
-     * @type {Object}
-     */
-		cache = {},
-    /**
-     * TBD
+     * A jQuery collection to proxy events
      * @property proxy
+     * @private
+     * @type {Array}
+     */
+    $proxy,
+    /**
+     * A cache of $proxy event methods
+     * @property cache
+     * @private
      * @type {Object}
      */
-		proxy,
-    /**
-     * Description
-     * @property provider
-     * @type {Boolean}
-     */
-		provider = true;
+    cache = {};
 
-	settings = _.extend( defaults, settings );
+  settings = _.extend( defaults, settings );
 
-	proxy = settings.proxy;
-	cache.bind = proxy.bind;
-	cache.unbind = proxy.unbind
-	cache.trigger = proxy.trigger;
+  $proxy = $( settings.proxy );
 
-/**
- * Creates an event listener. 
- * @method bind
- * @public
- * @param {String} type The event type to respond to
- * @param {function} handler The callback function triggered by the event
- */
-	EventProvider.bind = function ( type, handler ) {
-		return ( function() {
-			cache.bind.apply( settings.proxy, [type, handler] );
-			return EventProvider;
-		}() );
-	}
+  cache.on = $proxy.on;
+  cache.off = $proxy.off
+  cache.trigger = $proxy.trigger;
 
   /**
-   * Removes an event listener. 
-   * @method unbind
+   * Creates an event listener. 
+   * @method on
+   * @public
+   * @param {String} type The event type to respond to
+   * @param {function} handler The callback function triggered by the event
+   */
+  EventProvider.on = function ( type, handler ) {
+    return ( function() {
+      cache.on.apply( $proxy, [type, handler] );
+      return EventProvider;
+    }() );
+  }
+
+  /**
+   * Removes a event listeners of type. 
+   * @method off
    * @public
    * @param {String} type The event type to remove
-   */
-	EventProvider.unbind = function( type ) {
-		return proxy.unbind = ( function() {
-			cache.unbind.apply( settings.proxy, [type] );
-			return EventProvider;
-		}() );
-	}
-	
+  */
+  EventProvider.off = function( type ) {
+    return proxy.off = ( function() {
+      cache.off.apply( settings.proxy, [type] );
+      return EventProvider;
+    }() );
+  }
+
   /**
-   * Fires a custom event.
+   * Fires an event.
    * @method trigger
    * @public
    * @param {String} type The event type
    * @param {Array} parameters Arguments passed on to the callback function.
    */
-	EventProvider.trigger = function( type, parameters ) {
-		return ( function() {
-			cache.trigger.apply( settings.proxy, [type + ':before', parameters] );
-			cache.trigger.apply( settings.proxy, [type, parameters] );
-			cache.trigger.apply( settings.proxy, [type + ':after', parameters] );
-			return EventProvider;
-		}() );
-	}
+  EventProvider.trigger = function( type, parameters ) {
+    return ( function() {
+      cache.trigger.apply( $proxy, [type + ':before', parameters] );
+      cache.trigger.apply( $proxy, [type, parameters] );
+      cache.trigger.apply( $proxy, [type + ':after', parameters] );
+      return EventProvider;
+    }() );
+  }
 
 } );
 
 if ( typeof module !== 'undefined' && module.exports ) {
-	module.exports = EventProvider;
+  module.exports = EventProvider;
 }
