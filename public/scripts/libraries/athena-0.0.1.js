@@ -36,7 +36,7 @@
 			}
 		}
 
-		//Keep track of total actors found, so we can trigger an acting event when they're instanciated
+		//Keep track of total actors found, so we can trigger an acting event when they're instantiated
 		count = _.reject( $( pattern, $this ), function( item, index ) {
 			return $( item ).data().acting;
 		} ).length;

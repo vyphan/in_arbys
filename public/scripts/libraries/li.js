@@ -282,7 +282,12 @@
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Abstract.js',
 			requires: ['libraries/klass', 'providers/Event']
-		}
+		}, {
+  			id: 'ui/Button',
+  			version: '0.0.1',
+  			path: '/scripts/packages/ui/Buttonjs',
+  			requires: ['ui/Abstract']
+  		}
 	] );
 
 }() );
