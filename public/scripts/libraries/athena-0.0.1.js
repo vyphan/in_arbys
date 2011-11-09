@@ -58,13 +58,8 @@
 
 			//There are no child UI components, so it's safe to instantiate it, or queue it up and load nessasary packages
 			if( $actors.length === 0 ) {
-<<<<<<< HEAD
-				if( x$this.is( pattern ) ) {
-					roles = _.reject( ( x$this.attr( 'role' ) || '' ).split( ' ' ), function( role, index ) {
-=======
 				if( $this.is( pattern ) ) {
 					roles = _.reject( ( $this.data().athena || '' ).split( ' ' ), function( role, index ) {
->>>>>>> 1dbbeeebc6e7daef9de922f971f9296d5c00304c
 						return ( role.indexOf( 'ui:' ) === -1 );
 					} );
 					_.each( roles, function( role, index ) {

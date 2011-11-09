@@ -283,19 +283,11 @@
 			path: '/scripts/packages/ui/Abstract.js',
 			requires: ['libraries/klass', 'providers/Event']
 		}, {
-<<<<<<< HEAD
-  			id: 'ui/Button',
-  			version: '0.0.1',
-  			path: '/scripts/packages/ui/Buttonjs',
-  			requires: ['ui/Abstract']
-  		}
-=======
 			id: 'ui/Button',
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Button.js',
-			requires: ['ui/Abstract']
+			requires: ['ui/Button']
 		}
->>>>>>> 1dbbeeebc6e7daef9de922f971f9296d5c00304c
 	] );
 
 }() );

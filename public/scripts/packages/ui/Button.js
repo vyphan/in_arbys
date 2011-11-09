@@ -1,41 +1,53 @@
+console.log("Button.js is loaded!");
+
 var id = 'ui:Button',
   Abstract = li.require( 'ui/Abstract' ),
   Button;
 
+/**
+ * Representation of a button element
+ * @class Button
+ * @constructor
+ * @param {HTMLElement} element The HTML element surrounded by the control
+ * @param {Object} settings Configuration properties for this instance
+ */
 Button = Abstract.extend( function ( $element, settings ){
+/**
+ * Instance of Button
+ * @property Button
+ * @type Object
+ */
   var Button = this,
+/**
+ * Default configuration values
+ * @property defaults
+ * @type Object
+ */
     defaults = {
       on: 'click'
     },
+    /**
+     * Custom event name
+     * @property action
+     * @type Object
+     */
     action;
 
   settings = _.extend( defaults, settings );
 
   action = settings.action;
 
-<<<<<<< HEAD
-	element.bind( settings.event, function ( event ) {
-		Button.send( out );
-		console.log("Button clicked");
-	} );
-=======
   $element.on( settings.on, function ( event ) {
     Button.trigger( action );
+    console.log("button clicked!");
   } );
 
   $element.data( id, Button );
->>>>>>> 1dbbeeebc6e7daef9de922f971f9296d5c00304c
 
 } );
 
 if ( typeof module !== 'undefined' && module.exports ) {
-<<<<<<< HEAD
-	module.exports = Button;
-}
-
-
-alert('yo');
-=======
   module.exports = Button;
 }
->>>>>>> 1dbbeeebc6e7daef9de922f971f9296d5c00304c
+
+
