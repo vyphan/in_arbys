@@ -355,8 +355,8 @@
 	li.define( [
 		{
 			id: 'libraries/klass',
-			version: '1.0.0',
-			path: '/scripts/libraries/klass.js'
+			version: '#ashasdkakkjkshdjsdkshdkhskjshj',
+			path: '/scripts/libraries/klass.js?'
 		}, {
 			id: 'providers/Event',
 			version: '0.0.1',

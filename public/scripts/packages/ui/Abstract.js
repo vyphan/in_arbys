@@ -109,7 +109,6 @@ Abstract = klass( function ( $element, settings ){
       if( settings.bubble === false ) {
         event.stopPropagation();
       }
-      console.log( event );
       handler.apply( arguments );
     } );
   }
