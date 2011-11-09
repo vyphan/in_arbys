@@ -8,6 +8,7 @@ var id = 'ui:Button',
  * Representation of a button element
  * @class Button
  * @constructor
+ * @extends Abstract
  * @param {HTMLElement} element The HTML element surrounded by the control
  * @param {Object} settings Configuration properties for this instance
  */

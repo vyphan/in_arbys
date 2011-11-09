@@ -15,25 +15,57 @@
 
 ( function( window, document, undefined ) {
 
+/**
+ * Module namespace
+ * @property li
+ * @type Object
+ */
 	var li = {},
+	/**
+	 * List of JS files
+	 * @property modules
+	 * @type Array
+	 */
 		modules = [],
-		packages = {},
-		loaders = {};
+
+  /**
+   * Object containing meta data for each module
+   * @property packages
+   * @type Object
+   */
+	packages = {},
+	/**
+	 * A hash-map of Resource Loaders
+	 * @property loaders
+	 * @type Object
+	 */
+	loaders = {};
 
 	//Allow resource sharing across *.linkedin.com,
-	//This should be factored out with via proxy.
-
+	//This should be factored out via proxy.
 	if( document.domain.match( 'linkedin.com' ) ) {
 		document.domain = 'linkedin.com';
 	}
 
+  /**
+   * Global configuration object
+   * @property ENV_CONFIG
+   * @type Object
+   */
 	window.ENV_CONFIG = ENV_CONFIG || {};
 
+  // merge external and local global configs
 	li.environment = _.extend( {
 		debug: false,
 		baseUri: ''
 	}, ENV_CONFIG );
 
+  /**
+   * Stores packages in Local Storage if available 
+   * @method cacheScript
+   * @private
+   * @param {String} id The package id
+   */
 	function cacheScript( id ) {
 		var pckg,
 			key;
@@ -45,6 +77,12 @@
 		}
 	}
 	
+	/**
+	 * Executes/evals code.
+	 * @method evalScript
+	 * @private
+	 * @param {String} code The code to evaluate
+	 */
 	function evalScript( code ) {
 		if ( window.execScript ) {
 			window.execScript( code );
@@ -53,19 +91,44 @@
 		}
 	}
 	
+  /**
+   * Class to manage javascript dependencies
+   * @class Require
+   * @constructor
+   * @param {Arra} ids The list of package ids to load.
+   * @param {Function} callback The callback function to execute after loading is complete. 
+   */
 	function Require( ids, callback ) {
 		var required = [],
 			interfaces = ids,
 			request;
 
+    /**
+     * Dynamically loads a script file 
+     * @method getScript
+     * @private
+     * @param {String} id The identity key for the script
+     */
 		function getScript( id ) {
 			var pckg = packages[id],
 				key,
 				loader = new ResourceLoader();
 
+      /**
+       * Loads an external resource
+       * @class ResourceLoader
+       * @constructor
+       * @for Require
+       */
 			function ResourceLoader(){
 				var ResourceLoader = this;
 
+        /**
+         * Generates a globally-unique identifer
+         * @method guid
+         * @private
+         * @return {String} The id 
+         */
 				function guid() {
 					function S4() {
 						return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 );
@@ -73,17 +136,38 @@
 					return ( S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4() );
 				}
 
+        /**
+         * The id of the resource loader instance
+         * @property id
+         * @type String
+         */
 				ResourceLoader.id = guid();
 
+        // Add this instance into the map of loaders
 				loaders[ResourceLoader.id] = ResourceLoader;
+
+        /**
+         * Caches and evaluates the loaded script file. 
+         * @method proxyEventHandler
+         * @private
+         * @param {Object} response The data returned from loading the script via XHR
+         */
 				ResourceLoader.proxyEventHandler = function( response ) {
 					pckg.__script = response;
 					cacheScript( pckg.id );
 					resolve( pckg.id );
 				};
 				
+				/**
+				 * Description 
+				 * @method Name
+				 * @public|private
+				 * @param {Type} Name Description
+				 */
+				
+				
 				ResourceLoader.load = function( url ){
-					( function recurse() {
+          ( function recurse() {
 						if( window.getResource ) {
 							window.getResource( ResourceLoader.id, url );
 						} else {
@@ -91,8 +175,9 @@
 						}
 					}() );
 				};
-				
+			  
 			}
+			
 			function resolve( id ) {
 				var i,
 					code;
@@ -286,7 +371,7 @@
 			id: 'ui/Button',
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Button.js',
-			requires: ['ui/Button']
+			requires: ['ui/Abstract']
 		}
 	] );
 

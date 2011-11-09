@@ -17,38 +17,6 @@ Abstract = klass( function ( $element, settings ){
    * @property Abstrance
    * @type {Object}
    */
-<<<<<<< HEAD
-	var Abstract = this,
-	/**
-	 * Instance of EventProvider
-	 * @property Event
-	 * @type {Object}
-	 */
-	Event,
-  /**
-    * Default configuration values
-  	* @property defaults
-  	* @type {Object}
-  	*/
-  defaults = {
-    observers: []
-  },
-  /**
-   * Other components that are watching this component for any events it triggers
-   * @property observers
-   * @type {Array}
-   */
-  observers,
-  /**
-   * Description
-   * @property namespace
-   * @type {String}
-   */
-	namespace;
-	
-	settings = _.extend( defaults, settings );
-	observers = settings.observers;
-=======
   var Abstract = this,
     /**
      * Instance of EventProvider
@@ -102,7 +70,6 @@ Abstract = klass( function ( $element, settings ){
      * @type {String}
      */
     namespace = '';
->>>>>>> 1dbbeeebc6e7daef9de922f971f9296d5c00304c
 
   settings = _.extend( defaults, settings );
 
@@ -113,63 +80,6 @@ Abstract = klass( function ( $element, settings ){
   $subscribers = $( settings.publish );
   $subscribe = $( settings.subscribe );
 
-<<<<<<< HEAD
-  /**
-   * Trigger events for any observers 
-   * @method notify
-   * @private
-   * @param {String} type The type of custom event to trigger
-   * @param {Array} parameters Arguments passed through to the observer's callback function
-   */
-	function notify( type, parameters ) {
-		_.each( observers, function( observer, index ) {
-			observer.trigger ? observer.trigger( type, parameters ) : $( observer ).trigger( type, parameters );
-		} );
-	}
-
-  /**
-   * Creates an event listener 
-   * @method bind
-   * @public
-   * @param {String} type The type of the event 
-   * @param {Function} handler The callback function
-   */
-	Abstract.bind = function( type, handler ) {
-		return Event.bind( type + namespace, handler );
-	};
-  
-  /**
-   * Removes an event listener 
-   * @method unbind
-   * @public
-   * @param {String} type The type of the event
-   */
-	Abstract.unbind = function( type ) {
-		return Event.unbind( type + namespace );
-	};
-	
-	/**
-   * Fires a custom event 
-   * @method trigger
-   * @public
-   * @param {String} type The type of the event
-   * @param {Array} parameters Arguments passed through to the callback function
-   */
-  Abstract.trigger = function( type, parameters ) {
-		notify( type + namespace, parameters );
-		return Event.trigger( type + namespace, parameters );
-	};
-	
-	/**
-   * Subscribes to a custom event
-   * @method subscribe
-   * @public
-   * @param {Object} observer A reference to another ui component that wants to respond to some event triggered by the instance.
-   */
-  Abstract.subscribe = function( observer ) {
-		observers.push( observer );
-	};
-=======
   Event = new EventProvider( {
     proxy: $element
   } );
@@ -244,7 +154,6 @@ Abstract = klass( function ( $element, settings ){
   Abstract.unsubscribe = function( $subscriber ) {
     $subscribers = $subscriber.filter( $subscribers );
   }
->>>>>>> 1dbbeeebc6e7daef9de922f971f9296d5c00304c
 
   //Export a refferance in jQuery's data see http://api.jquery.com/data/
   $element.data( id, Abstract );
