@@ -1,3 +1,4 @@
+
 /**
  * @id providers/Event
  * @requires ['libraries/jquery', 'libraries/klass']
