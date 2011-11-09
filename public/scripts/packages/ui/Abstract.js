@@ -12,38 +12,38 @@ var id = 'ui/Abstract',
  */
 Abstract = klass( function ( element, settings ){
 
-/**
- * Instance of Abstract class
- * @property Abstrance
- * @type {Object}
- */
+  /**
+   * Instance of Abstract class
+   * @property Abstrance
+   * @type {Object}
+   */
 	var Abstract = this,
 	/**
 	 * Instance of EventProvider
 	 * @property Event
 	 * @type {Object}
 	 */
-		Event,
-  	/**
-  	 * Default configuration values
-  	 * @property defaults
-  	 * @type {Object}
-  	 */
-		defaults = {
-			observers: []
-		},
-  	/**
-  	 * Other components that are watching this component for any events it triggers
-  	 * @property observers
-  	 * @type {Array}
-  	 */
-		observers,
-  	/**
-  	 * Description
-  	 * @property namespace
-  	 * @type {String}
-  	 */
-		namespace;
+	Event,
+  /**
+    * Default configuration values
+  	* @property defaults
+  	* @type {Object}
+  	*/
+  defaults = {
+    observers: []
+  },
+  /**
+   * Other components that are watching this component for any events it triggers
+   * @property observers
+   * @type {Array}
+   */
+  observers,
+  /**
+   * Description
+   * @property namespace
+   * @type {String}
+   */
+	namespace;
 	
 	settings = _.extend( defaults, settings );
 	observers = settings.observers;
@@ -55,25 +55,25 @@ Abstract = klass( function ( element, settings ){
 		proxy: element
 	} );
 
-/**
- * Trigger events for any observers 
- * @function notify
- * @param {String} type The type of custom event to trigger
- * @param {Array} parameters Arguments passed through to the observer's callback function
- */
+  /**
+   * Trigger events for any observers 
+   * @function notify
+   * @param {String} type The type of custom event to trigger
+   * @param {Array} parameters Arguments passed through to the observer's callback function
+   */
 	function notify( type, parameters ) {
 		_.each( observers, function( observer, index ) {
 			observer.trigger ? observer.trigger( type, parameters ) : $( observer ).trigger( type, parameters );
 		} );
 	}
 
-/**
- * Creates an event listener 
- * @method bind
- * @public
- * @param {String} type The type of the event 
- * @param {Function} handler The callback function
- */
+  /**
+   * Creates an event listener 
+   * @method bind
+   * @public
+   * @param {String} type The type of the event 
+   * @param {Function} handler The callback function
+   */
 	Abstract.bind = function( type, handler ) {
 		return Event.bind( type + namespace, handler );
 	}

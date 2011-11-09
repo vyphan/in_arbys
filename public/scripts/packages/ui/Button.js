@@ -16,10 +16,14 @@ Button = Abstract.extend( function ( element, settings ){
 
 	element.bind( settings.event, function ( event ) {
 		Button.send( out );
-	} )
+		console.log("Button clicked");
+	} );
 
 } );
 
 if ( typeof module !== 'undefined' && module.exports ) {
 	module.exports = Button;
 }
+
+
+alert('yo');
