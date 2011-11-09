@@ -57,7 +57,8 @@ Abstract = klass( function ( element, settings ){
 
   /**
    * Trigger events for any observers 
-   * @function notify
+   * @method notify
+   * @private
    * @param {String} type The type of custom event to trigger
    * @param {Array} parameters Arguments passed through to the observer's callback function
    */
@@ -76,7 +77,7 @@ Abstract = klass( function ( element, settings ){
    */
 	Abstract.bind = function( type, handler ) {
 		return Event.bind( type + namespace, handler );
-	}
+	};
   
   /**
    * Removes an event listener 
@@ -86,7 +87,7 @@ Abstract = klass( function ( element, settings ){
    */
 	Abstract.unbind = function( type ) {
 		return Event.unbind( type + namespace );;
-	}
+	};
 	
 	/**
    * Fires a custom event 
@@ -98,7 +99,7 @@ Abstract = klass( function ( element, settings ){
   Abstract.trigger = function( type, parameters ) {
 		notify( type + namespace, parameters );
 		return Event.trigger( type + namespace, parameters );
-	}
+	};
 	
 	/**
    * Subscribes to a custom event
@@ -108,7 +109,7 @@ Abstract = klass( function ( element, settings ){
    */
   Abstract.subscribe = function( observer ) {
 		observers.push( observer );
-	}
+	};
 
 	element.data( id, this );
 
