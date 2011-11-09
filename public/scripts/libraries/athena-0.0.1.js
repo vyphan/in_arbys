@@ -41,33 +41,34 @@
 			return $( item ).data().acting;
 		} ).length;
 
-		//Recurse over children to make sure UI components are instanciated inside out. 
-		( function recurse( $this ) {
+		//Recurse over children to make sure UI components are instantiated inside out. 
+		( function recurse( x$this ) {
 			var $actors,
 				roles;
 
 			//It's already instantiated so there's no need to continue
-			if( $this.data().acting ) {
+			if( x$this.data().acting ) {
 				return;
 			}
 
 			//UI components that are children of the passed in node.
-			$actors = _.reject( $( pattern, $this ), function( item, index ) {
+			$actors = _.reject( $( pattern, x$this ), function( item, index ) {
 				return $( item ).data().acting;
 			} );
 
-			//There are no child UI components, so it's safe to instanceiate it, or queue it up and load nessasary packages
+			//There are no child UI components, so it's safe to instantiate it, or queue it up and load nessasary packages
 			if( $actors.length === 0 ) {
-				if( $this.is( pattern ) ) {
-					roles = _.reject( ( $this.attr( 'role' ) || '' ).split( ' ' ), function( role, index ) {
+				if( x$this.is( pattern ) ) {
+					roles = _.reject( ( x$this.attr( 'role' ) || '' ).split( ' ' ), function( role, index ) {
 						return ( role.indexOf( 'ui:' ) === -1 );
 					} );
 					_.each( roles, function( role, index ) {
 						var module;
 						if( typeof actions[role] === 'function' ) {
-							execute( $this, role, actions[role] );
-						} else {
-							enqueue( role, $this );
+							execute( x$this, role, actions[role] );
+						} 
+						else {
+							enqueue( role, x$this );
 							module = role.replace( ':', '/' );
 							if( _.indexOf( required, module ) === -1 ) {
 								required.push( module );
@@ -77,7 +78,7 @@
 									while ( queue.length > 0 ) {
 										execute( queue.pop(), role, Action );
 									}
-									recurse( $this.parents() );
+									recurse( x$this.parents() );
 								} );
 							}
 						}
@@ -88,13 +89,13 @@
 			}
 
 			//Lather, rinse, repeat...
-			_.each( $this.contents(), function( node, index ) {
+			_.each( x$this.contents(), function( node, index ) {
 				recurse( $( node ) );
 			} );
 
-		} () );
+		} ( $this ) );
 
-	}
+	};
 
 }( jQuery ) );
 
@@ -103,6 +104,6 @@
 	//Returns a control.
 	$.fn.getControl = function( id ) {
 		return $( this ).data( id );
-	}
+	};
 
 }( jQuery ) );

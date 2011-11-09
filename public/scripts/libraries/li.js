@@ -44,6 +44,7 @@
 			localStorage[key] = pckg.__script;
 		}
 	}
+	
 	function evalScript( code ) {
 		if ( window.execScript ) {
 			window.execScript( code );
@@ -51,6 +52,7 @@
 			window.eval.call( window, code );
 		}
 	}
+	
 	function Require( ids, callback ) {
 		var required = [],
 			interfaces = ids,
@@ -78,7 +80,8 @@
 					pckg.__script = response;
 					cacheScript( pckg.id );
 					resolve( pckg.id );
-				}
+				};
+				
 				ResourceLoader.load = function( url ){
 					( function recurse() {
 						if( window.getResource ) {
@@ -87,7 +90,8 @@
 							window.setTimeout( recurse, 1 );
 						}
 					}() );
-				}
+				};
+				
 			}
 			function resolve( id ) {
 				var i,
@@ -110,7 +114,7 @@
 						try {
 							evalScript( code );
 						} catch ( e ) {
-							console.error( 'Module ', item, ' could not be loaded.\n', e )
+							console.error( 'Module ', item, ' could not be loaded.\n', e );
 							return false;
 						}
 					
@@ -154,7 +158,7 @@
 					namespaces = item.split( '/' ),
 					namespace = 'li',
 					context = li;
-			
+
 				_.each( namespaces, function( item, index ) {
 
 					if( context[namespaces[index]] === undefined ) {
@@ -203,7 +207,10 @@
 		this.execute = function() {
 			( function gather( ids ) {
 				_.each( ids, function( item, index ) {
-					gather( packages[ item ].requires );
+          if (packages[item]) {
+					  gather( packages[ item ].requires );
+					}
+					
 					if( _.indexOf( modules, item ) === -1 ) {
 						required.push( item );
 						modules.push( item );
@@ -214,7 +221,7 @@
 			if( required.length > 0 ) {
 				require( required );
 			}
-		}
+		};
 
 	}
 
@@ -227,14 +234,18 @@
 				path: item.path || li.environment.baseUri + item.id + '.js'
 			};
 		} );
-	}
+	};
+	
 	li.require = function( ids, callback ){
+	  var pckg;
 		if( typeof ids === 'string' ){
-			var pckg = packages[ids];
+			pckg = packages[ids];
 			return eval( pckg.__namespace );
 		}
 		new Require( ids, callback ).execute();
-	}
+		return false;
+	};
+	
 	li.proxyEventHandler = function ( event ) {
 		var parameters = event.data.split( '&response=' ),
 			response,
@@ -245,7 +256,7 @@
 
 		loaders[key].proxyEventHandler( response );
 
-	}
+	};
 
 	//CommonJS
 	window.module = { exports: true };
