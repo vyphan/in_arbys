@@ -78,7 +78,8 @@
 					pckg.__script = response;
 					cacheScript( pckg.id );
 					resolve( pckg.id );
-				}
+				};
+				
 				ResourceLoader.load = function( url ){
 					( function recurse() {
 						if( window.getResource ) {
@@ -87,8 +88,11 @@
 							window.setTimeout( recurse, 1 );
 						}
 					}() );
-				}
+				};
 			}
+			
+			
+			
 			function resolve( id ) {
 				var i,
 					code;
@@ -110,7 +114,7 @@
 						try {
 							evalScript( code );
 						} catch ( e ) {
-							console.error( 'Module ', item, ' could not be loaded.\n', e )
+							console.error( 'Module ', item, ' could not be loaded.\n', e );
 							return false;
 						}
 					
@@ -146,6 +150,7 @@
 			return;
 
 		}
+		
 		function require( ids ) {
 			_.each( ids, function( item, index ) {
 
@@ -214,7 +219,7 @@
 			if( required.length > 0 ) {
 				require( required );
 			}
-		}
+		};
 
 	}
 
@@ -227,14 +232,17 @@
 				path: item.path || li.environment.baseUri + item.id + '.js'
 			};
 		} );
-	}
+	};
+	
 	li.require = function( ids, callback ){
 		if( typeof ids === 'string' ){
 			var pckg = packages[ids];
 			return eval( pckg.__namespace );
 		}
 		new Require( ids, callback ).execute();
-	}
+		return null;
+	};
+	
 	li.proxyEventHandler = function ( event ) {
 		var parameters = event.data.split( '&response=' ),
 			response,
@@ -245,7 +253,7 @@
 
 		loaders[key].proxyEventHandler( response );
 
-	}
+	};
 
 	//CommonJS
 	window.module = { exports: true };
