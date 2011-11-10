@@ -106,13 +106,14 @@ Abstract = klass( function ( $element, settings ){
    */
   Abstract.on = function( type, handler ) {
     return Event.on( type + namespace, function( event ) {
+debugger;
       if( settings.bubble === false ) {
         event.stopPropagation();
       }
       console.log( event );
       handler.apply( arguments );
     } );
-  }
+  };
 
   /**
    * Unbinds event listener(s) of a type
@@ -122,7 +123,7 @@ Abstract = klass( function ( $element, settings ){
    */
   Abstract.off = function( type ) {
     return Event.off( type + namespace );
-  }
+  };
 
   /**
    * Description 
@@ -133,7 +134,7 @@ Abstract = klass( function ( $element, settings ){
   Abstract.trigger = function( type, parameters ) {
     notify( type + namespace, parameters );
     return Event.trigger( type + namespace, parameters );
-  }
+  };
 
   /**
    * Subscribe to events
@@ -143,7 +144,7 @@ Abstract = klass( function ( $element, settings ){
    */
   Abstract.subscribe = function( $subscriber ) {
     $subscribers.add( $subscriber );
-  }
+  };
 
   /**
    * Unsubscribe from events
@@ -153,7 +154,7 @@ Abstract = klass( function ( $element, settings ){
    */
   Abstract.unsubscribe = function( $subscriber ) {
     $subscribers = $subscriber.filter( $subscribers );
-  }
+  };
 
   //Export a refferance in jQuery's data see http://api.jquery.com/data/
   $element.data( id, Abstract );
