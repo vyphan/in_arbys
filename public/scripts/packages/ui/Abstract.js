@@ -126,10 +126,11 @@ Abstract = klass( function ( $element, settings ){
   };
 
   /**
-   * Description 
-   * @method Name
+   * Fires a custom event 
+   * @method trigger
    * @public
-   * @param {Type} Name Description
+   * @param {String} type The type of event
+   * @param {Aarray} parameters Extra arguments to pass through to the subscribed event handler
    */
   Abstract.trigger = function( type, parameters ) {
     notify( type + namespace, parameters );
