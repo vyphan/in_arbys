@@ -91,7 +91,8 @@
 
     <button id="pause_button" data-athena="ui:Button" data-athena-config="{
       'ui:Button': {
-        action: 'pause'
+        action: 'pause',
+        bubble: false
       }
     }">Pause</button>
 
@@ -100,7 +101,7 @@
   <script type="text/javascript" charset="utf-8">
     $( function() {
 
-      $( '#pause_button' ).on( 'pause:before', function() {
+      Button.on( 'pause:before', function() {
         console.info(  'before, pause' );
       } );
 
@@ -132,7 +133,8 @@
         console.info( 'after, play' );
       } );
 
-      $( '#container' ).act();
+      container.html();
+
     } );
   </script>
 
