@@ -66,8 +66,7 @@ THE SOFTWARE.
   */
   /*
   Constants and Registries used
-  */  var JSON, Persist, Porthole, callbackRegistry, checkComplete, clearFileRegistry, commonJSFooter, commonJSHeader, config, context, counter, createIframe, createTxId, fileExpiration, fileOnComplete, fileRegistry, fileStorage, fileStorageToken, fileStore, getFile, getModule, getPointcuts, getXHR, hostPrefixRegex, hostSuffixRegex, iframeName, isCached, isExpired, jsSuffix, loadModules, loadQueue, modulePathRegistry, moduleRegistry, namespace, normalizePath, onModuleLoad, pauseRequired, require, requireReducerRegex, requireRegex, responseSlicer, saveFile, saveModule, schemaVersion, sendToIframe, sendToXhr, setConfig, setUserModules, txnRegistry, userModules, xDomainRpc;
-  var __slice = Array.prototype.slice;
+  */  var JSON, Persist, Porthole, callbackRegistry, checkComplete, clearFileRegistry, commonJSFooter, commonJSHeader, config, context, counter, createIframe, createTxId, fileExpiration, fileOnComplete, fileRegistry, fileStorage, fileStorageToken, fileStore, getFile, getModule, getPointcuts, getXHR, hostPrefixRegex, hostSuffixRegex, iframeName, isCached, isExpired, jsSuffix, loadModules, loadQueue, modulePathRegistry, moduleRegistry, namespace, normalizePath, onModuleLoad, pauseRequired, require, requireRegex, responseSlicer, saveFile, saveModule, schemaVersion, sendToIframe, sendToXhr, setConfig, setUserModules, txnRegistry, userModules, xDomainRpc;
   schemaVersion = 1;
   context = this;
   pauseRequired = false;
@@ -93,8 +92,7 @@ THE SOFTWARE.
   hostPrefixRegex = /^https?:\/\//;
   hostSuffixRegex = /^(.*?)(\/.*|$)/;
   iframeName = "injectProxy";
-  requireReducerRegex = /require[\s]*\([\s]*(?:"|')(?:[\w\\\/\.\:]+?)(?:'|")[\s]*\)/;
-  requireRegex = /.*?require[\s]*\([\s]*("|')([\w\\/\.\:]+?)('|")[\s]*\).*?/gm;
+  requireRegex = /require[\s]*\([\s]*(?:"|')([\w\\/\.\:]+?)(?:'|")[\s]*\)/gm;
   responseSlicer = /^(.+?)[\s](.+?)[\s](.+?)[\s]([\w\W]+)$/m;
   /*
   CommonJS wrappers for a header and footer
@@ -400,7 +398,7 @@ THE SOFTWARE.
       the CommonJS harness, and will capture its exports. After this, it will signal
       to inject() that all items that were waiting on this path should continue checking
       their depdendencies
-      */    var cut, cuts, cutsStr, fn, footer, header, notReq, notRequires, requires, runCmd, runModule, _i, _len;
+      */    var cut, cuts, cutsStr, fn, footer, header, requires, runCmd, runModule;
     cuts = getPointcuts(module);
     cutsStr = {};
     for (cut in cuts) {
@@ -409,20 +407,13 @@ THE SOFTWARE.
     }
     header = commonJSHeader.replace(/__MODULE_ID__/g, module).replace(/__MODULE_URI__/g, path).replace(/__INJECT_NS__/g, namespace).replace(/__POINTCUT_BEFORE__/g, cutsStr.before);
     footer = commonJSFooter.replace(/__POINTCUT_AFTER__/g, cutsStr.after);
-    runCmd = "" + header + "\n" + text + "\n" + footer;
+    runCmd = "" + header + "\n" + text + "\n" + footer + "\n//@ sourceURL=" + path;
     requires = [];
-    notRequires = text.split(requireReducerRegex);
-    for (_i = 0, _len = notRequires.length; _i < _len; _i++) {
-      notReq = notRequires[_i];
-      text = text.replace(notReq, "");
+    while (requireRegex.exec(text)) {
+      requires.push(RegExp.$1);
     }
-    text.replace(requireRegex, function() {
-      var args;
-      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return requires.push(args[2]);
-    });
     runModule = function() {
-      var exports, txn, _j, _len2, _ref, _results;
+      var exports, txn, _i, _len, _ref, _results;
       try {
         exports = context.eval(runCmd);
       } catch (err) {
@@ -433,8 +424,8 @@ THE SOFTWARE.
       fileOnComplete[path].loading = false;
       _ref = fileOnComplete[path].txns;
       _results = [];
-      for (_j = 0, _len2 = _ref.length; _j < _len2; _j++) {
-        txn = _ref[_j];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        txn = _ref[_i];
         _results.push(checkComplete(txn));
       }
       return _results;
