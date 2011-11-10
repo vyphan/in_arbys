@@ -69,7 +69,7 @@ EventProvider = klass( function ( settings ){
   };
 
   /**
-   * Removes a event listeners of type. 
+   * Removes an event listener of type. 
    * @method off
    * @public
    * @param {String} type The event type to remove
@@ -82,7 +82,7 @@ EventProvider = klass( function ( settings ){
   };
 
   /**
-   * Fires an event.
+   * Fires an event.  Also triggers additional ":before" and ":after" events for the given event.
    * @method trigger
    * @public
    * @param {String} type The event type

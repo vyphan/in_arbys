@@ -88,22 +88,23 @@
     <button id="play_button" data-athena="ui:Button" data-athena-config="{
       'ui:Button': {
         action: 'play',
-        bubble: false
+        bubble: false,
+        publish: $('#pause_button')
       }
     }">Play</button>
 
     <button id="pause_button" data-athena="ui:Button" data-athena-config="{
       'ui:Button': {
-        action: 'pause',
-        subscribe: '#play_button'
+        action: 'pause'
       }
     }">Pause</button>
 
   </div>
 
   <script type="text/javascript" charset="utf-8">
-    $( function() {
 
+    $( function() {
+/*
       $( '#pause_button' ).on( 'pause:before', function() {
         console.info(  'before, pause' );
       } );
@@ -135,9 +136,10 @@
       $( '#play_button' ).on( 'play:after', function() {
         console.info( 'after, play' );
       } );
-
+*/
       $( '#container' ).act();
     } );
+    
   </script>
 
 </body>

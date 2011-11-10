@@ -94,7 +94,7 @@ Abstract = klass( function ( $element, settings ){
    */
   function notify( type, parameters ) {
     _.each( $subscribers, function( subscriber, index ) {
-      subscriber.trigger( type + namespace, parameters );
+      $(subscriber).trigger( type + namespace, parameters );
     } );
   }
 
@@ -156,7 +156,7 @@ Abstract = klass( function ( $element, settings ){
     $subscribers = $subscriber.filter( $subscribers );
   };
 
-  //Export a refferance in jQuery's data see http://api.jquery.com/data/
+  //Export a reference in jQuery's data see http://api.jquery.com/data/
   $element.data( id, Abstract );
 
 } );

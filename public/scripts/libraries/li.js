@@ -49,8 +49,10 @@
 		if ( window.execScript ) {
 			window.execScript( code );
 		} else {
-		  // window.eval.call compresses the JS code into a single line,
-		  // making it hard to debug
+		  /* 
+		    window.eval.call compresses the JS code into a single line,
+        making it hard to debug.  Normal eval seems to work OK though.
+      */
 			if (li.environment.debug) {
 			  eval(code);
 			}
@@ -115,7 +117,7 @@
 				required = _.reject( required, function( item, index ) {
 					if( packages[item].requires.length === 0 && packages[item].__script ) {
 						if( li.environment.debug ) {
-							code = ( '( function () {\n' + packages[item].__script + '\n_.log(\'Module "' + item + '" ready.\' );\n}() );' );
+							code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );' );
 						} else {
 							code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
 						}
