@@ -110,7 +110,6 @@ Abstract = klass( function ( $element, settings ){
       if( settings.bubble === false ) {
         event.stopPropagation();
       }
-      _.log( event );
       handler.apply( arguments );
     } );
   };
