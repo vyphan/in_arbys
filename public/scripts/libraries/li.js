@@ -48,7 +48,8 @@
 		if ( window.execScript ) {
 			window.execScript( code );
 		} else {
-			window.eval.call( window, code );
+			//window.eval.call( window, code );
+			eval(code);
 		}
 	}
 	function Require( ids, callback ) {
@@ -106,10 +107,11 @@
 				required = _.reject( required, function( item, index ) {
 					if( packages[item].requires.length === 0 && packages[item].__script ) {
 						if( li.environment.debug ) {
-							code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );' );
+							code = ( '( function () {\n' + packages[item].__script + '\n_.log(\'Module "' + item + '" ready.\' );\n}() );' );
 						} else {
 							code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
 						}
+					
 					
 						try {
 							evalScript( code );

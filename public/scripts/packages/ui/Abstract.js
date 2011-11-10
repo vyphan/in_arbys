@@ -47,6 +47,7 @@ Abstract = klass( function ( $element, settings ){
        * When false, events are prevented from bubbling up the DOM tree
        * @property publish
        * @type {Boolean}
+       * @default true
        */
       bubble: true
     },
@@ -109,7 +110,7 @@ Abstract = klass( function ( $element, settings ){
       if( settings.bubble === false ) {
         event.stopPropagation();
       }
-      console.log( event );
+      _.log( event );
       handler.apply( arguments );
     } );
   };

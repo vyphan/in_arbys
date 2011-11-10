@@ -80,20 +80,22 @@
 
 </head>
 
-<body>
-
-  <div id="container" data-athena="ui:Abstract" data-athena-config="{
+<body data-athena="ui:Abstract" data-athena-config="{
     ui:Abstract: {}
   }">
+  
+  <div id="container">
     <button id="play_button" data-athena="ui:Button" data-athena-config="{
       'ui:Button': {
-        action: 'play'
+        action: 'play',
+        bubble: false
       }
     }">Play</button>
 
     <button id="pause_button" data-athena="ui:Button" data-athena-config="{
       'ui:Button': {
-        action: 'pause'
+        action: 'pause',
+        subscribe: '#play_button'
       }
     }">Pause</button>
 

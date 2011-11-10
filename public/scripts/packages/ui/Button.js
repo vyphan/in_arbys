@@ -15,6 +15,7 @@ Button = Abstract.extend( function ( $element, settings ){
 
   // on click
   $element.on( settings.on, function ( event ) {
+    _.log("Button " + settings.on);
     Button.trigger( action );
   } );
 
@@ -26,41 +27,3 @@ if ( typeof module !== 'undefined' && module.exports ) {
   module.exports = Button;
 }
 
-
-
-/*
-
-$( '#pause_button' ).on( 'pause:before', function() {
-  console.info(  'before, pause' );
-} );
-
-$( '#container' ).on( 'pause', function() {
-  console.info( 'bubbled, pause' );
-} );
-
-$( '#pause_button' ).on( 'pause', function() {
-  console.info( 'pause' );
-} );
-
-$( '#pause_button' ).on( 'pause:after', function() {
-  console.info( 'after, pause' );
-} );
-
-$( '#play_button' ).on( 'play:before', function() {
-  console.info( 'before, play' );
-} );
-
-$( '#container' ).on( 'play', function() {
-  console.info( 'bubbled, play' );
-} );
-
-$( '#play_button' ).on( 'play', function() {
-  console.info( 'play' );
-} );
-
-$( '#play_button' ).on( 'play:after', function() {
-  console.info( 'after, play' );
-} );
-
-
-*/

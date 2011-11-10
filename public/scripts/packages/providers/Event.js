@@ -26,10 +26,10 @@ EventProvider = klass( function ( settings ){
     defaults = {
       /**
        * A selector used in creating a Jquery collection to proxie events
-       * @property subscribe
+       * @property proxy
        * @type {String}
        */
-      proxy: '',
+      proxy: ''
     },
     /**
      * A jQuery collection to proxy events
@@ -51,7 +51,7 @@ EventProvider = klass( function ( settings ){
   $proxy = $( settings.proxy );
 
   cache.on = $proxy.on;
-  cache.off = $proxy.off
+  cache.off = $proxy.off;
   cache.trigger = $proxy.trigger;
 
   /**
@@ -66,7 +66,7 @@ EventProvider = klass( function ( settings ){
       cache.on.apply( $proxy, [type, handler] );
       return EventProvider;
     }() );
-  }
+  };
 
   /**
    * Removes a event listeners of type. 
@@ -79,7 +79,7 @@ EventProvider = klass( function ( settings ){
       cache.off.apply( settings.proxy, [type] );
       return EventProvider;
     }() );
-  }
+  };
 
   /**
    * Fires an event.
@@ -95,7 +95,7 @@ EventProvider = klass( function ( settings ){
       cache.trigger.apply( $proxy, [type + ':after', parameters] );
       return EventProvider;
     }() );
-  }
+  };
 
 } );
 
