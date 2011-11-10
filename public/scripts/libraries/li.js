@@ -44,14 +44,22 @@
 			localStorage[key] = pckg.__script;
 		}
 	}
+	
 	function evalScript( code ) {
 		if ( window.execScript ) {
 			window.execScript( code );
 		} else {
-			//window.eval.call( window, code );
-			eval(code);
+		  // window.eval.call compresses the JS code into a single line,
+		  // making it hard to debug
+			if (li.environment.debug) {
+			  eval(code);
+			}
+			else {
+			  window.eval.call( window, code );
+			}
 		}
 	}
+	
 	function Require( ids, callback ) {
 		var required = [],
 			interfaces = ids,
@@ -112,7 +120,7 @@
 							code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
 						}
 					
-					
+
 						try {
 							evalScript( code );
 						} catch ( e ) {
