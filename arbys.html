@@ -2,17 +2,28 @@
 
 <p><strong>Taking someone to a place they haven't been to</strong> has been a LinkedIn UED tradition since it's infancy. While now we employe the Wheel of Lunch'In to determine the welcome lunch, there was an era where every Monday was a trip to the local Arby's. It holds a special place in our heart, and we want to share that special place with you.</p>
 
-<div>Menu Carousel. Loops through 3 sandwich images, then changes to three salad images, then changes to three shake images</div>
-<ul>
-  <li>Sandwiches</li>
-  <li>Salads</li>
-  <li>Shakes</li>
-</ul>
-
-<h2>Our Arby's</h2>
-
-<div>Carousel of images of us at arby's.<br/>
-  Clicking one opens it into a simple modal window
+<h2>Our Favorite Menu Items</h2>
+<div data-athena="ui:Carousel" class="carousel">
+  <ul>
+    <li><a href="http://www.arbys.com/menu/ultimate-angus.html" title="Click for details"><img src="http://www.arbys.com/assets/templates/images/roast%20beef%20and%20melts/ARB11_AngusPhlly_small2.png" alt="Ultimate Angus"><span>Ultimate Angus</span></a></li>
+    <li><a href="http://www.arbys.com/menu/roast-beef.html" title="Click for details"><img src="http://www.arbys.com/assets/templates/images/sandwiches_melts_category_small.png" alt="Arby's Roast Beef"><span>Arby's Roast Beef</span></a></li>
+    <li><a href="http://www.arbys.com/menu/market-fresh-sandwiches.html" title="Click for details"><img src="http://www.arbys.com/assets/templates/images/market_fresh_sandwiches_category_small.png" alt="Market Fresh Sandwiches"><span>Market Fresh Sandwiches</span></a></li>
+    <li><a href="http://www.arbys.com/menu/prime-cut-chicken.html" title="Click for details"><img src="http://www.arbys.com/assets/templates/images/chicken/ARB11_CrvingChckn_silo_drop2.png" alt="Prime-Cut Chicken"><span>Prime-Cut Chicken</span></a></li>
+    <li><a href="http://www.arbys.com/menu/value-menu.html" title="Click for details"><img src="http://www.arbys.com/assets/templates/images/valuemenu/JrHamMelt_small4.png" alt="Arby's Value Menu"><span>Arby's Value Menu</span></a></li>
+    <li><a href="http://www.arbys.com/menu/toasted-subs.html" title="Click for details"><img src="http://www.arbys.com/assets/templates/images/toasted_subs_category_small.png" alt="Subs"><span>Subs</span></a></li>
+  </ul>
+  <button data-athena="ui:Button" data-athena-config="{
+    'ui-button': {
+      on: 'click',
+      action: 'previous'
+    }
+  }" class="button">Previous</button>
+  <button data-athena="ui:Button" data-athena-config="{
+    'ui-button': {
+      on: 'click',
+      action: 'next'
+    }
+  }" class="button">Next</button>
 </div>
 
 <p><strong>Our local Arby's is the one on South Bernardo,</strong> where you can eat your curly fries beneath the atrium or sip a Jamocha shake in the comfortable booths. Beef and cheddar never tasted so good!</p>
