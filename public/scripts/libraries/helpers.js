@@ -1,4 +1,3 @@
-
 _.explodeURL = function ( url ) {
   var regexp = /^(([^:\/\?#]+):)?(\/\/([^\/\?#]*))?([^\.\?#]*)(\.([^\?#]*))?(\?([^#]*))?(#(.*))?/,
     exploded = regexp.exec( url ),
@@ -25,5 +24,13 @@ _.explodeURL = function ( url ) {
     }
   }
 
+
   return urlFragments;
-}
+
+};
+
+_.log = function (msg) {
+  if ( li.environment.debug && console && !!console.log ) {
+    console.log( 'FRAMEWORK: ' + msg );
+  }
+};

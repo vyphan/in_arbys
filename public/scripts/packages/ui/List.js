@@ -9,7 +9,7 @@ var id = 'ui/List',
  * @param {HTMLElement} element The HTML element containing this component
  * @param {Object} settings Configuration properties for this instance
  */
-List = Abstract.extend( function ( element, settings ){
+List = Abstract.extend( function ( $element, settings ){
   /**
    * Instance of the List class
    * @property List
@@ -25,7 +25,16 @@ List = Abstract.extend( function ( element, settings ){
 
 	settings = _.extend( defaults, settings );
 
-	element.data( id, this );
+	$element.data( id, this );
+
+  // Subscribe to custom events
+  $element.on('next', function (event) {
+    _.log("List: next");
+  });
+
+  $element.on('previous', function (event) {
+    _.log("List: previous");
+  });
 
 } );
 

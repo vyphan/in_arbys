@@ -32,23 +32,31 @@ Button = Abstract.extend( function ( $element, settings ){
      * @property action
      * @type Object
      */
-    action;
+    action,
+    $subscribesTo;
 
   settings = _.extend( defaults, settings );
 
   action = settings.action;
 
+  $subscribesTo = $(settings.subscribe);
+
+  // on click
   $element.on( settings.on, function ( event ) {
+    _.log("Button " + settings.on + " with " + action);
     Button.trigger( action );
     console.log("button clicked!");
   } );
 
   $element.data( id, Button );
 
+  if ($subscribesTo.length) {
+    Button.subscribe( $subscribesTo );
+  }
+  
 } );
 
 if ( typeof module !== 'undefined' && module.exports ) {
   module.exports = Button;
 }
-
 

@@ -10,7 +10,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Katy</title>
+  <title>Carousel</title>
 
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/> -->
 
@@ -22,6 +22,10 @@
 
   <!-- Application Styles -->
   <link rel="stylesheet" href="styles/applications/RoastBeef.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+  <style type="text/css" media="screen">
+
+  </style>
 
   <script type="text/javascript" charset="utf-8">
     ENV_CONFIG = {
@@ -76,33 +80,41 @@
 
 </head>
 
+<h1>Carousel</h1>
+
 <body data-athena="ui:Abstract" data-athena-config="{
     ui:Abstract: {}
   }">
-  <div id="container">
-    <button id="play_button" data-athena="ui:Button" data-athena-config="{
-      'ui:Button': {
-        action: 'play',
-        bubble: false
-      }
-    }">Play</button>
-
-    <button id="pause_button" data-athena="ui:Button" data-athena-config="{
-      'ui:Button': {
-        action: 'pause',
-        bubble: false
-      }
-    }">Pause</button>
-<div ="ui:Abstract" >
   
-</div>
-  </div>
+  <div id="container" data-athena="ui:Carousel" data-athena-config="{'ui:Carousel':{}}">
+    <ul id="car-list" data-athena="ui:List" data-athena-config="{
+      'ul:List':{
+        subscribe: 'button'
+      }
+    }">
+      <li>one</li>
+      <li>two</li>
+      <li>three</li>
+    </ul>
 
+    <button id="btn-prev" data-athena="ui:Button" data-athena-config="{
+      'ui:Button': {
+        action: 'previous'
+      }
+    }">Previous</button>
+
+    <button id="btn-next" data-athena="ui:Button" data-athena-config="{
+      'ui:Button': {
+        action: 'next'
+      }
+    }">Next</button>
+
+  </div>
 
   <script type="text/javascript" charset="utf-8">
 
     $( function() {
-
+/*
       $( '#pause_button' ).on( 'pause:before', function() {
         console.info(  'before, pause' );
       } );
@@ -134,9 +146,8 @@
       $( '#play_button' ).on( 'play:after', function() {
         console.info( 'after, play' );
       } );
-
+*/
       $( '#container' ).act();
-
     } );
     
   </script>
@@ -144,4 +155,3 @@
 </body>
 
 </html>
-
