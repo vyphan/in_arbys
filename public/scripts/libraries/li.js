@@ -124,7 +124,6 @@
 							code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
 						}
 					
-
 						try {
 							evalScript( code );
 						} catch ( e ) {
@@ -303,8 +302,12 @@
 			version: '0.0.1',
 			path: '/scripts/packages/ui/List.js',
 			requires: ['ui/Abstract']
+		}, {
+	  	id: 'ui/Carousel',
+			version: '0.0.1',
+			path: '/scripts/packages/ui/Carousel.js',
+			requires: ['ui/Abstract', 'ui/Button', 'ui/List']
 		}
-
   		
 	] );
 

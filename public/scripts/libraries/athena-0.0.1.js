@@ -51,6 +51,7 @@
 				return;
 			}
 
+
 			//UI components that are children of the passed in node.
 			$actors = _.reject( $( pattern, $this ), function( item, index ) {
 				return $( item ).data().acting;
@@ -94,7 +95,7 @@
 
 		} ( $this ) );
 
-	}
+	};
 
 }( jQuery ) );
 
@@ -103,6 +104,6 @@
 	//Returns a control.
 	$.fn.getControl = function( id ) {
 		return $( this ).data( id );
-	}
+	};
 
 }( jQuery ) );
