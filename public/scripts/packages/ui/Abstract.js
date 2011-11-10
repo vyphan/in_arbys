@@ -78,8 +78,8 @@ Abstract = klass( function ( $element, settings ){
     namespace = '.' + settings.namespace;
   }
 
-  $subscribers = $( settings.publish );
-  $subscribe = $( settings.subscribe );
+  $subscribers = $( settings.subscribe );
+  $publish = $( settings.publish );
 
   Event = new EventProvider( {
     proxy: $element

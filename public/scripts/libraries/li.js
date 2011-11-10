@@ -46,11 +46,22 @@
 	}
 	
 	function evalScript( code ) {
+  
 		if ( window.execScript ) {
 			window.execScript( code );
 		} else {
-			window.eval.call( window, code );
+		  /* 
+		    window.eval.call compresses the JS code into a single line,
+        making it hard to debug.  Normal eval seems to work OK though.
+      */
+			if (li.environment.debug) {
+			  eval(code);
+			}
+			else {
+			  window.eval.call( window, code );
+			}
 		}
+		
 	}
 	
 	function Require( ids, callback ) {

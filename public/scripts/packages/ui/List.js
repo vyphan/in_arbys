@@ -10,13 +10,14 @@ List = Abstract.extend( function ( element, settings ){
 
 	element.data( id, this );
 
+  // Subscribe to custom events
   List.on('next', function (event) {
     _.log("List: next");
-  })
+  });
 
   List.on('previous', function (event) {
     _.log("List: previous");
-  })
+  });
 
 } );
 
