@@ -1,4 +1,3 @@
-
 ( function( $ ){
 
   var pattern = pattern = '[data-athena*="ui:"]',
