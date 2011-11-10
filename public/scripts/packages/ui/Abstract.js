@@ -53,18 +53,18 @@ Abstract = klass( function ( $element, settings ){
     },
     /**
      * A jQuery collection that is notified of all events
-     * @property $subscribers
+     * @property $publishTo
      * @private
      * @type {Array}
      */
-    $subscribers,
+    $publishTo,
     /**
      * A jQuery collection that is subscribed to
      * @property subscribe
      * @private
      * @type {Array}
      */
-    $subscribe,
+    $subscribeTo,
     /**
      * The namespace that all events will be fired into. See http://docs.jquery.com/Namespaced_Events.
      * @property namespace
@@ -78,22 +78,22 @@ Abstract = klass( function ( $element, settings ){
     namespace = '.' + settings.namespace;
   }
 
-  $subscribers = $( settings.subscribe );
-  $publish = $( settings.publish );
+  $subscribeTo = $( settings.subscribe );
+  $publishTo = $( settings.publish );
 
   Event = new EventProvider( {
     proxy: $element
   } );
 
   /**
-   * Trigger events for $subscribers 
+   * Trigger events for $publishTo 
    * @private
    * @method notify
    * @param {String} type The type of custom event to trigger
    * @param {Array} parameters Arguments passed through to the observer's callback function
    */
   function notify( type, parameters ) {
-    _.each( $subscribers, function( subscriber, index ) {
+    _.each( $publishTo, function( subscriber, index ) {
       $(subscriber).trigger( type + namespace, parameters );
     } );
   }
@@ -143,7 +143,7 @@ Abstract = klass( function ( $element, settings ){
    * @param {Array} $subscriber A jQuery collection to subscibe
    */
   Abstract.subscribe = function( $subscriber ) {
-    $subscribers.add( $subscriber );
+    $publishTo.add( $subscriber );
   };
 
   /**
@@ -153,7 +153,7 @@ Abstract = klass( function ( $element, settings ){
    * @param {Array} $subscriber A jQuery collection to unsubscribe
    */
   Abstract.unsubscribe = function( $subscriber ) {
-    $subscribers = $subscriber.filter( $subscribers );
+    $publishTo = $subscriber.filter( $publishTo );
   };
 
   //Export a reference in jQuery's data see http://api.jquery.com/data/

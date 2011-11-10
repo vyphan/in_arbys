@@ -9,7 +9,7 @@ var id = 'ui/List',
  * @param {HTMLElement} element The HTML element containing this component
  * @param {Object} settings Configuration properties for this instance
  */
-List = Abstract.extend( function ( element, settings ){
+List = Abstract.extend( function ( $element, settings ){
   /**
    * Instance of the List class
    * @property List

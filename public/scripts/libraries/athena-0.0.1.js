@@ -42,18 +42,18 @@
 		} ).length;
 
 		//Recurse over children to make sure UI components are instantiated inside out. 
-		( function recurse( x$this ) {
+		( function recurse( $this ) {
 			var $actors,
 				roles;
 
 			//It's already instantiated so there's no need to continue
-			if( x$this.data().acting ) {
+			if( $this.data().acting ) {
 				return;
 			}
 
 
 			//UI components that are children of the passed in node.
-			$actors = _.reject( $( pattern, x$this ), function( item, index ) {
+			$actors = _.reject( $( pattern, $this ), function( item, index ) {
 				return $( item ).data().acting;
 			} );
 
@@ -66,10 +66,10 @@
 					_.each( roles, function( role, index ) {
 						var module;
 						if( typeof actions[role] === 'function' ) {
-							execute( x$this, role, actions[role] );
+							execute( $this, role, actions[role] );
 						} 
 						else {
-							enqueue( role, x$this );
+							enqueue( role, $this );
 							module = role.replace( ':', '/' );
 							if( _.indexOf( required, module ) === -1 ) {
 								required.push( module );
@@ -79,7 +79,7 @@
 									while ( queue.length > 0 ) {
 										execute( queue.pop(), role, Action );
 									}
-									recurse( x$this.parents() );
+									recurse( $this.parents() );
 								} );
 							}
 						}
@@ -90,7 +90,7 @@
 			}
 
 			//Lather, rinse, repeat...
-			_.each( x$this.contents(), function( node, index ) {
+			_.each( $this.contents(), function( node, index ) {
 				recurse( $( node ) );
 			} );
 

@@ -86,10 +86,11 @@
     ui:Abstract: {}
   }">
   
-  <div id="container" data-athena="ui:Carousel" data-athena-config="{}">
-
+  <div id="container" data-athena="ui:Carousel" data-athena-config="{'ui:Carousel':{}}">
     <ul id="car-list" data-athena="ui:List" data-athena-config="{
-      subscribe: 'button'
+      'ul:List':{
+        subscribe: 'button'
+      }
     }">
       <li>one</li>
       <li>two</li>

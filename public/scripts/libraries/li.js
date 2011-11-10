@@ -390,7 +390,7 @@
 	  	id: 'ui/Carousel',
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Carousel.js',
-			requires: ['ui/Abstract', 'ui/Button', 'ui/List']
+			requires: ['ui/Abstract']
 		}
   		
 	] );
