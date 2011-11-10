@@ -118,8 +118,8 @@
   }
 
   $.fn.on = function() {
-    var $this = $( this ),
-    if( $this.data( 'athena' ) ) {
+    var $this = $( this );
+    if( $this.data( 'acting' ) ) {
       _.each( arguments, function( argument, index ) {
         if( typeof argument === 'function' ) {
           
@@ -129,19 +129,17 @@
     }
     return cache.on.apply( $this, arguments );
   }
-
   $.fn.off = function() {
     var $this = $( this );
-    if( $this.data( 'athena' ) ) {
+    if( $this.data( 'acting' ) ) {
       
     }
     return cache.off.apply( $this, arguments );
   }
-
   $.fn.trigger = function() {
     var $this = $( this );
     if( $this.data( 'athena' ) ) {
-      
+
     }
     return cache.trigger.apply( $this, arguments );
   }

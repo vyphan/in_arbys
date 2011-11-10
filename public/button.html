@@ -23,10 +23,6 @@
   <!-- Application Styles -->
   <link rel="stylesheet" href="styles/applications/RoastBeef.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
-  <style type="text/css" media="screen">
-
-  </style>
-
   <script type="text/javascript" charset="utf-8">
     ENV_CONFIG = {
       debug: true
@@ -96,13 +92,16 @@ THIS IS BUTTON.HTML
         bubble: false
       }
     }">Pause</button>
-
+<div ="ui:Abstract" >
+  
+</div>
   </div>
+
 
   <script type="text/javascript" charset="utf-8">
     $( function() {
 
-      Button.on( 'pause:before', function() {
+      $( '#pause_button' ).on( 'pause:before', function() {
         console.info(  'before, pause' );
       } );
 
@@ -134,7 +133,7 @@ THIS IS BUTTON.HTML
         console.info( 'after, play' );
       } );
 
-      container.html();
+      $('#container').act();
 
     } );
   </script>
