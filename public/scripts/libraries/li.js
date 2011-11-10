@@ -49,16 +49,7 @@
 		if ( window.execScript ) {
 			window.execScript( code );
 		} else {
-		  /* 
-		    window.eval.call compresses the JS code into a single line,
-        making it hard to debug.  Normal eval seems to work OK though.
-      */
-			if (li.environment.debug) {
-			  eval(code);
-			}
-			else {
-			  window.eval.call( window, code );
-			}
+			window.eval.call( window, code );
 		}
 	}
 	
@@ -296,7 +287,14 @@
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Button.js',
 			requires: ['ui/Abstract']
+		}, {
+	  	id: 'ui/List',
+			version: '0.0.1',
+			path: '/scripts/packages/ui/List.js',
+			requires: ['ui/Abstract']
 		}
+
+  		
 	] );
 
 }() );
