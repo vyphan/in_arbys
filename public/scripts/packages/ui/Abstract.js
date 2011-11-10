@@ -106,7 +106,6 @@ Abstract = klass( function ( $element, settings ){
    */
   Abstract.on = function( type, handler ) {
     return Event.on( type + namespace, function( event ) {
-debugger;
       if( settings.bubble === false ) {
         event.stopPropagation();
       }
