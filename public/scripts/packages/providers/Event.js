@@ -55,34 +55,31 @@ EventProvider = klass( function ( settings ){
   cache.trigger = $proxy.trigger;
 
   /**
-   * Creates an event listener. 
+   * Creates an event listener. See: http://api.jquery.com/on/
    * @method on
    * @public
-   * @param {String} type The event type to respond to
-   * @param {function} handler The callback function triggered by the event
    */
-  EventProvider.on = function ( type, handler ) {
+  EventProvider.on = function () {
     return ( function() {
-      cache.on.apply( $proxy, [type, handler] );
+      cache.on.apply( $proxy, arguments );
       return EventProvider;
     }() );
   };
 
   /**
-   * Removes an event listener of type. 
+   * Removes a event listeners of type. See: http://api.jquery.com/off/
    * @method off
    * @public
-   * @param {String} type The event type to remove
-  */
-  EventProvider.off = function( type ) {
+   */
+  EventProvider.off = function() {
     return proxy.off = ( function() {
-      cache.off.apply( settings.proxy, [type] );
+      cache.off.apply( settings.proxy, arguments );
       return EventProvider;
     }() );
   };
 
   /**
-   * Fires an event.  Also triggers additional ":before" and ":after" events for the given event.
+   * Fires an event. Also triggers additional ":before" and ":after" events for the given event. See: http://api.jquery.com/trigger/
    * @method trigger
    * @public
    * @param {String} type The event type

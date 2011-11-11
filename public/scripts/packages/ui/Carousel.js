@@ -15,7 +15,6 @@ Carousel = List.extend( function ( $element, settings ){
 
 	settings = _.extend( defaults, settings );
 
-
   Carousel.next = function () {
     var index = Carousel.selectedIndex,
       size = Carousel.size,

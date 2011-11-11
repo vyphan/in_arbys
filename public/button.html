@@ -23,10 +23,6 @@
   <!-- Application Styles -->
   <link rel="stylesheet" href="styles/applications/RoastBeef.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
-  <style type="text/css" media="screen">
-
-  </style>
-
   <script type="text/javascript" charset="utf-8">
     ENV_CONFIG = {
       debug: true
@@ -93,16 +89,20 @@
 
     <button id="pause_button" data-athena="ui:Button" data-athena-config="{
       'ui:Button': {
-        action: 'pause'
+        action: 'pause',
+        bubble: false
       }
     }">Pause</button>
-
+<div ="ui:Abstract" >
+  
+</div>
   </div>
+
 
   <script type="text/javascript" charset="utf-8">
 
     $( function() {
-/*
+
       $( '#pause_button' ).on( 'pause:before', function() {
         console.info(  'before, pause' );
       } );
@@ -134,8 +134,9 @@
       $( '#play_button' ).on( 'play:after', function() {
         console.info( 'after, play' );
       } );
-*/
+
       $( '#container' ).act();
+
     } );
     
   </script>
