@@ -47,23 +47,24 @@ Abstract = klass( function ( $element, settings ){
        * When false, events are prevented from bubbling up the DOM tree
        * @property publish
        * @type {Boolean}
+       * @default true
        */
       bubble: true
     },
     /**
      * A jQuery collection that is notified of all events
-     * @property $subscribers
+     * @property $publishTo
      * @private
      * @type {Array}
      */
-    $subscribers,
+    $publishTo,
     /**
      * A jQuery collection that is subscribed to
      * @property subscribe
      * @private
      * @type {Array}
      */
-    $subscribe,
+    $subscribeTo,
     /**
      * The namespace that all events will be fired into. See http://docs.jquery.com/Namespaced_Events.
      * @property namespace
@@ -77,23 +78,23 @@ Abstract = klass( function ( $element, settings ){
     namespace = '.' + settings.namespace;
   }
 
-  $subscribers = $( settings.publish );
-  $subscribe = $( settings.subscribe );
+  $subscribeTo = $( settings.subscribe );
+  $publishTo = $( settings.publish );
 
   Event = new EventProvider( {
     proxy: $element
   } );
 
   /**
-   * Trigger events for $subscribers 
+   * Trigger events for $publishTo 
    * @private
    * @method notify
    * @param {String} type The type of custom event to trigger
    * @param {Array} parameters Arguments passed through to the observer's callback function
    */
   function notify( type, parameters ) {
-    _.each( $subscribers, function( subscriber, index ) {
-      subscriber.trigger( type + namespace, parameters );
+    _.each( $publishTo, function( subscriber, index ) {
+      $(subscriber).trigger( type + namespace, parameters );
     } );
   }
 
@@ -109,10 +110,9 @@ Abstract = klass( function ( $element, settings ){
       if( settings.bubble === false ) {
         event.stopPropagation();
       }
-      console.log( event );
       handler.apply( arguments );
     } );
-  }
+  };
 
   /**
    * Unbinds event listener(s) of a type
@@ -122,18 +122,19 @@ Abstract = klass( function ( $element, settings ){
    */
   Abstract.off = function( type ) {
     return Event.off( type + namespace );
-  }
+  };
 
   /**
-   * Description 
-   * @method Name
+   * Fires a custom event 
+   * @method trigger
    * @public
-   * @param {Type} Name Description
+   * @param {String} type The type of event
+   * @param {Aarray} parameters Extra arguments to pass through to the subscribed event handler
    */
   Abstract.trigger = function( type, parameters ) {
     notify( type + namespace, parameters );
     return Event.trigger( type + namespace, parameters );
-  }
+  };
 
   /**
    * Subscribe to events
@@ -142,8 +143,8 @@ Abstract = klass( function ( $element, settings ){
    * @param {Array} $subscriber A jQuery collection to subscibe
    */
   Abstract.subscribe = function( $subscriber ) {
-    $subscribers.add( $subscriber );
-  }
+    $publishTo.add( $subscriber );
+  };
 
   /**
    * Unsubscribe from events
@@ -152,10 +153,10 @@ Abstract = klass( function ( $element, settings ){
    * @param {Array} $subscriber A jQuery collection to unsubscribe
    */
   Abstract.unsubscribe = function( $subscriber ) {
-    $subscribers = $subscriber.filter( $subscribers );
-  }
+    $publishTo = $subscriber.filter( $publishTo );
+  };
 
-  //Export a refferance in jQuery's data see http://api.jquery.com/data/
+  //Export a reference in jQuery's data see http://api.jquery.com/data/
   $element.data( id, Abstract );
 
 } );

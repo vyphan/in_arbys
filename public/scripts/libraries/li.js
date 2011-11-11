@@ -15,268 +15,391 @@
 
 ( function( window, document, undefined ) {
 
-	var li = {},
-		modules = [],
-		packages = {},
-		loaders = {};
+/**
+ * Module namespace
+ * @property li
+ * @type Object
+ */
+  var li = {},
+  /**
+   * List of JS files
+   * @property modules
+   * @type Array
+   */
+    modules = [],
 
-	//Allow resource sharing across *.linkedin.com,
-	//This should be factored out with via proxy.
+  /**
+   * Object containing meta data for each module
+   * @property packages
+   * @type Object
+   */
+  packages = {},
+  /**
+   * A hash-map of Resource Loaders
+   * @property loaders
+   * @type Object
+   */
+  loaders = {};
 
-	if( document.domain.match( 'linkedin.com' ) ) {
-		document.domain = 'linkedin.com';
-	}
+  //Allow resource sharing across *.linkedin.com,
+  //This should be factored out via proxy.
+  if( document.domain.match( 'linkedin.com' ) ) {
+    document.domain = 'linkedin.com';
+  }
 
-	window.ENV_CONFIG = ENV_CONFIG || {};
+  /**
+   * Global configuration object
+   * @property ENV_CONFIG
+   * @type Object
+   */
+  window.ENV_CONFIG = ENV_CONFIG || {};
 
-	li.environment = _.extend( {
-		debug: false,
-		baseUri: ''
-	}, ENV_CONFIG );
+  // merge external and local global configs
+  li.environment = _.extend( {
+    debug: false,
+    baseUri: ''
+  }, ENV_CONFIG );
 
-	function cacheScript( id ) {
-		var pckg,
-			key;
+  /**
+   * Stores packages in Local Storage if available 
+   * @method cacheScript
+   * @private
+   * @param {String} id The package id
+   */
+  function cacheScript( id ) {
+    var pckg,
+      key;
 
-		if( Modernizr.localstorage && li.environment.debug === false ) {
-			pckg = packages[id];
-			key = pckg.id + pckg.version;
-			localStorage[key] = pckg.__script;
-		}
-	}
-	function evalScript( code ) {
-		if ( window.execScript ) {
-			window.execScript( code );
-		} else {
-			window.eval.call( window, code );
-		}
-	}
-	function Require( ids, callback ) {
-		var required = [],
-			interfaces = ids,
-			request;
+    if( Modernizr.localstorage && li.environment.debug === false ) {
+      pckg = packages[id];
+      key = pckg.id + pckg.version;
+      localStorage[key] = pckg.__script;
+    }
+  }
+  
+  /**
+   * Executes/evals code.
+   * @method evalScript
+   * @private
+   * @param {String} code The code to evaluate
+   */
+  function evalScript( code ) {
+  
+    if ( window.execScript ) {
+      window.execScript( code );
+    } else {
+      /* 
+        window.eval.call compresses the JS code into a single line,
+        making it hard to debug.  Normal eval seems to work OK though.
+      */
+      if (li.environment.debug) {
+        eval(code);
+      }
+      else {
+        window.eval.call( window, code );
+      }
+    }
+    
+  }
 
-		function getScript( id ) {
-			var pckg = packages[id],
-				key,
-				loader = new ResourceLoader();
+  /**
+   * Class to manage javascript dependencies
+   * @class Require
+   * @constructor
+   * @param {Arra} ids The list of package ids to load.
+   * @param {Function} callback The callback function to execute after loading is complete. 
+   */
+  function Require( ids, callback ) {
+    var required = [],
+      interfaces = ids,
+      request;
 
-			function ResourceLoader(){
-				var ResourceLoader = this;
+    /**
+     * Dynamically loads a script file 
+     * @method getScript
+     * @private
+     * @param {String} id The identity key for the script
+     */
+    function getScript( id ) {
+      var pckg = packages[id],
+        key,
+        loader = new ResourceLoader();
 
-				function guid() {
-					function S4() {
-						return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 );
-					}
-					return ( S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4() );
-				}
+      /**
+       * Loads an external resource
+       * @class ResourceLoader
+       * @constructor
+       * @for Require
+       */
+      function ResourceLoader(){
+        var ResourceLoader = this;
 
-				ResourceLoader.id = guid();
+        /**
+         * Generates a globally-unique identifer
+         * @method guid
+         * @private
+         * @return {String} The id 
+         */
+        function guid() {
+          function S4() {
+            return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 );
+          }
+          return ( S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4() );
+        }
 
-				loaders[ResourceLoader.id] = ResourceLoader;
-				ResourceLoader.proxyEventHandler = function( response ) {
-					pckg.__script = response;
-					cacheScript( pckg.id );
-					resolve( pckg.id );
-				}
-				ResourceLoader.load = function( url ){
-					( function recurse() {
-						if( window.getResource ) {
-							window.getResource( ResourceLoader.id, url );
-						} else {
-							window.setTimeout( recurse, 1 );
-						}
-					}() );
-				}
-			}
-			function resolve( id ) {
-				var i,
-					code;
+        /**
+         * The id of the resource loader instance
+         * @property id
+         * @type String
+         */
+        ResourceLoader.id = guid();
 
-				for( i in packages ) {
-					packages[i].requires = _.reject( packages[i].requires, function ( item ) {
-						return ( item === id );
-					} );
-				}
+        // Add this instance into the map of loaders
+        loaders[ResourceLoader.id] = ResourceLoader;
 
-				required = _.reject( required, function( item, index ) {
-					if( packages[item].requires.length === 0 && packages[item].__script ) {
-						if( li.environment.debug ) {
-							code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );' );
-						} else {
-							code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
-						}
-					
-						try {
-							evalScript( code );
-						} catch ( e ) {
-							console.error( 'Module ', item, ' could not be loaded.\n', e )
-							return false;
-						}
-					
-						if( module.exports !== true ) {
-							eval( packages[item].__namespace + ' = module.exports;' );
-							module.exports = true;
-						}
-					
-						return true;
-					
-					} else {
-						return false;
-					}
-				} );
+        /**
+         * Caches and evaluates the loaded script file. 
+         * @method proxyEventHandler
+         * @private
+         * @param {Object} response The data returned from loading the script via XHR
+         */
+        ResourceLoader.proxyEventHandler = function( response ) {
+          pckg.__script = response;
+          cacheScript( pckg.id );
+          resolve( pckg.id );
+        };
+        
+        /**
+         * Description 
+         * @method Name
+         * @public|private
+         * @param {Type} Name Description
+         */
+        
+        
+        ResourceLoader.load = function( url ){
+          ( function recurse() {
+            if( window.getResource ) {
+              window.getResource( ResourceLoader.id, url );
+            } else {
+              window.setTimeout( recurse, 1 );
+            }
+          }() );
+        };
+        
+      }
 
-				if( required.length === 0 ) {
-					applyCallback( callback );
-				}
+      function resolve( id ) {
+        var i,
+          code;
 
-			}
+        for( i in packages ) {
+          packages[i].requires = _.reject( packages[i].requires, function ( item ) {
+            return ( item === id );
+          } );
+        }
 
-			if( Modernizr.localstorage && li.environment.debug === false ) {
-				key = pckg.id + pckg.version;
-				if( localStorage[key] ) {
-					pckg.__script = localStorage[key];
-					resolve( pckg.id );
-					return;
-				}
-			}
+        required = _.reject( required, function( item, index ) {
+          if( packages[item].requires.length === 0 && packages[item].__script ) {
+            if( li.environment.debug ) {
+              code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );//@ sourceURL=' + packages[item].path );
+            } else {
+              code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
+            }
+          
+            try {
+              evalScript( code );
+            } catch ( e ) {
+              console.error( 'Module ', item, ' could not be loaded.\n', e );
+              return false;
+            }
+          
+            if( module.exports !== true ) {
+              eval( packages[item].__namespace + ' = module.exports;' );
+              module.exports = true;
+            }
+          
+            return true;
+          
+          } else {
+            return false;
+          }
+        } );
 
-			loader.load( pckg.path );
+        if( required.length === 0 ) {
+          applyCallback( callback );
+        }
 
-			return;
+      }
 
-		}
-		function require( ids ) {
-			_.each( ids, function( item, index ) {
+      if( Modernizr.localstorage && li.environment.debug === false ) {
+        key = pckg.id + pckg.version;
+        if( localStorage[key] ) {
+          pckg.__script = localStorage[key];
+          resolve( pckg.id );
+          return;
+        }
+      }
 
-				var pckg = packages[item],
-					requirements,
-					namespaces = item.split( '/' ),
-					namespace = 'li',
-					context = li;
-			
-				_.each( namespaces, function( item, index ) {
+      loader.load( pckg.path );
 
-					if( context[namespaces[index]] === undefined ) {
-						context[namespaces[index]] = {};
-					}
+      return;
 
-					context = context[namespaces[index]];
-					namespace += '[\'' + namespaces[index] + '\']';
+    }
+    function require( ids ) {
+      _.each( ids, function( item, index ) {
 
-				} );
+        var pckg = packages[item],
+          requirements,
+          namespaces = item.split( '/' ),
+          namespace = 'li',
+          context = li;
 
-				if( !pckg ) {
-					console.error( 'The Module with id ' + item + ' is not defined.' );
-					return;
-				}
+        _.each( namespaces, function( item, index ) {
 
-				if( !pckg.__required ) {
-					pckg.__required = true;
-					pckg.__namespace = namespace;
-					requirements = pckg.requires;
+          if( context[namespaces[index]] === undefined ) {
+            context[namespaces[index]] = {};
+          }
 
-					( function recurse( requirements ) {
-						if( requirements.length > 0 ) {
-							_.each( requirements, function( item, index ) {
-								recurse( packages[item].requires );
-								if( _.indexOf( pckg.requires, item ) === -1 ) {
-									pckg.requires.push( item );
-								}
-							} );
-						}
-					}( requirements ) );
+          context = context[namespaces[index]];
+          namespace += '[\'' + namespaces[index] + '\']';
 
-					getScript( pckg.id );
+        } );
 
-				}
+        if( !pckg ) {
+          console.error( 'The Module with id ' + item + ' is not defined.' );
+          return;
+        }
 
-			} );
-		}
-		function applyCallback( callback ) {
-			_.each( interfaces, function( item, index ) {
-				interfaces[ index ] = eval( packages[item].__namespace );
-			} );
-			callback.apply( this, interfaces );
-		}
+        if( !pckg.__required ) {
+          pckg.__required = true;
+          pckg.__namespace = namespace;
+          requirements = pckg.requires;
 
-		this.execute = function() {
-			( function gather( ids ) {
-				_.each( ids, function( item, index ) {
-					gather( packages[ item ].requires );
-					if( _.indexOf( modules, item ) === -1 ) {
-						required.push( item );
-						modules.push( item );
-					}
-				} );
-			}( ids ) );
+          ( function recurse( requirements ) {
+            if( requirements.length > 0 ) {
+              _.each( requirements, function( item, index ) {
+                recurse( packages[item].requires );
+                if( _.indexOf( pckg.requires, item ) === -1 ) {
+                  pckg.requires.push( item );
+                }
+              } );
+            }
+          }( requirements ) );
 
-			if( required.length > 0 ) {
-				require( required );
-			}
-		}
+          getScript( pckg.id );
 
-	}
+        }
 
-	li.define = function( definitions ){
-		_.each( definitions, function( item, index ) {
-			packages[item.id] = {
-				id: item.id,
-				version: item.version,
-				requires: item.requires || [],
-				path: item.path || li.environment.baseUri + item.id + '.js'
-			};
-		} );
-	}
-	li.require = function( ids, callback ){
-		if( typeof ids === 'string' ){
-			var pckg = packages[ids];
-			return eval( pckg.__namespace );
-		}
-		new Require( ids, callback ).execute();
-	}
-	li.proxyEventHandler = function ( event ) {
-		var parameters = event.data.split( '&response=' ),
-			response,
-			key;
+      } );
+    }
+    function applyCallback( callback ) {
+      _.each( interfaces, function( item, index ) {
+        interfaces[ index ] = eval( packages[item].__namespace );
+      } );
+      callback.apply( this, interfaces );
+    }
 
-		response = parameters[1];
-		key = parameters[0].split( '?key=' )[1];
+    this.execute = function() {
+      ( function gather( ids ) {
+        _.each( ids, function( item, index ) {
+          if (packages[item]) {
+            gather( packages[ item ].requires );
+          }
+          
+          if( _.indexOf( modules, item ) === -1 ) {
+            required.push( item );
+            modules.push( item );
+          }
+        } );
+      }( ids ) );
 
-		loaders[key].proxyEventHandler( response );
+      if( required.length > 0 ) {
+        require( required );
+      }
+    };
 
-	}
+  }
 
-	//CommonJS
-	window.module = { exports: true };
+  li.define = function( definitions ){
+    _.each( definitions, function( item, index ) {
+      packages[item.id] = {
+        id: item.id,
+        version: item.version,
+        requires: item.requires || [],
+        path: item.path || li.environment.baseUri + item.id + '.js'
+      };
+    } );
+  };
+  
+  li.require = function( ids, callback ){
+    var pckg;
+    if( typeof ids === 'string' ){
+      pckg = packages[ids];
+      return eval( pckg.__namespace );
+    }
+    new Require( ids, callback ).execute();
+    return false;
+  };
+  
+  li.proxyEventHandler = function ( event ) {
+    var parameters = event.data.split( '&response=' ),
+      response,
+      key;
 
-	//Expose li, module to global scope
-	window.li = li;
+    response = parameters[1];
+    key = parameters[0].split( '?key=' )[1];
+
+    loaders[key].proxyEventHandler( response );
+
+  };
+
+  //CommonJS
+  window.module = { exports: true };
+
+  //Expose li, module to global scope
+  window.li = li;
 
 }( this, this.document ) );
 
 ( function DependancyTree(){
-	li.define( [
-		{
-			id: 'libraries/klass',
-			version: '1.0.0',
-			path: '/scripts/libraries/klass.js'
+  li.define( [
+    {
+      id: 'libraries/klass',
+      version: '#ashasdkakkjkshdjsdkshdkhskjshj',
+      path: '/scripts/libraries/klass.js?'
+    }, {
+      id: 'providers/Event',
+      version: '0.0.1',
+      path: '/scripts/packages/providers/Event.js',
+      requires: ['libraries/klass']
+    }, {
+      id: 'ui/Abstract',
+      version: '0.0.1',
+      path: '/scripts/packages/ui/Abstract.js',
+      requires: ['libraries/klass', 'providers/Event']
+    }, {
+      id: 'ui/Button',
+      version: '0.0.1',
+      path: '/scripts/packages/ui/Button.js',
+      requires: ['ui/Abstract']
+    }, {
+      id: 'ui/List',
+      version: '0.0.1',
+      path: '/scripts/packages/ui/List.js',
+      requires: ['ui/Abstract']
+    }, {
+      id: 'ui/Carousel',
+      version: '0.0.1',
+      path: '/scripts/packages/ui/Carousel.js',
+      requires: ['ui/List']
 		}, {
-			id: 'providers/Event',
+	  	id: 'ui/Play',
 			version: '0.0.1',
-			path: '/scripts/packages/providers/Event.js',
-			requires: ['libraries/klass']
-		}, {
-			id: 'ui/Abstract',
-			version: '0.0.1',
-			path: '/scripts/packages/ui/Abstract.js',
-			requires: ['libraries/klass', 'providers/Event']
-		}, {
-			id: 'ui/Button',
-			version: '0.0.1',
-			path: '/scripts/packages/ui/Button.js',
+			path: '/scripts/packages/ui/Play.js',
 			requires: ['ui/Abstract']
 		}
-	] );
+    
+  ] );
 
 }() );

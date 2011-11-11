@@ -13,6 +13,9 @@ var nStatic = require("node-static"),
 // if not a static file in our repo, then hand out arbys page
 http.createServer(function(request, response) {
   fileServer.serve(request, response, function(err, result) {
+    
+    sys.log(request.url);
+    
     if ((err != null ? err.status : void 0) === 404) {
       // not a static file
       // read head, body, and foot async and display
