@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="styles/applications/RoastBeef.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
   <style type="text/css" media="screen">
-
+    .selected { font-weight: bold; }
   </style>
 
   <script type="text/javascript" charset="utf-8">
@@ -83,19 +83,18 @@
 <h1>Carousel</h1>
 
 <body data-athena="ui:Abstract" data-athena-config="{
-    ui:Abstract: {}
+    ui:Abstract: {
+      subscribe: 'button'
+    }
   }">
   
   <div id="container" data-athena="ui:Carousel" data-athena-config="{'ui:Carousel':{}}">
-    <ul id="car-list" data-athena="ui:List" data-athena-config="{
-      'ul:List':{
-        subscribe: 'button'
-      }
-    }">
-      <li>one</li>
+   
+    <ol id="car-list">
+      <li class="selected">one</li>
       <li>two</li>
       <li>three</li>
-    </ul>
+    </ol>
 
     <button id="btn-prev" data-athena="ui:Button" data-athena-config="{
       'ui:Button': {
@@ -110,6 +109,30 @@
     }">Next</button>
 
   </div>
+
+
+  <div id="container2" data-athena="ui:Carousel ui:Play" data-athena-config="{'ui:Carousel':{}, 'ui:Play':{}}">
+   
+    <ol id="car-list2">
+      <li class="selected">one</li>
+      <li>two</li>
+      <li>three</li>
+    </ol>
+
+    <button id="btn-play" data-athena="ui:Button" data-athena-config="{
+      'ui:Button': {
+        action: 'play'
+      }
+    }">Play</button>
+
+    <button id="btn-stop" data-athena="ui:Button" data-athena-config="{
+      'ui:Button': {
+        action: 'stop'
+      }
+    }">Stop</button>
+
+  </div>
+
 
   <script type="text/javascript" charset="utf-8">
 

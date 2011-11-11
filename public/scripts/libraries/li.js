@@ -93,7 +93,8 @@
         making it hard to debug.  Normal eval seems to work OK though.
       */
 			if (li.environment.debug) {
-			  eval(code);
+			  //eval(code);
+			  window.eval.call( window, code );
 			}
 			else {
 			  window.eval.call( window, code );
@@ -199,7 +200,7 @@
 				required = _.reject( required, function( item, index ) {
 					if( packages[item].requires.length === 0 && packages[item].__script ) {
 						if( li.environment.debug ) {
-							code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );' );
+							code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );//@ sourceURL=' + packages[item].path );
 						} else {
 							code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
 						}
@@ -390,6 +391,11 @@
 	  	id: 'ui/Carousel',
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Carousel.js',
+			requires: ['ui/List']
+		}, {
+	  	id: 'ui/Play',
+			version: '0.0.1',
+			path: '/scripts/packages/ui/Play.js',
 			requires: ['ui/Abstract']
 		}
   		

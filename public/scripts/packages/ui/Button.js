@@ -1,5 +1,3 @@
-console.log("Button.js is loaded!");
-
 var id = 'ui:Button',
   Abstract = li.require( 'ui/Abstract' ),
   Button;
