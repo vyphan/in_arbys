@@ -202,7 +202,7 @@
         required = _.reject( required, function( item, index ) {
           if( packages[item].requires.length === 0 && packages[item].__script ) {
             if( li.environment.debug ) {
-              code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );' );
+              code = ( '( function () {\n' + packages[item].__script + '\nconsole.log(\'Module "' + item + '" ready.\' );\n}() );//@ sourceURL=' + packages[item].path );
             } else {
               code = ( '( function () {\n' + packages[item].__script + '\n}() );' );
             }
@@ -392,7 +392,7 @@
       id: 'ui/Carousel',
       version: '0.0.1',
       path: '/scripts/packages/ui/Carousel.js',
-      requires: ['ui/Abstract']
+      requires: ['ui/List']
 		}, {
 	  	id: 'ui/Play',
 			version: '0.0.1',
