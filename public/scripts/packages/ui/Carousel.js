@@ -50,7 +50,7 @@ Carousel = List.extend( function ( $element, settings ){
   };
   
   
-  // Subscribe to custom events
+  // Observes these custom events
   $element.on('next', function (event) {
     Carousel.next();
     event.stopPropagation();

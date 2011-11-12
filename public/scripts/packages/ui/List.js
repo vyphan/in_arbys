@@ -90,7 +90,7 @@ List = Abstract.extend( function ( $element, settings ){
       // Style the new item
       $(List.selectedItem).addClass(SELECTED_CSS);    
       
-      // Fire custom event
+      // Notify this custom event
       List.trigger("itemSelected", List.selectedItem);
     }
   };
