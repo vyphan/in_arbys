@@ -19,7 +19,7 @@
     }
   }
 
-  //Parse node for UI components, load and instantiate, nessasay pacakges.
+  //Parse node for UI components, load and instantiate, neccessary packages.
   $.fn.act = function() {
     var $this = $( this ),
       count;
@@ -93,7 +93,7 @@
 
     } ( $this ) );
 
-  }
+  };
 
 }( jQuery ) );
 
@@ -102,7 +102,7 @@
   //Returns a control.
   $.fn.getControl = function( id ) {
     return $( this ).data( id );
-  }
+  };
 
 }( jQuery ) );
 
@@ -115,7 +115,7 @@
     on: $.fn.on,
     off: $.fn.off,
     trigger: $.fn.trigger
-  }
+  };
 
   $.fn.on = function() {
     var $this = $( this );
@@ -128,20 +128,22 @@
       } );
     }
     return cache.on.apply( $this, arguments );
-  }
+  };
+  
   $.fn.off = function() {
     var $this = $( this );
     if( $this.data( 'acting' ) ) {
       
     }
     return cache.off.apply( $this, arguments );
-  }
+  };
+  
   $.fn.trigger = function() {
     var $this = $( this );
     if( $this.data( 'athena' ) ) {
 
     }
     return cache.trigger.apply( $this, arguments );
-  }
+  };
 
 }( jQuery ) );
