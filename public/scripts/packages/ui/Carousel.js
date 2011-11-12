@@ -24,7 +24,7 @@ Carousel = List.extend( function ( $element, settings ){
       Carousel.first();
     }
     else {
-      Carousel.selectNode(index + 1);
+      Carousel.selectItem(index + 1);
     }
   };
   
@@ -37,16 +37,16 @@ Carousel = List.extend( function ( $element, settings ){
       Carousel.last();
     }
     else {
-      Carousel.selectNode(next);
+      Carousel.selectItem(next);
     }
   };
   
   Carousel.first = function () {
-    Carousel.selectNode(0);
+    Carousel.selectItem(0);
   };
   
   Carousel.last = function () {
-    Carousel.selectNode(Carousel.size - 1);    
+    Carousel.selectItem(Carousel.size - 1);    
   };
   
   

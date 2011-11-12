@@ -23,14 +23,14 @@ List = Abstract.extend( function ( $element, settings ){
 	 */
 	defaults = {
   	/**
-  	 * The CSS selector used to grab the list nodes
-  	 * @property nodeSelector
+  	 * The CSS selector used to grab the list items
+  	 * @property itemSelector
   	 * @type String
   	 * @final
   	 */	  
-	  nodeSelector: "li",
+	  itemSelector: "li",
   	/**
-  	 * The CSS Class that signifies a selected list node
+  	 * The CSS Class that signifies a selected list item
   	 * @property CSS_SELECTED
   	 * @type String
   	 * @final
@@ -55,58 +55,58 @@ List = Abstract.extend( function ( $element, settings ){
 	 * @property selectedElement
 	 * @type JQObject
 	 */
-	List.selectedNode;
+	List.selectedItem;
   /**
    * A collection of list items
-   * @property nodes
+   * @property items
    * @type Array
    */
-	List.nodes;
+	List.items;
 
   // Init
 	settings = _.extend( defaults, settings );
-  List.nodes = $( settings.nodeSelector, $element );
-  List.selectedNode = List.nodes[0];
+  List.items = $( settings.itemSelector, $element );
+  List.selectedItem = List.items[0];
   List.selectedIndex = 0;
-  List.size = List.nodes.length;
+  List.size = List.items.length;
 
   /**
-   * Select a node in the list
-   * @method selectNode
+   * Select a item in the list
+   * @method selectItem
    * @public
-   * @param {Integer} num The index of the node to select
+   * @param {Integer} num The index of the item to select
    */
-  List.selectNode = function (num) {
+  List.selectItem = function (num) {
     var SELECTED_CSS = settings.selectedClass;
     
     if (0 <= num && num < List.size) {
-      // Unstyle the old node
-      $(List.selectedNode).removeClass(SELECTED_CSS);
+      // Unstyle the old item
+      $(List.selectedItem).removeClass(SELECTED_CSS);
     
-      // Update selectedIndex & selectedNode
+      // Update selectedIndex & selectedItem
       List.selectedIndex = num;
-      List.selectedNode = List.nodes[List.selectedIndex];
+      List.selectedItem = List.items[List.selectedIndex];
     
-      // Style the new node
-      $(List.selectedNode).addClass(SELECTED_CSS);    
+      // Style the new item
+      $(List.selectedItem).addClass(SELECTED_CSS);    
       
       // Fire custom event
-      List.trigger("nodeSelected", List.selectedNode);
+      List.trigger("itemSelected", List.selectedItem);
     }
   };
   
   /**
-   * Returns the selected list node
-   * @method getSelectedNode
+   * Returns the selected list item
+   * @method getSelectedItem
    * @public
    * @return Object
    */
-  List.getSelectedNode = function () {
-    return List.selectedNode;
+  List.getSelectedItem = function () {
+    return List.selectedItem;
   };
   
   /**
-   * Returns the number of nodes in the list 
+   * Returns the number of items in the list 
    * @method getSize
    * @public
    * @return Integer
@@ -115,19 +115,6 @@ List = Abstract.extend( function ( $element, settings ){
     return List.size;
   };
   
-/*
-  // Subscribe to custom events
-  $element.on('next', function (event) {
-    _.log("List: next");
-    List.setSelectedNode(List.selectedIndex + 1);
-  });
-
-  $element.on('previous', function (event) {
-    _.log("List: previous");
-    List.setSelectedNode(List.selectedIndex - 1);
-  });
-*/
-
   // Framework magic
   $element.data( id, List );
   
