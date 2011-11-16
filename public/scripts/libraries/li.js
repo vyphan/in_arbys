@@ -398,6 +398,11 @@
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Play.js',
 			requires: ['ui/Abstract']
+		}, {
+			id: 'ui/Dialog',
+			version: '0.0.1',
+			path: '/scripts/packages/ui/Dialog.js',
+			requires: ['ui/Abstract']
 		}
     
   ] );
