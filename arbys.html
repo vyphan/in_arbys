@@ -1,144 +1,109 @@
-<h1>Thinking Arby's? We are too!</h1>
+<div id="container" data-athena="ui:Abstract" data-athena-config="{ ui:Abstract: {} }">
 
-<p><strong>Taking someone to a place they haven't been to</strong> has been a LinkedIn UED tradition since it's infancy. While now we employe the Wheel of Lunch'In to determine the welcome lunch, there was an era where every Monday was a trip to the local Arby's. It holds a special place in our heart, and we want to share that special place with you.</p>
-<p><strong>Our local Arby's is the one on South Bernardo,</strong> where you can eat your curly fries beneath the atrium or sip a Jamocha shake in the comfortable booths. Beef and cheddar never tasted so good!</p>
+  <h1>Thinking Arby's? We are too!</h1>
 
-
-<!-- CAROUSEL -->
-<h2>Our Favorites</h2>
-<ul class="paginator" data-athena="ui:List">
-  <li><button data-athena="ui:Button" data-athena-config="{ 'ui:Button': { action: 'select=1', notify: '.carousel' } }">Go to Carousel Panel 1</button></li>
-  <li><button data-athena="ui:Button" data-athena-config="{ 'ui:Button': { action: 'select=2', notify: '.carousel' } }">Go to Carousel Panel 2</button></li>
-</ul>
-<ol class="carousel" data-athena="ui:List">
-  <li>
-    <ul>
-      <li><a href="http://www.arbys.com/menu/ultimate-angus.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#ultimate-angus-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/roast%20beef%20and%20melts/ARB11_AngusPhlly_small2.png" alt="Ultimate Angus"><span>Ultimate Angus</span></a></li>
-      <li><a href="http://www.arbys.com/menu/roast-beef.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#roast-beef-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/sandwiches_melts_category_small.png" alt="Arby's Roast Beef"><span>Arby's Roast Beef</span></a></li>
-      <li><a href="http://www.arbys.com/menu/market-fresh-sandwiches.html" title="Click for details"data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#market-fresh-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/market_fresh_sandwiches_category_small.png" alt="Market Fresh Sandwiches"><span>Market Fresh Sandwiches</span></a></li>        
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li><a href="http://www.arbys.com/menu/prime-cut-chicken.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#prime-cut-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/chicken/ARB11_CrvingChckn_silo_drop2.png" alt="Prime-Cut Chicken"><span>Prime-Cut Chicken</span></a></li>
-      <li><a href="http://www.arbys.com/menu/value-menu.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#value-meal-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/valuemenu/JrHamMelt_small4.png" alt="Arby's Value Menu"><span>Arby's Value Menu</span></a></li>
-      <li><a href="http://www.arbys.com/menu/toasted-subs.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#subs-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/toasted_subs_category_small.png" alt="Subs"><span>Subs</span></a></li>
-    </ul>
-  </li>
-</ol>
-<div class="controls">
-  <button data-athena="ui:Button(previous) => .paginator, .carousel" data-athena-config="{'ui:Button': { action: 'previous', notify: '.paginator, .carousel' } }">Previous</button>
-  <button data-athena="ui:Button(next) => .paginator, .carousel" data-athena-config="{'ui:Button': { action: 'next', notify: '.paginator, .carousel' } }">Next</button>
-</div>
+  <p><strong>Taking someone to a place they haven't been to</strong> has been a LinkedIn UED tradition since it's infancy. While now we employe the Wheel of Lunch'In to determine the welcome lunch, there was an era where every Monday was a trip to the local Arby's. It holds a special place in our heart, and we want to share that special place with you.</p>
+  <p><strong>Our local Arby's is the one on South Bernardo,</strong> where you can eat your curly fries beneath the atrium or sip a Jamocha shake in the comfortable booths. Beef and cheddar never tasted so good!</p>
 
 
-<!-- DIALOG -->
-<div id="ultimate-angus-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/templates/arbys/images/ultimateAngusMainImage.png" alt="Ultimate Angus Sandwiches">
-  <h3>Ultimate Angus</h3>
-  <p>Angus Beef is regarded as some of the best beef in the world for its fine quality, amazing flavor, and exquisite marbling. At Arby's, we only serve 100% Black Angus beef, lightly seasoned with just the right touch of our special blend of cracked black pepper, herbs and spices. Our premium 94% lean top round is oven roasted to perfection and served freshly sliced for the "ultimate" in Angus.</p>
-  <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
-</div>
-<div id="roast-beef-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/images/sandwiches_melts_category.png" alt="Roast Beef and Curly Fries">
-  <h3>Roast Beef</h3>
-  <p>Wanna feel great? Grab an Arby's® Roast Beef Sandwich. It's slow roasted for three hours in our stores every day, freshly sliced and piled high to roast beef perfection. If one of these doesn't put you in a good mood, nothing will.</p>
-  <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
-</div>
-<div id="market-fresh-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/images/market_fresh_sandwiches_category.png" alt="Old School Sandwich Deliciousness">
-  <h3>Market Fresh Sandwiches</h3>
-  <p>These are the feel-good sandwiches of the year. When thick cut honey wheat bread meets generous cuts of oven roasted meats and fresh produce, the result is one serious sandwich.</p>
-  <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
-</div>
-<div id="prime-cut-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/templates/images/chicken/chicken_header_0000_food.png" alt="Chicken Deliciousness">
-  <h3>Prime-Cut Chicken</h3>
-  <p>All white meat, chicken breast fillets are the epitome of juicy deliciousness. These sandwiches are sure to put your taste buds in a good mood.</p>
-  <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
-</div>
-<div id="value-meal-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/templates/images/valuemenu/arbys_valueheader_food.png" alt="Value Menu Deliciousness">
-  <h3>Value Menu</h3>
-  <p>There’s truly no other value menu like it. The Arby’s value menu features items like our one-of-a-kind Arby’s curly fries, awesome Jamocha Shakes, Jr. Roast Beef sandwiches and decadent turnovers. This wealth of offerings will have you feeling pretty well-off.</p>
-  <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
-</div>
-<div id="subs-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/images/toasted_subs_category.png" alt="Delicious Sub Sandwich">
-  <h3>Subs</h3>
-  <p>We present Arby's® Subs. Spring-loaded with tasty veggies and oven roasted cuts of meat, such as thinly sliced roast beef, turkey, ham, salami, and pepperoni. Crisp slices of bacon. With melted cheese on a crunchy roll. You’ve now entered the state of Bliss.</p>
-  <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
-</div>
+  <!-- CAROUSEL -->
+  <h2>Our Favorites</h2>
+  <ol>
+    <li>
+      <ul>
+        <li><a href="http://www.arbys.com/menu/ultimate-angus.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#ultimate-angus-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/roast%20beef%20and%20melts/ARB11_AngusPhlly_small2.png" alt="Ultimate Angus"><span>Ultimate Angus</span></a></li>
+        <li><a href="http://www.arbys.com/menu/roast-beef.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#roast-beef-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/sandwiches_melts_category_small.png" alt="Arby's Roast Beef"><span>Arby's Roast Beef</span></a></li>
+        <li><a href="http://www.arbys.com/menu/market-fresh-sandwiches.html" title="Click for details"data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#market-fresh-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/market_fresh_sandwiches_category_small.png" alt="Market Fresh Sandwiches"><span>Market Fresh Sandwiches</span></a></li>        
+      </ul>
+    </li>
+    <li>
+      <ul>
+        <li><a href="http://www.arbys.com/menu/prime-cut-chicken.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#prime-cut-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/chicken/ARB11_CrvingChckn_silo_drop2.png" alt="Prime-Cut Chicken"><span>Prime-Cut Chicken</span></a></li>
+        <li><a href="http://www.arbys.com/menu/value-menu.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#value-meal-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/valuemenu/JrHamMelt_small4.png" alt="Arby's Value Menu"><span>Arby's Value Menu</span></a></li>
+        <li><a href="http://www.arbys.com/menu/toasted-subs.html" title="Click for details" data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'open', notify: '#subs-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/toasted_subs_category_small.png" alt="Subs"><span>Subs</span></a></li>
+      </ul>
+    </li>
+  </ol>
 
+  <!-- DIALOGS -->
+  <div id="ultimate-angus-dialog" title="Ultimate Angus" class="dialog" data-athena="ui:Dialog" data-athena="ui:Dialog" data-athena-config="{ 
+    'ui:Dialog': { 
+  		autoOpen: false,
+  		width: 600,
+  		draggable: true,
+  		modal: false,
+  		closeText: 'Close'
+    }
+  }">
+    <img src="http://www.arbys.com/assets/templates/arbys/images/ultimateAngusMainImage.png" alt="Ultimate Angus Sandwiches">
+    <p>Angus Beef is regarded as some of the best beef in the world for its fine quality, amazing flavor, and exquisite marbling. At Arby's, we only serve 100% Black Angus beef, lightly seasoned with just the right touch of our special blend of cracked black pepper, herbs and spices. Our premium 94% lean top round is oven roasted to perfection and served freshly sliced for the "ultimate" in Angus.</p>
+    <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
+  </div>
+  <div id="roast-beef-dialog" title="Roast Beef" class="dialog" data-athena="ui:Dialog" data-athena-config="{ 
+    'ui:Dialog': { 
+  		autoOpen: false,
+  		width: 600,
+  		draggable: true,
+  		modal: false,
+  		closeText: 'Close'
+    }
+  }">
+    <img src="http://www.arbys.com/assets/images/sandwiches_melts_category.png" alt="Roast Beef and Curly Fries">
+    <p>Wanna feel great? Grab an Arby's® Roast Beef Sandwich. It's slow roasted for three hours in our stores every day, freshly sliced and piled high to roast beef perfection. If one of these doesn't put you in a good mood, nothing will.</p>
+    <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
+  </div>
+  <div id="market-fresh-dialog" title="Market Fresh Sandwiches" class="dialog" data-athena="ui:Dialog" data-athena-config="{ 
+    'ui:Dialog': { 
+  		autoOpen: false,
+  		width: 600,
+  		draggable: true,
+  		modal: false,
+  		closeText: 'Close'
+    }
+  }">
+    <img src="http://www.arbys.com/assets/images/market_fresh_sandwiches_category.png" alt="Old School Sandwich Deliciousness">
+    <p>These are the feel-good sandwiches of the year. When thick cut honey wheat bread meets generous cuts of oven roasted meats and fresh produce, the result is one serious sandwich.</p>
+    <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
+  </div>
+  <div id="prime-cut-dialog" title="Prime-Cut Chicken" class="dialog" data-athena="ui:Dialog" data-athena-config="{ 
+    'ui:Dialog': { 
+  		autoOpen: false,
+  		width: 600,
+  		draggable: true,
+  		modal: false,
+  		closeText: 'Close'
+    }
+  }">
+    <img src="http://www.arbys.com/assets/templates/images/chicken/chicken_header_0000_food.png" alt="Chicken Deliciousness">
+    <p>All white meat, chicken breast fillets are the epitome of juicy deliciousness. These sandwiches are sure to put your taste buds in a good mood.</p>
+    <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
+  </div>
+  <div id="value-meal-dialog" class="dialog" data-athena="ui:Dialog" data-athena-config="{ 
+    'ui:Dialog': { 
+  		autoOpen: false,
+  		width: 600,
+  		draggable: true,
+  		modal: false,
+  		closeText: 'Close'
+    }
+  }">
+    <img src="http://www.arbys.com/assets/templates/images/valuemenu/arbys_valueheader_food.png" alt="Value Menu Deliciousness">
+    <h3>Value Menu</h3>
+    <p>There’s truly no other value menu like it. The Arby’s value menu features items like our one-of-a-kind Arby’s curly fries, awesome Jamocha Shakes, Jr. Roast Beef sandwiches and decadent turnovers. This wealth of offerings will have you feeling pretty well-off.</p>
+    <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
+  </div>
+  <div id="subs-dialog" title="Subs" class="dialog" data-athena="ui:Dialog" data-athena-config="{ 
+    'ui:Dialog': { 
+  		autoOpen: false,
+  		width: 600,
+  		draggable: true,
+  		modal: false,
+  		closeText: 'Close'
+    }
+  }">
+    <img src="http://www.arbys.com/assets/images/toasted_subs_category.png" alt="Delicious Sub Sandwich">
+    <p>We present Arby's® Subs. Spring-loaded with tasty veggies and oven roasted cuts of meat, such as thinly sliced roast beef, turkey, ham, salami, and pepperoni. Crisp slices of bacon. With melted cheese on a crunchy roll. You’ve now entered the state of Bliss.</p>
+    <button data-athena="ui:Button" data-athena-config="{'ui:Button': { action: 'close' } }">Close</button>
+  </div>
 
-
-
-<!-- CAROUSEL (ALTERNATE SYNTAX) -->
-<!--
-<h2>Our Favorites</h2>
-<ul class="paginator" data-control="ui:List">
-  <li><button data-control="ui:Button(select=1) =^> .carousel">Go to Carousel Panel 1</button></li>
-  <li><button data-control="ui:Button(select=2) =^> .carousel">Go to Carousel Panel 2</button></li>
-</ul>
-<ol class="carousel" data-control="ui:List">
-  <li>
-    <ul>
-      <li><a href="http://www.arbys.com/menu/ultimate-angus.html" title="Click for details" data-control="ui:Button(action=open) => #ultimate-angus-dialog"><img src="http://www.arbys.com/assets/templates/images/roast%20beef%20and%20melts/ARB11_AngusPhlly_small2.png" alt="Ultimate Angus"><span>Ultimate Angus</span></a></li>
-      <li><a href="http://www.arbys.com/menu/roast-beef.html" title="Click for details" data-control="ui:Button(action=open) => #roast-beef-dialog"><img src="http://www.arbys.com/assets/templates/images/sandwiches_melts_category_small.png" alt="Arby's Roast Beef"><span>Arby's Roast Beef</span></a></li>
-      <li><a href="http://www.arbys.com/menu/market-fresh-sandwiches.html" title="Click for details"data-control="ui:Button(action=open) => #market-fresh-dialog"><img src="http://www.arbys.com/assets/templates/images/market_fresh_sandwiches_category_small.png" alt="Market Fresh Sandwiches"><span>Market Fresh Sandwiches</span></a></li>        
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li><a href="http://www.arbys.com/menu/prime-cut-chicken.html" title="Click for details" data-control="ui:Button(action=open) => #prime-cut-dialog"><img src="http://www.arbys.com/assets/templates/images/chicken/ARB11_CrvingChckn_silo_drop2.png" alt="Prime-Cut Chicken"><span>Prime-Cut Chicken</span></a></li>
-      <li><a href="http://www.arbys.com/menu/value-menu.html" title="Click for details" data-control="ui:Button(action=open) => #value-meal-dialog"><img src="http://www.arbys.com/assets/templates/images/valuemenu/JrHamMelt_small4.png" alt="Arby's Value Menu"><span>Arby's Value Menu</span></a></li>
-      <li><a href="http://www.arbys.com/menu/toasted-subs.html" title="Click for details" data-control="ui:Button(action=open) => #subs-dialog"><img src="http://www.arbys.com/assets/templates/images/toasted_subs_category_small.png" alt="Subs"><span>Subs</span></a></li>
-    </ul>
-  </li>
-</ol>
-<div class="controls">
-  <button data-control="ui:Button(action=previous) => .paginator, .carousel">Previous</button>
-  <button data-control="ui:Button(action=next) => .paginator, .carousel">Next</button>
 </div>
--->
-
-
-<!-- DIALOG (ALTERNATE SYNTAX) -->
-<!--
-<div id="ultimate-angus-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/templates/arbys/images/ultimateAngusMainImage.png" alt="Ultimate Angus Sandwiches">
-  <h3>Ultimate Angus</h3>
-  <p>Angus Beef is regarded as some of the best beef in the world for its fine quality, amazing flavor, and exquisite marbling. At Arby's, we only serve 100% Black Angus beef, lightly seasoned with just the right touch of our special blend of cracked black pepper, herbs and spices. Our premium 94% lean top round is oven roasted to perfection and served freshly sliced for the "ultimate" in Angus.</p>
-  <button data-athena="ui:Button(action=close)">Close</button>
-</div>
-<div id="roast-beef-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/images/sandwiches_melts_category.png" alt="Roast Beef and Curly Fries">
-  <h3>Roast Beef</h3>
-  <p>Wanna feel great? Grab an Arby's® Roast Beef Sandwich. It's slow roasted for three hours in our stores every day, freshly sliced and piled high to roast beef perfection. If one of these doesn't put you in a good mood, nothing will.</p>
-  <button data-athena="ui:Button(action=close)">Close</button>
-</div>
-<div id="market-fresh-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/images/market_fresh_sandwiches_category.png" alt="Old School Sandwich Deliciousness">
-  <h3>Market Fresh Sandwiches</h3>
-  <p>These are the feel-good sandwiches of the year. When thick cut honey wheat bread meets generous cuts of oven roasted meats and fresh produce, the result is one serious sandwich.</p>
-  <button data-athena="ui:Button(action=close)">Close</button>
-</div>
-<div id="prime-cut-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/templates/images/chicken/chicken_header_0000_food.png" alt="Chicken Deliciousness">
-  <h3>Prime-Cut Chicken</h3>
-  <p>All white meat, chicken breast fillets are the epitome of juicy deliciousness. These sandwiches are sure to put your taste buds in a good mood.</p>
-  <button data-athena="ui:Button(action=close)">Close</button>
-</div>
-<div id="value-meal-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/templates/images/valuemenu/arbys_valueheader_food.png" alt="Value Menu Deliciousness">
-  <h3>Value Menu</h3>
-  <p>There’s truly no other value menu like it. The Arby’s value menu features items like our one-of-a-kind Arby’s curly fries, awesome Jamocha Shakes, Jr. Roast Beef sandwiches and decadent turnovers. This wealth of offerings will have you feeling pretty well-off.</p>
-  <button data-athena="ui:Button(action=close)">Close</button>
-</div>
-<div id="subs-dialog" class="dialog" data-athena="ui:Dialog" >
-  <img src="http://www.arbys.com/assets/images/toasted_subs_category.png" alt="Delicious Sub Sandwich">
-  <h3>Subs</h3>
-  <p>We present Arby's® Subs. Spring-loaded with tasty veggies and oven roasted cuts of meat, such as thinly sliced roast beef, turkey, ham, salami, and pepperoni. Crisp slices of bacon. With melted cheese on a crunchy roll. You’ve now entered the state of Bliss.</p>
-  <button data-athena="ui:Button(action=close)">Close</button>
-</div>
--->

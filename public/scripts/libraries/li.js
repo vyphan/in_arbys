@@ -281,6 +281,11 @@
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Dialog.js',
 			requires: ['ui/Abstract']
+		}, {
+			id: 'ui/List',
+			version: '0.0.1',
+			path: '/scripts/packages/ui/List.js',
+			requires: ['ui/Abstract']
 		}
 	] );
 

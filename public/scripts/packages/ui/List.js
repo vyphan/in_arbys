@@ -1,6 +1,6 @@
 var id = 'ui/List',
 	Abstract = li.require( 'ui/Abstract' ),
-	Callout;
+	List;
 
 List = Abstract.extend( function ( element, settings ){
 	var List = this,
