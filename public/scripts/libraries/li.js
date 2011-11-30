@@ -374,6 +374,11 @@
       path: '/scripts/packages/providers/Event.js',
       requires: ['libraries/klass']
     }, {
+        id: 'providers/AutoPlay',
+        version: '0.0.1',
+        path: '/scripts/packages/providers/AutoPlayer.js',
+        requires: ['libraries/klass']
+    }, {
       id: 'ui/Abstract',
       version: '0.0.1',
       path: '/scripts/packages/ui/Abstract.js',
@@ -394,10 +399,10 @@
       path: '/scripts/packages/ui/Carousel.js',
       requires: ['ui/List']
 		}, {
-	  	id: 'ui/Play',
+	  	id: 'ui/CarouselAutoPlay',
 			version: '0.0.1',
-			path: '/scripts/packages/ui/Play.js',
-			requires: ['ui/Abstract']
+			path: '/scripts/packages/ui/CarouselAutoPlay.js',
+			requires: ['ui/Abstract', 'providers/AutoPlayer']
 		}
     
   ] );
