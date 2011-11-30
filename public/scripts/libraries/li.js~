@@ -401,6 +401,10 @@
 		}, {
 	  	id: 'ui/CarouselAutoPlay',
 			version: '0.0.1',
+<<<<<<< HEAD
+			path: '/scripts/packages/ui/CarouselAutoPlay.js',
+			requires: ['ui/Abstract', 'providers/AutoPlayer']
+=======
 			path: '/scripts/packages/ui/Button.js',
 			requires: ['ui/Abstract']
 		}, {
@@ -408,6 +412,7 @@
 			version: '0.0.1',
 			path: '/scripts/packages/ui/Dialog.js',
 			requires: ['ui/Abstract']
+>>>>>>> 9de241f8da191c66c50eac1d5ab9a0291ca3c79d
 		}
     
   ] );
