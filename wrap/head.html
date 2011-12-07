@@ -42,65 +42,7 @@ LI.staticUrlHashEnabled = true;
 
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <!-- CUSTOM JS BEGIN -->
-  <!-- global lib -->
-  <script type="text/javascript" src="/scripts/libraries/modernizr-2.0.6.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/jquery-1.7.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    ENV_CONFIG = {
-      debug: true
-    }
-  </script>  
 
-  <!-- athena -->
-  <script type="text/javascript" src="/scripts/libraries/klass.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/underscore.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/helpers.js"></script>
-  
-  <script type="text/javascript" src="/scripts/libraries/porthole.js"></script>
-  <script type="text/javascript">
-
-    var getResource = false,
-      head = document.getElementsByTagName( 'head' )[0],
-      proxieIds = [ 'localhost:3000' ],
-      proxies = [];
-
-    _.each( proxieIds, function( item, index ){
-      var proxy = item,
-        iframe;
-
-        iframe = document.createElement( 'iframe' );
-
-        iframe.src = '//' + item + '/cdn-proxy.html';
-        iframe.id = item + '-proxy';
-        iframe.name = item + '-proxy';
-        iframe.onload = function() {
-          proxies[index] = new Porthole.WindowProxy( '//' + item, item + '-proxy' );
-          proxies[index].addEventListener( li.proxyEventHandler );
-          if( !getResource ) {
-            getResource = function( key, url ) {
-              var proxy = proxies.shift();
-              proxy.postMessage( 'key=' + key + '&url=' + url );
-              proxies.push( proxy );
-            }
-          }
-        }
-        head.appendChild( iframe );
-    } );
-
-  </script>
-  <script type="text/javascript" src="/scripts/libraries/li.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/athena-0.0.1.js"></script>
-  
-  <!-- inject() -->
-  <script type="text/javascript" src="/scripts/libraries/inject-0.2.0-dev.js"></script>
-  
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-  
-  <script type="text/javascript" charset="utf-8">
-    $( function() {
-      $('body').act();
-    } );
-  </script>  
   
 <!-- CUSTOM JS END -->
 <!-- ////////////////////////////////////////////////////////////////////// -->
