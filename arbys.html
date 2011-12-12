@@ -6,23 +6,25 @@
 
 <!-- CAROUSEL -->
 <h2>Our Favorites</h2>
-<div>
-  <ol>
-    <li>
-      <ul>
-        <li><a href="http://www.arbys.com/menu/ultimate-angus.html" title="Click for details" data-athena="Button" data-athena-config="{'Button': { action: 'open', notify: '#ultimate-angus-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/roast%20beef%20and%20melts/ARB11_AngusPhlly_small2.png" alt="Ultimate Angus"><span>Ultimate Angus</span></a></li>
+<div id="carousel" data-athena="Carousel">
+  <ol class="panels">
+    <li class="active">
+      <ul class="items">
+        <li class="athena-selected"><a href="http://www.arbys.com/menu/ultimate-angus.html" title="Click for details" data-athena="Button" data-athena-config="{'Button': { action: 'open', notify: '#ultimate-angus-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/roast%20beef%20and%20melts/ARB11_AngusPhlly_small2.png" alt="Ultimate Angus"><span>Ultimate Angus</span></a></li>
         <li><a href="http://www.arbys.com/menu/roast-beef.html" title="Click for details" data-athena="Button" data-athena-config="{'Button': { action: 'open', notify: '#roast-beef-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/sandwiches_melts_category_small.png" alt="Arby's Roast Beef"><span>Arby's Roast Beef</span></a></li>
         <li><a href="http://www.arbys.com/menu/market-fresh-sandwiches.html" title="Click for details"data-athena="Button" data-athena-config="{'Button': { action: 'open', notify: '#market-fresh-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/market_fresh_sandwiches_category_small.png" alt="Market Fresh Sandwiches"><span>Market Fresh Sandwiches</span></a></li>        
       </ul>
     </li>
     <li>
-      <ul>
+      <ul class="items">
         <li><a href="http://www.arbys.com/menu/prime-cut-chicken.html" title="Click for details" data-athena="Button" data-athena-config="{'Button': { action: 'open', notify: '#prime-cut-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/chicken/ARB11_CrvingChckn_silo_drop2.png" alt="Prime-Cut Chicken"><span>Prime-Cut Chicken</span></a></li>
         <li><a href="http://www.arbys.com/menu/value-menu.html" title="Click for details" data-athena="Button" data-athena-config="{'Button': { action: 'open', notify: '#value-meal-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/valuemenu/JrHamMelt_small4.png" alt="Arby's Value Menu"><span>Arby's Value Menu</span></a></li>
         <li><a href="http://www.arbys.com/menu/toasted-subs.html" title="Click for details" data-athena="Button" data-athena-config="{'Button': { action: 'open', notify: '#subs-dialog' } }"><img src="http://www.arbys.com/assets/templates/images/toasted_subs_category_small.png" alt="Subs"><span>Subs</span></a></li>
       </ul>
     </li>
   </ol>
+  <button data-athena="Button" data-athena-config="{'Button': { action: 'previous' } }">Previous</button>
+  <button data-athena="Button" data-athena-config="{'Button': { action: 'next' } }">Next</button>
 </div>
 
 
