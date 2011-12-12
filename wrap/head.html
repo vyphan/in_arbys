@@ -43,6 +43,28 @@ LI.staticUrlHashEnabled = true;
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <!-- CUSTOM JS BEGIN -->
 
+ <!-- Bootstrap:Util -->
+ <script src="/scripts/libraries/underscore.js" type="text/javascript" charset="utf-8"></script>
+ <script src="/scripts/libraries/helpers.js" type="text/javascript" charset="utf-8"></script>
+ 
+ <!-- Bootstrap:Dependency Manager & Loader -->
+ <script type="text/javascript" src="/scripts/libraries/inject.js"></script>
+
+<!-- Bootstrap:UI -->
+ <script src="/scripts/libraries/jquery-1.7.js" type="text/javascript" charset="utf-8"></script>
+
+ <script src="/scripts/libraries/athena/config.js" type="text/javascript" charset="utf-8"></script>
+
+ <script type="text/javascript" charset="utf-8">
+   ATHENA_CONFIG = {
+     debug: true
+   };
+ </script>
+
+ <script type="text/javascript" charset="utf-8">
+   localStorage.clear();
+   require.ensure( ['athena'], function() {} );
+ </script>
   
 <!-- CUSTOM JS END -->
 <!-- ////////////////////////////////////////////////////////////////////// -->
