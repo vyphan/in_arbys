@@ -16,6 +16,33 @@
 .product-showcase {
   margin-bottom: 15px;
 }
+.product-showcase .carousel li {
+  display: none;
+}
+.product-showcase .carousel li.athena-selected {
+  display: inline;
+}
+.product-showcase .image {
+  float: left;
+  width: 60%;
+  text-align: center;
+}
+.product-showcase .details {
+  position: relative;
+  float: right;
+  width: 33%;
+  height: 310px;
+  background-color: #efefef;
+}
+.product-showcase .details p {
+  margin: 15px;
+  font-size: 110%;
+}
+.product-showcase .controls {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
 
 
 /* TRADITION */
