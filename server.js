@@ -43,7 +43,7 @@ function createServer(path) {
   };
 }
 
-fileServer = createServer(path.normalize("" + __dirname + "/"));
+fileServer = createServer(path.normalize("" + __dirname + "/public/"));
 http.createServer(fileServer).listen(3000);
 
 sys.log("Server listening on port 3000");
