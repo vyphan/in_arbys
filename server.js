@@ -9,18 +9,6 @@ var paperboy = require("paperboy"),
     arbys_foot = path.normalize("./wrap/foot.html"),
     arbys_main = path.normalize("./arbys.html");
 
-<<<<<<< HEAD
-// start server on port 3000
-// if not a static file in our repo, then hand out arbys page
-http.createServer(function(request, response) {
-  fileServer.serve(request, response, function(err, result) {
-    
-    sys.log(request.url);
-    
-    if ((err != null ? err.status : void 0) === 404) {
-      // not a static file
-      // read head, body, and foot async and display
-=======
 // create a static server handler
 function createServer(path) {
   return function(request, response) {
@@ -35,7 +23,6 @@ function createServer(path) {
       // res.writeHead(404, {'Content-Type': 'text/plain'});
       // res.end("Error 404: File not found");
       // return the page
->>>>>>> da753e68980f401985f4899567710dcf513c65b9
       Seq()
       .par(function() {
         // load head
