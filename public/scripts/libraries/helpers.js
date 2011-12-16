@@ -29,8 +29,15 @@ _.explodeURL = function ( url ) {
 
 };
 
+<<<<<<< HEAD
 _.log = function (msg) {
   if ( li.environment.debug && console && !!console.log ) {
     console.log( 'FRAMEWORK: ' + msg );
+=======
+_.log = function () {
+  var args = arguments;
+  if ( window.ATHENA_CONFIG && window.ATHENA_CONFIG.debug && console && !!console.log ) {
+    console.log( "ATHENA: ", args );
+>>>>>>> da753e68980f401985f4899567710dcf513c65b9
   }
 };

@@ -27,10 +27,9 @@
 
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <!-- CUSTOM CSS BEGIN -->
-<!-- inline for arby's... this is not the focus -->
-<style>
 
-</style>
+<link rel="stylesheet" type="text/css" href="/styles/arbys.css">
+
 <!-- CUSTOM CSS END -->
 <!-- ////////////////////////////////////////////////////////////////////// -->
 
@@ -42,20 +41,29 @@ LI.staticUrlHashEnabled = true;
 
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <!-- CUSTOM JS BEGIN -->
-  <!-- global lib -->
-  <script type="text/javascript" src="/scripts/libraries/modernizr-2.0.6.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/class.js"></script>
 
-  <!-- athena -->
-  <script type="text/javascript" src="/scripts/libraries/klass.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/porthole.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/li.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/underscore.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/helpers.js"></script>
-  <script type="text/javascript" src="/scripts/libraries/athena-0.0.1.js"></script>
-  
-  <!-- inject() -->
-  <script type="text/javascript" src="/scripts/libraries/inject-0.2.2-dev.js"></script>
+ <!-- Bootstrap:Util -->
+ <script src="/scripts/libraries/underscore.js" type="text/javascript" charset="utf-8"></script>
+ <script src="/scripts/libraries/helpers.js" type="text/javascript" charset="utf-8"></script>
+ 
+ <!-- Bootstrap:Dependency Manager & Loader -->
+ <script type="text/javascript" src="/scripts/libraries/inject.js"></script>
+
+<!-- Bootstrap:UI -->
+ <script src="/scripts/libraries/jquery-1.7.js" type="text/javascript" charset="utf-8"></script>
+
+ <script src="/scripts/libraries/athena/config.js" type="text/javascript" charset="utf-8"></script>
+
+ <script type="text/javascript" charset="utf-8">
+   ATHENA_CONFIG = {
+     debug: true
+   };
+ </script>
+
+ <script type="text/javascript" charset="utf-8">
+   localStorage.clear();
+   require.ensure( ['athena'], function() {} );
+ </script>
   
 <!-- CUSTOM JS END -->
 <!-- ////////////////////////////////////////////////////////////////////// -->
@@ -101,3 +109,5 @@ LI_WCT([
   <div class="wrapper">
     <div id="global-error"></div>
       <div id="main" class="arb">
+        
+<!-- ******************** END HEAD ******************** -->
