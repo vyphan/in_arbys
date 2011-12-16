@@ -13,7 +13,15 @@
 
 
 /* PRODUCT SHOWCASE */
-.product-showcase {
+.product-showcase ul li {
+  display: none;
+}
+.product-showcase ul.tab-list li,
+.product-showcase ul li.athena-selected {
+  display: block;
+}
+
+/*.product-showcase {
   margin-bottom: 25px;
 }
 .product-showcase .carousel li {
@@ -82,7 +90,7 @@
   position: absolute;
   right: 15px;
   bottom: 15px;
-}
+}*/
 
 
 /* TRADITION */

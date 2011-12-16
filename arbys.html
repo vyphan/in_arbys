@@ -1,117 +1,132 @@
-<div class="product-showcase">
-  <div class="carousel clearfix" data-athena="Carousel" data-athena-config="{ 'Carousel': { observe: '.showcase-previous,.showcase-next', autoplay: true, delay: 5000 }}">
-    <ol class="items">
-      <li class="athena-selected">
-        <div class="image">
-          <div class="tab-control" data-athena="Tabs">
-            <ul class="tab-panels" data-athena="List">
-              <li id="a1" class="athena-selected" data-athena="Container">
-                <img width="600" height="229" src="http://www.arbys.com/assets/templates/arbys/images/ultimateAngusMainImage.png" alt="Ultimate Angus Sandwiches">
-              </li>
-              <li id="a2" data-athena="Container">
-                <img width="600" height="305" src="http://www.arbys.com/assets/images/sandwiches_melts_category.png" alt="Roast Beef and Curly Fries">
-              </li>
-              <li id="a3" data-athena="Container">
-                <img width="375" height="219" src="http://www.arbys.com/assets/images/market_fresh_sandwiches_category.png" alt="Old School Sandwich Deliciousness">
-              </li>
-            </ul>
-            <ul class="tab-list" data-athena="List">
-              <li class="athena-selected">
-                <a href="#a1" data-athena="Button:Select">Angus Beef</a>
-              </li>
-              <li>
-                <a href="#a2" data-athena="Button:Select">Delicious Melts</a>
-              </li>
-              <li>
-                <a href="#a3" data-athena="Button:Select">Market Fresh</a>
-              </li>
-            </ul>
+<script type="text/javascript">
+/*
+// Sample custom page logic
+// Built to withstand DOM changes
+$(".product-showcase *[data-athena*='Carousel']")
+.on("overflowMax", function() {
+  $(".product-showcase").trigger("next");
+})
+.on("overflowMin", function() {
+  $(".product-showcase").trigger("previous");
+});
+*/
+</script>
+
+<div data-athena="Tabs" class="product-showcase">
+  <ul class="tab-panels">
+    <!-- this is a menu section -->
+    <li id="classics" class="athena-selected">
+      <ul data-athena="Carousel" data-config="{
+        'Carousel': {
+          observe: '.controls button'
+        }
+      }">
+        <li class="athena-selected">
+          <div><img src="/images/roastbeef.png"/></div>
+          <div>
+            <h2>Roast Beef</h2>
+            <p>Extoll RB virtues here</p>
           </div>
-        </div>
-        <div class="details">
-          <h2>Angus Beef</h2>
-          <p>Angus Beef is regarded as some of the best beef in the world for its fine quality, amazing flavor, and exquisite marbling. At Arby's, we only serve 100% Black Angus beef, lightly seasoned with just the right touch of our special blend of cracked black pepper, herbs and spices. Our premium 94% lean top round is oven roasted to perfection and served freshly sliced for the "ultimate" in Angus.</p>
-          <div class="controls">
-            <button class="showcase-previous" data-athena="Button:Previous">Previous</button>
-            <button class="showcase-next" data-athena="Button:Next">Next</button>
+        </li>
+        <li>
+          <div><img src="/images/beefandcheddar.png"/></div>
+          <div>
+            <h2>Beef and Cheddar</h2>
+            <p>Explain why the only thing greater than roast beef is cheez whiz</p>
           </div>
-        </div>
-      </li>
-      <li>
-        <div class="image">
-          <div class="tab-control" data-athena="Tabs">
-            <ul class="tab-panels" data-athena="List">
-              <li id="b1" class="athena-selected" data-athena="Container">
-                <img width="600" height="305" src="http://www.arbys.com/assets/images/sandwiches_melts_category.png" alt="Roast Beef and Curly Fries">
-              </li>
-              <li id="b2" data-athena="Container">
-                <img width="375" height="219" src="http://www.arbys.com/assets/images/market_fresh_sandwiches_category.png" alt="Old School Sandwich Deliciousness">
-              </li>
-              <li id="b3" data-athena="Container">
-                <img width="600" height="229" src="http://www.arbys.com/assets/templates/arbys/images/ultimateAngusMainImage.png" alt="Ultimate Angus Sandwiches">
-              </li>              
-            </ul>            
-            <ul class="tab-list" data-athena="List">
-              <li class="athena-selected">
-                <a href="#b1" data-athena="Button:Select">Delicious Melts</a>
-              </li>
-              <li>
-                <a href="#b2" data-athena="Button:Select">Market Fresh</a>
-              </li>
-              <li>
-                <a href="#b3" data-athena="Button:Select">Angus Beef</a>
-              </li>
-            </ul>
+        </li>
+        <li>
+          <div><img src="/images/baconbeefandcheddar.png"/></div>
+          <div>
+            <h2>Bacon Beef and Cheddar</h2>
+            <p>I lied, this is the ultimate sandwich of kings.</p>
           </div>
-        </div>
-        <div class="details">
-          <h2>Delicious Melts</h2>
-          <p>Wanna feel great? Grab an Arby's® Roast Beef Sandwich. It's slow roasted for three hours in our stores every day, freshly sliced and piled high to roast beef perfection. If one of these doesn't put you in a good mood, nothing will.</p>
-          <div class="controls">
-            <button class="showcase-previous" data-athena="Button:Previous">Previous</button>
-            <button class="showcase-next" data-athena="Button:Next">Next</button>
+        </li>
+      </ul>
+      <div class="controls">
+        <button class="showcase-next" data-athena="Button:Next">Next</button>
+        <button class="showcase-next" data-athena="Button:Previous">Previous</button>
+      </div>
+    </li>
+    <!-- end menu section -->
+    <!-- this is a menu section -->
+    <li id="melts">
+      <ul data-athena="Carousel" data-config="{
+        'Carousel': {
+          observe: '.controls button'
+        }
+      }">
+        <li class="athena-selected">
+          <div><img src="/images/melt.png"/></div>
+          <div>
+            <h2>Classic Melt</h2>
+            <p>Here's why melts rule, especially with beef and not tuna.</p>
           </div>
-        </div>
-      </li>
-      <li>
-        <div class="image">
-          <div class="tab-control" data-athena="Tabs">
-            <ul class="tab-panels" data-athena="List">
-              <li id="c1" class="athena-selected" data-athena="Container">
-                <img width="375" height="219" src="http://www.arbys.com/assets/images/market_fresh_sandwiches_category.png" alt="Old School Sandwich Deliciousness">
-              </li>
-              <li id="c2" data-athena="Container">
-                <img width="600" height="229" src="http://www.arbys.com/assets/templates/arbys/images/ultimateAngusMainImage.png" alt="Ultimate Angus Sandwiches">
-              </li>
-              <li id="c3" data-athena="Container">
-                <img width="600" height="305" src="http://www.arbys.com/assets/images/sandwiches_melts_category.png" alt="Roast Beef and Curly Fries">
-              </li>              
-            </ul>            
-            <ul class="tab-list" data-athena="List">
-              <li class="athena-selected">
-                <a href="#c1" data-athena="Button:Select">Market Fresh</a>
-              </li>
-              <li>
-                <a href="#c2" data-athena="Button:Select">Angus Beef</a>
-              </li>
-              <li>
-                <a href="#c3" data-athena="Button:Select">Delicious Melts</a>
-              </li>
-            </ul>
+        </li>
+        <li>
+          <div><img src="/images/frenchdip.png"/></div>
+          <div>
+            <h2>French Dip, Melted Swiss</h2>
+            <p>It's not quite a melt, but it'd be a crime not to show it</p>
           </div>
-        </div>
-        <div class="details">
-          <h2>Market Fresh</h2>
-          <p>These are the feel-good sandwiches of the year. When thick cut honey wheat bread meets generous cuts of oven roasted meats and fresh produce, the result is one serious sandwich.</p>
-          <div class="controls">
-            <button class="showcase-previous" data-athena="Button:Previous">Previous</button>
-            <button class="showcase-next" data-athena="Button:Next">Next</button>
+        </li>
+        <li>
+          <div><img src="/images/reuben.png"/></div>
+          <div>
+            <h2>Reuben</h2>
+            <p>This is the ultimate melt. Fear it.</p>
           </div>
-        </div>
-      </li>
-    </ol>
-  </div>
+        </li>
+      </ul>
+      <div class="controls">
+        <button class="showcase-next" data-athena="Button:Next">Next</button>
+        <button class="showcase-next" data-athena="Button:Previous">Previous</button>
+      </div>
+    </li>
+    <!-- end menu section -->
+    <!-- this is a menu section -->
+    <li id="marketfresh">
+      <ul data-athena="Carousel" data-config="{
+        'Carousel': {
+          observe: '.controls button'
+        }
+      }">
+        <li class="athena-selected">
+          <div><img src="/images/turkeywrap.png"/></div>
+          <div>
+            <h2>Roast Turkey Ranch and Bacon Wrap</h2>
+            <p>Bacon! From a market!</p>
+          </div>
+        </li>
+        <li>
+          <div><img src="/images/turkeyswiss.png"/></div>
+          <div>
+            <h2>Roast Turkey and Swiss</h2>
+            <p>Maybe you miss sandwiches and want to be healthy...</p>
+          </div>
+        </li>
+        <li>
+          <div><img src="/images/farmhouse.png"/></div>
+          <div>
+            <h2>Farmhouse Salad</h2>
+            <p>Okay I get it, healthy it is! Farmhous salad time!</p>
+          </div>
+        </li>
+      </ul>
+      <div class="controls">
+        <button class="showcase-next" data-athena="Button:Next">Next</button>
+        <button class="showcase-next" data-athena="Button:Previous">Previous</button>
+      </div>
+    </li>
+    <!-- end menu section -->
+  </ul>
+  <ul class="tab-list">
+    <li class="athena-selected"><a href="#classics" data-athena="Button:Select">Classic Sandwiches</a></li>
+    <li><a href="#melts" data-athena="Button:Select">Melty Goodness</a></li>
+    <li><a href="#marketfresh" data-athena="Button:Select">Market Fresh Ideas</a></li>
+  </ul>
 </div>
+
 <div class="grid-a">
   <div id="content">
     <div class="tradition">
