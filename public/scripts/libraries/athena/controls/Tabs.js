@@ -94,12 +94,12 @@ Tabs =  Class.create( Abstract,  ( function () {
 
         // Set ARIA role for "tablist"
         if ( !$tabList.attr( ARIA_ROLE ) ) { 
-          $tabList.attr( ARIA_ROLE, ARIA_TABLIST );
+          //$tabList.attr( ARIA_ROLE, ARIA_TABLIST );
         }
 
         // Set ARIA role for "tabpanel"
         if ( !$tabPanels.attr( ARIA_ROLE ) ) {
-          $tabPanels.attr( ARIA_ROLE, ARIA_TABPANEL );
+          //$tabPanels.attr( ARIA_ROLE, ARIA_TABPANEL );
         }
 
         if ( $items.length > 0 ) {
@@ -134,9 +134,9 @@ Tabs =  Class.create( Abstract,  ( function () {
        */
       function tabInit( settings ) {
         // Get references to tablist, tabpanels and the current tab
-        $tabPanels = $( $element.children( settings.tabPanels ) );
-        $tabList = $( $element.children( settings.tabList ) );
-        initARIARoles();
+        $tabPanels = $( settings.tabPanels, $element ).athena( 'getControl', 'List' );
+        $tabList = $( settings.tabList, $element ).athena( 'getControl', 'List' );
+        //initARIARoles();
       }
 
       /**
@@ -148,7 +148,7 @@ Tabs =  Class.create( Abstract,  ( function () {
        * @return {Void}
        */
       function selectTabHandler( event, item ) {
-        $tabPanels.trigger( SELECT_EVENT, [item] );
+        //$tabPanels.trigger( SELECT_EVENT, [ item ] );
       }
 
       /**
@@ -165,9 +165,8 @@ Tabs =  Class.create( Abstract,  ( function () {
           // Get the index of the item
           index = items.index(item);
 
-          console.log( 'hello' );
         // Fire the select with the index value
-        $tabPanels.trigger( SELECT_EVENT, [index] );
+        //$tabPanels.trigger( SELECT_EVENT, [index] );
       };
 
       // MIX THE DEFAULTS INTO THE SETTINGS VALUES
@@ -180,8 +179,10 @@ Tabs =  Class.create( Abstract,  ( function () {
       $super( $element, settings );
       
       // Attach event listeners
-      $tabList.on( SELECT_EVENT, selectTabHandler );
-      $tabList.on( SELECTED_EVENT, selectedTabHandler );
+      $tabsList.on( SELECTED_EVENT, function( event, item, index ) {
+        //$tabPanels.trigger( SELECT_EVENT );
+      } );
+      //Tabs.on( SELECTED_EVENT, selectedTabHandler );
 
     }
 

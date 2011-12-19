@@ -173,37 +173,60 @@ Carousel =  Class.create( List, ( function() {
       Carousel.pause = function() {
         if( playing ) {
           playing = false;
-          Carousel.trigger( PAUSED_EVENT, $element );
+          Carousel.trigger( PAUSED_EVENT, [ $element ] );
         }
         return Carousel;
       };
 
-      // EVENT BINDINGS
-      Carousel.on( SELECTED_EVENT, function( event, $item ) {
-         var $panel = $item.closest( $panels );
-         if( $panel.hasClass( settings.activeFlag ) === false ) {
-           $panels.removeClass( settings.activeFlag );
-           $panel.addClass( settings.activeFlag );
-         }
-      } );
-      Carousel.on( MAXED_EVENT, function( event ) {
-       event.stopPropagation();
-       if( playing && repeat !== 0 ) {
-         repeat -= 1;
-         Carousel.first();
-       } else if ( playing && repeat < 0 ){
-         Carousel.first();
-       } else {
-         Carousel.first();
-       }
-      } );
-      Carousel.on( FLOORED_EVENT, function( event ) {
-       event.stopPropagation();
-       Carousel.last();
-      } );
+      /**
+       * Carousels wrap, so they always have next
+       * @method hasNext
+       * @public
+       * @return {Boolean} true if not at the last item in the list
+       */
+      Carousel.hasNext = function() {
+        return true;
+      };
+
+      /**
+       * Carousels wrap, so they always have previous
+       * @method hasPrevious
+       * @public
+       * @return {Boolean} true
+       */
+      Carousel.hasPrevious = function() {
+        return true;
+      };
+      
+      /**
+       * Selects the next item in the Carousel. 
+       * @method next
+       * @public
+       * @return {Object} List
+       */
+      Carousel.next = function() {
+          if( Carousel.size() === Carousel.index() + 1 ) {
+            Carousel.select( 0 );
+          } else {
+            Carousel.select( Carousel.index() + 1 ); 
+          }
+        return Carousel;
+      };
+
+      /**
+       * Selects the previous item in the Carousel. 
+       * @method previous
+       * @public
+       * @return {Object} List
+       */  
+      Carousel.previous = function() {
+        Carousel.select( Carousel.index() - 1 );
+        return Carousel;
+      };
+
       Carousel.on( PLAY_EVENT, function( event ) {
-       event.stopPropagation();
-       Carousel.play();
+        event.stopPropagation();
+        Carousel.play();
       } );
       Carousel.on( [PAUSE_EVENT, NEXT_EVENT, PREVIOUS_EVENT, FIRST_EVENT, LAST_EVENT, SELECT_EVENT].join( ' ' ), function( event, item ) {
         event.stopPropagation();
@@ -213,11 +236,14 @@ Carousel =  Class.create( List, ( function() {
       // Play if autoplay was true in settings
       if( settings.autoplay ) {
         Carousel.play();
+      } else {
+        Carousel.trigger( PAUSED_EVENT, [ $element ] );
       }
+
     }
   };
 
-}() ));
+}() ) );
 
 //Export to Common JS Loader
 if( module ) {

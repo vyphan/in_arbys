@@ -1,6 +1,6 @@
 var Class = require( 'class' ),
-  Button = require( 'athena/Button' ),
-  NextButton;
+  NextButton = require( 'athena/Button/Next' ),
+  NextRepeatButton;
 
 /**
  * Representation of a button element preconfigured with a 'next' event
@@ -10,11 +10,13 @@ var Class = require( 'class' ),
  * @param {HTMLElement} element The HTML element surrounded by the control
  * @param {Object} settings Configuration properties for this instance
  */
-NextButton = Class.create( Button, ( function () {
+NextRepeatButton = Class.create( NextButton, ( function () {
 
-  var MAXED_EVENT = 'maxed',
-    SELECTED_EVENT = 'selected';
-
+  var REPEAT_INTERVAL = 1000,
+     PREVIOUS_EVENT = "previous",
+     NEXT_EVENT = "next",
+     MAXED_EVENT = 'maxed';
+     
   // RETURN METHODS OBJECT
   return {
    /**
@@ -29,12 +31,12 @@ NextButton = Class.create( Button, ( function () {
 
      // PRIVATE INSTANCE PROPERTIES
      /**
-      * Instance of NextButton
+      * Instance of NextRepeatButton
       * @property Button
       * @type Object
       * @private
       */
-      var NextButton = this,
+      var NextRepeatButton = this,
 
        /**
         * Default configuration values
@@ -44,8 +46,19 @@ NextButton = Class.create( Button, ( function () {
         * @final
         */
         defaults = {
-          action: 'next'
-        };
+          repeatInterval: REPEAT_INTERVAL,
+          onPrevious: PREVIOUS_EVENT,
+          onNext: NEXT_EVENT,
+          action: 'selected'
+        },
+        /**
+         * Repeat timer
+         * @property timer
+         * @type object
+         * @private
+         */
+        timer,
+        item;
 
      // MIX THE DEFAULTS INTO THE SETTINGS VALUES
      _.defaults( settings, defaults );
@@ -53,14 +66,23 @@ NextButton = Class.create( Button, ( function () {
      // CALL THE PARENT'S CONSTRUCTOR
      $super( $element, settings );
 
-     NextButton.on( SELECTED_EVENT, function( event ) {
-         NextButton.enable();
+     item = settings.item || null;
+
+     NextRepeatButton.on( "click", function( event ) {
+       event.stopPropagation();
+       if (!timer) {
+         timer = window.setInterval( function() {
+           NextRepeatButton.trigger(settings.action, [item]);
+         }, settings.repeatInterval);         
+       }
      } );
 
-     NextButton.on( MAXED_EVENT, function( event, $subject ) {
-       var Control = $subject.athena( 'getControl' );
-       if( !Control.hasNext() ) {
-         NextButton.disable();
+     NextRepeatButton.on( settings.onPrevious, function( event ) {
+       event.stopPropagation();
+       if (timer) {
+         _.log("NextRepeat", "clearing timer", timer);
+         window.clearInterval(timer);
+         timer = null;
        }
      } );
 
@@ -72,8 +94,8 @@ NextButton = Class.create( Button, ( function () {
 //Export to Common JS Loader
 if( module ) {
   if( typeof module.setExports === 'function' ){
-    module.setExports( NextButton );
+    module.setExports( NextRepeatButton );
   } else if( module.exports ) {
-   module.exports = NextButton; 
+   module.exports = NextRepeatButton; 
   }
 }
