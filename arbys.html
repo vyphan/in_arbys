@@ -195,8 +195,39 @@ $(".product-showcase *[data-athena*='Carousel']")
     </div>
   </div>
   <div id="extra">
-    <div class="team">
-      (TEAM)
+    <div id="team" class="" data-athena="Switcher" data-athena-config="{ 'Switcher': { 'states': 'all inject athena' } }">
+      <h2>The Team</h2>
+      <ul id="team-lnks">
+        <li class="team-lnk inject"><button data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'inject' } }">Inject</button></li>
+        <li class="team-lnk athena"><button data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'athena' } }">Athena</button></li>
+        <li class="team-lnk all"><button data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'all' } }">All</button></li>
+      </ul>      
+      <ul id="team-members">
+        <li class="team-member inject" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=5276101"><img src="http://m3.licdn.com/media/p/1/000/03f/2b3/1456141.jpg" width="65" alt="Jakob Heuser"/></a>
+        </li>
+        <li class="team-member inject" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=3064462"><img src="http://m4.licdn.com/media/p/3/000/085/261/148aa26.jpg" width="65" alt="Fermin Simeon"/></a>
+        </li>
+        <li class="team-member inject" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=36632273"><img src="http://m4.licdn.com/media/p/3/000/08e/254/3675c3d.jpg" width="65" alt="Chao Zhang"/></a>
+        </li>
+        <li class="team-member inject" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=30987320"><img src="http://m4.licdn.com/media/p/3/000/095/332/3c93849.jpg" width="65" alt="Matt Powell"/></a>
+        </li>
+        <li class="team-member athena" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=4702958"><img src="http://m3.licdn.com/media/p/2/000/026/258/2b82a2c.jpg" width="65" alt="Robert Martone"/></a>
+        </li>
+        <li class="team-member athena" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=20859938"><img src="http://m3.licdn.com/media/p/3/000/09d/0d6/2efac2d.jpg" width="65" alt="Peter Frueh"/></a>
+        </li>
+        <li class="team-member athena" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=2831004"><img src="http://m4.licdn.com/media/p/2/000/096/353/37a2baf.jpg" width="65" alt="Jim Gourgoutis"/></a>
+        </li>
+        <li class="team-member athena" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
+          <a href="/miniprofile.html?id=2913299"><img src="http://m4.licdn.com/media/p/1/000/0ad/1d9/20d59ea.jpg" width="65" alt="Oliver Tse"/></a>
+        </li>
+      </ul>
     </div>
     <div class="source">
       <h2>Technology on Github</h2>
