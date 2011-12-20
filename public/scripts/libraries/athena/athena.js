@@ -205,6 +205,7 @@ Athena = function( settings ) {
       numberOfControls += controls.length;
 
       _.each( controls, function( key, index ) {
+
         var pckg = settings.namespace + '/' + key.replace( /:/g, '/' );
         if( _.indexOf( required, pckg ) === -1 && _.indexOf( _.keys( packages, pckg ) ) === -1 ) {
           required.push( pckg );
@@ -609,28 +610,28 @@ Athena = function( settings ) {
       return trigger.apply( $this, [event, parameters] );
     };
 
-    // $.fn.on = function() {
-    //   var $this = $( this ),
-    //     handler,
-    //     parameters;
-    // 
-    //   if( Athena.isControl( $this ) ) {
-    //     parameters = Array.prototype.slice.call( arguments );
-    //     _.each( parameters, function( parameter, index ) {
-    //       if( typeof parameter === 'function' ) {
-    //         parameters[index] = function() {
-    //           var parameters = Array.prototype.slice.call( arguments );
-    //           if( !parameters[0].isImmediatePropagationStopped() ) {
-    //            parameter.apply( $this, parameters );
-    //           }
-    //         }
-    //       }
-    //     } );
-    //     return on.apply( $this, parameters );
-    //   } else {
-    //     return on.apply( $this, arguments );
-    //   }
-    // };
+    $.fn.on = function() {
+      var $this = $( this ),
+        handler,
+        parameters;
+
+      if( Athena.isControl( $this ) ) {
+        parameters = Array.prototype.slice.call( arguments );
+        _.each( parameters, function( parameter, index ) {
+          if( typeof parameter === 'function' ) {
+            parameters[index] = function() {
+              var parameters = Array.prototype.slice.call( arguments );
+              if( !parameters[0].isPropagationStopped() ) {
+               parameter.apply( $this, parameters );
+              }
+            }
+          }
+        } );
+        return on.apply( $this, parameters );
+      } else {
+        return on.apply( $this, arguments );
+      }
+    };
 
   } ( jQuery ) );
 

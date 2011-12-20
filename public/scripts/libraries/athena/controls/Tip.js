@@ -302,8 +302,8 @@ Tip =  Class.create( Abstract,  ( function () {
       function mouseenterEvent( event ) {
         //set up a listener on the document to be used in determing if the user has moused out of the threshold
         $document.on( 'mousemove.athena.tip', function( event ) {
-          var pageX = event.pageX,
-            pageY = event.pageY,
+          var clientX = event.clientX,
+            clientY = event.clientY,
             left = $element.offset().left,
             top = $element.offset().top,
             width = $element.width(),
@@ -315,13 +315,13 @@ Tip =  Class.create( Abstract,  ( function () {
            * @method isMouseInside
            */
           function isMouseInside() {
-            if( pageX < left - settings.threshold - settings.offsetLeft ) {
+            if( clientX < left - settings.threshold - settings.offsetLeft ) {
               return false;
-            } else if( pageY < top - settings.threshold - settings.offsetTop ) {
+            } else if( clientY < top - settings.threshold - settings.offsetTop ) {
               return false;
-            } else if ( pageX > left + width + settings.threshold + settings.offsetLeft ) {
+            } else if ( clientX > left + width + settings.threshold + settings.offsetLeft ) {
               return false;
-            } else if ( pageY > top + height + settings.threshold + settings.offsetTop ) {
+            } else if ( clientY > top + height + settings.threshold + settings.offsetTop ) {
               return false;
             }
             return true;

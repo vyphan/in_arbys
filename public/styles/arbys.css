@@ -13,6 +13,28 @@
 
 
 /* PRODUCT SHOWCASE */
+.product-showcase {
+  background: #c43a3a;
+  border: 1px solid #000;
+  -moz-box-shadow: 0 10px 5px #888;
+  -webkit-box-shadow: 0 10px 5px #888;
+  box-shadow: 0 10px 5px #888;
+  overflow: hidden;
+}
+.product-showcase .sandwich {
+  float: left;
+  width: 640px;
+  height: 260px;
+  overflow: hidden;
+}
+.product-showcase .description {
+  float: right;
+  width: 310px;
+}
+.product-showcase ul {
+  padding: 0;
+  margin: 0;
+}
 .product-showcase ul li {
   display: none;
 }
@@ -20,78 +42,32 @@
 .product-showcase ul li.athena-selected {
   display: block;
 }
-
-/*.product-showcase {
-  margin-bottom: 25px;
-}
-.product-showcase .carousel li {
-  display: none;
-}
-.product-showcase .carousel li.athena-selected {
-  display: inline;
-}
-.product-showcase .image {
-  position: relative;
-  float: left;
-  width: 68%;
-  height: 330px;
-  border: 1px solid #efefef;
-}
-.product-showcase .carousel .tab-control {
-  height: 100%;
-  background-image: none;
-  margin: 15px;
-}
-.product-showcase .carousel .tab-control ul {
+.product-showcase .tab-list {
+  clear: both;
   padding: 0;
+  margin: 0;
 }
-.product-showcase .carousel .tab-control .tab-list {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
+.product-showcase .tab-list li {
+  float: left;
+  width: 312px;
+  height: 50px;
+  background: #c43a3a;
+  border: 3px solid #c43a3a;
+}
+.product-showcase .tab-list li.athena-selected {
+  background: #ffffff;
+  border: 3px solid #000;
+  border-top: 3px solid #c43a3a;
+}
+.product-showcase .tab-list a {
+  display: block;
   width: 100%;
-  height: 20px;
-  background-color: #efefef;
+  height: 100%;
 }
-.product-showcase .carousel .tab-control .tab-list li {
-  display: inline;
-}
-.product-showcase .carousel .tab-control .tab-list li.athena-selected {
-  background-color: #dedede;
-  font-weight: bold;
-}
-.product-showcase .carousel .tab-control .tab-list li a {
-  margin: 0 15px;
-  color: black;
-  text-decoration: none;
-}
-.product-showcase .carousel .tab-control .tab-panels li {
-  display: none;
-}
-.product-showcase .carousel .tab-control .tab-panels li.athena-selected {
-  display: inline;
-}
-.product-showcase .details {
-  position: relative;
-  float: right;
-  width: 30%;
-  height: 330px;
-  background-color: #efefef;
-  border: 1px solid #efefef;
-}
-.product-showcase .details h2 {
-  margin: 5px 15px;
-}
-.product-showcase .details p {
-  margin: 15px;
-  font-size: 110%;
-}
-.product-showcase .controls {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-}*/
 
+.grid-a {
+  margin-top: 20px;
+}
 
 /* TRADITION */
 .tradition {
