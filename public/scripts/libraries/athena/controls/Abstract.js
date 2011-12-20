@@ -106,11 +106,8 @@ Abstract = Class.create( ( function() {
               parameters = Array.prototype.slice.call( arguments ),
               $observers;
 
-            //$observers = $this.data( 'athena-controls' )[ '$observers' ];
-            //$observers = $element.athena( 'getParent' ).athena( 'getControl' );
-            console.log( $element.athena( 'getParent' ) );
-            $element.athena( 'getParent' ).trigger( 'hello' );
-            //$observers.trigger( adapt[1] );
+            $observers = $this.data( 'athena-controls' )[ '$observers' ];
+            $observers.trigger( adapt[1] );
 
           } );
         }
