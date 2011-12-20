@@ -171,6 +171,8 @@ Tip =  Class.create( Abstract,  ( function () {
       //MIX THE DEFAULTS INTO THE SETTINGS VALUES
       _.defaults( settings, defaults );
 
+      $super( $element, settings );
+
       //Instantiate the tip
       $tip = $( _.template( settings.template, { content: settings.content } ) );
 
@@ -178,8 +180,15 @@ Tip =  Class.create( Abstract,  ( function () {
       if( settings.style ) {
         $tip.addClass( settings.placement + ' ' + settings.style );
       } else {
-        $tip.addClass( settings.placement + ' ' + $element.attr( 'class' ) );
+        if( $element.attr( 'class' ) ) {
+          console.log( $tip.attr('class'), settings.placement + ' ' + $element.attr( 'class' ) );
+          $tip.addClass( settings.placement + ' ' + $element.attr( 'class' ) );
+          console.log( $tip.attr('class'), settings.placement + ' ' + $element.attr( 'class' ) );
+        } else {
+          $tip.addClass( settings.placement );
+        }
       }
+
 
       /**
        * Used to determine the position of the tip
@@ -240,7 +249,6 @@ Tip =  Class.create( Abstract,  ( function () {
          } );
 
         } );
-
       }
 
       /**
@@ -280,18 +288,18 @@ Tip =  Class.create( Abstract,  ( function () {
               $tip.off( 'mouseleave.athena.tip' );
               $tip.remove();
               shown = false;
-              $element.trigger( HIDDEN_EVENT, $tip );
+              Tip.trigger( HIDDEN_EVENT, $tip );
             }
           }, settings.delay );
         }
       };
 
       //Event Listeners
-      $element.on( 'mouseenter', function( event ) {
+      Tip.on( 'mouseenter', function( event ) {
         //set up a listener on the document to be used in determing if the user has moused out of the threshold
         $document.on( 'mousemove.athena.tip', function( event ) {
-          var clientX = event.clientX,
-            clientY = event.clientY,
+          var pageX = event.pageX,
+            pageY = event.pageY,
             left = $element.offset().left,
             top = $element.offset().top,
             width = $element.width(),
@@ -303,19 +311,19 @@ Tip =  Class.create( Abstract,  ( function () {
              * @method isMouseInside
              */
           function isMouseInside() {
-            if( clientX < left - settings.threshold - settings.offsetLeft ) {
+            if( pageX < left - settings.threshold - settings.offsetLeft ) {
               return false;
-            } else if( clientY < top - settings.threshold - settings.offsetTop ) {
+            } else if( pageY < top - settings.threshold - settings.offsetTop ) {
               return false;
-            } else if ( clientX > left + width + settings.threshold + settings.offsetLeft ) {
+            } else if ( pageX > left + width + settings.threshold + settings.offsetLeft ) {
               return false;
-            } else if ( clientY > top + height + settings.threshold + settings.offsetTop ) {
+            } else if ( pageY > top + height + settings.threshold + settings.offsetTop ) {
               return false;
             }
             return true;
           }
 
-          if( !isMouseInside() ) {
+          if( !isMouseInside()) {
             Tip.hide();
             $document.off( 'mousemove.athena.tip' );
           }
@@ -323,7 +331,7 @@ Tip =  Class.create( Abstract,  ( function () {
         } );
         Tip.show();
       } );
-      $element.on( 'focus', function( event ) {
+      Tip.on( 'focus', function( event ) {
         event.stopPropagation();
         $element.on( 'blur.athena.tip', function( event ) {
           event.stopPropagation();
@@ -336,11 +344,11 @@ Tip =  Class.create( Abstract,  ( function () {
       } );
 
       //Listen to theese events from other controls
-      $element.on( HIDE_EVENT, function( event ) {
+      Tip.on( HIDE_EVENT, function( event ) {
         event.stopPropagation();
         Tip.hide();
       } );
-      $element.on( SHOW_EVENT, function( event ) {
+      Tip.on( SHOW_EVENT, function( event ) {
         event.stopPropagation();
         Tip.show();
       } );

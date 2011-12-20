@@ -1,9 +1,11 @@
 <!DOCTYPE html> 
 <html lang="en">
 <head>
+<!--[if lte IE 7]>
+  <script src="/scripts/libraries/localstorageshim.min.js" type="text/javascript" id="ie-localstorage-shim"></script>
+<![endif]-->
 <script type="text/javascript">
   if (!window.i18n) { window.i18n = {}; }
-
 </script>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
@@ -23,7 +25,7 @@
 <meta name="msapplication-task" content="name=My Connections;action-uri=/connections?trk=ie_sm_cnts;icon-uri=http://static01.linkedin.com/scds/common/u/img/favicon_ie9.ico"/>
 <meta name="msapplication-task" content="name=My Groups;action-uri=/myGroups?trk=ie_sm_grps;icon-uri=http://static01.linkedin.com/scds/common/u/img/favicon_ie9.ico"/>
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="http://static01.linkedin.com/scds/concat/common/css?h=816wa12razr1pi3itisz8kx3y-c8kkvmvykvq2ncgxoqb13d2by-5dz3h5gsd39fybw63uxm0suii-b28g3psonc6jgu3a4sre9tcf0-1mwex1sjfaqxgvzospta9cb3d-cuikobmujdsj6e1pdqs75or3i-25bes3amn41srwkfnlcxh7a9i-crve3onsclswtc6z1062wdl5g-8xnchckoje4kmo7xvhkhc6tk8-b7vkc1eb38qfxv1f4928tbi5y-8aaemjlwfuf1hyv2cl7b5uqav">
+<link rel="stylesheet" type="text/css" href="http://static01.linkedin.com/scds/concat/common/css?h=816wa12razr1pi3itisz8kx3y-c8kkvmvykvq2ncgxoqb13d2by-5dz3h5gsd39fybw63uxm0suii-b28g3psonc6jgu3a4sre9tcf0-1mwex1sjfaqxgvzospta9cb3d-cuikobmujdsj6e1pdqs75or3i-25bes3amn41srwkfnlcxh7a9i-crve3onsclswtc6z1062wdl5g-8xnchckoje4kmo7xvhkhc6tk8-b7vkc1eb38qfxv1f4928tbi5y-8aaemjlwfuf1hyv2cl7b5uqav-55eai483xfs5741fgwwzal7g5">
 
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <!-- CUSTOM CSS BEGIN -->
@@ -42,28 +44,31 @@ LI.staticUrlHashEnabled = true;
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <!-- CUSTOM JS BEGIN -->
 
- <!-- Bootstrap:Util -->
- <script src="/scripts/libraries/underscore.js" type="text/javascript" charset="utf-8"></script>
- <script src="/scripts/libraries/helpers.js" type="text/javascript" charset="utf-8"></script>
- 
- <!-- Bootstrap:Dependency Manager & Loader -->
- <script type="text/javascript" src="/scripts/libraries/inject.js"></script>
+  <!-- Bootstrap:Util -->
+  <script src="/scripts/libraries/underscore.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/scripts/libraries/helpers.js" type="text/javascript" charset="utf-8"></script>
 
-<!-- Bootstrap:UI -->
- <script src="/scripts/libraries/jquery-1.7.js" type="text/javascript" charset="utf-8"></script>
+  <!-- Bootstrap:Dependency Manager & Loader -->
+  <script type="text/javascript" src="/scripts/libraries/inject/inject.js"></script>
+  <!--[if lte IE 7]>
+    <script src="/scripts/libraries/inject/ie-localstorage-json-shim.js" type="text/javascript" id="ie-localstorage-shim"></script>
+  <![endif]-->
 
- <script src="/scripts/libraries/athena/config.js" type="text/javascript" charset="utf-8"></script>
+  <!-- Bootstrap:UI -->
+  <script src="/scripts/libraries/jquery-1.7.js" type="text/javascript" charset="utf-8"></script>
 
- <script type="text/javascript" charset="utf-8">
-   ATHENA_CONFIG = {
-     debug: true
-   };
- </script>
+  <script src="/scripts/libraries/athena/config.js" type="text/javascript" charset="utf-8"></script>
 
- <script type="text/javascript" charset="utf-8">
-   localStorage.clear();
-   require.ensure( ['athena'], function() {} );
- </script>
+  <script type="text/javascript" charset="utf-8">
+    ATHENA_CONFIG = {
+      debug: true
+    };
+  </script>
+
+  <script type="text/javascript" charset="utf-8">
+    localStorage.clear();
+    require.run('athena');
+  </script>
   
 <!-- CUSTOM JS END -->
 <!-- ////////////////////////////////////////////////////////////////////// -->

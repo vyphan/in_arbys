@@ -13,6 +13,26 @@
 
 
 /* PRODUCT SHOWCASE */
+.product-showcase {
+  background: #c43a3a;
+  border: 1px solid #000;
+  -moz-box-shadow: 0 10px 5px #888;
+  -webkit-box-shadow: 0 10px 5px #888;
+  box-shadow: 0 10px 5px #888;
+  overflow: hidden;
+}
+.product-showcase .sandwich {
+  float: left;
+  width: 640px;
+}
+.product-showcase .description {
+  float: right;
+  width: 310px;
+}
+.product-showcase ul {
+  padding: 0;
+  margin: 0;
+}
 .product-showcase ul li {
   display: none;
 }
@@ -20,78 +40,32 @@
 .product-showcase ul li.athena-selected {
   display: block;
 }
-
-/*.product-showcase {
-  margin-bottom: 25px;
-}
-.product-showcase .carousel li {
-  display: none;
-}
-.product-showcase .carousel li.athena-selected {
-  display: inline;
-}
-.product-showcase .image {
-  position: relative;
-  float: left;
-  width: 68%;
-  height: 330px;
-  border: 1px solid #efefef;
-}
-.product-showcase .carousel .tab-control {
-  height: 100%;
-  background-image: none;
-  margin: 15px;
-}
-.product-showcase .carousel .tab-control ul {
+.product-showcase .tab-list {
+  clear: both;
   padding: 0;
+  margin: 0;
 }
-.product-showcase .carousel .tab-control .tab-list {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
+.product-showcase .tab-list li {
+  float: left;
+  width: 312px;
+  height: 50px;
+  background: #c43a3a;
+  border: 3px solid #c43a3a;
+}
+.product-showcase .tab-list li.athena-selected {
+  background: #ffffff;
+  border: 3px solid #000;
+  border-top: 3px solid #c43a3a;
+}
+.product-showcase .tab-list a {
+  display: block;
   width: 100%;
-  height: 20px;
-  background-color: #efefef;
+  height: 100%;
 }
-.product-showcase .carousel .tab-control .tab-list li {
-  display: inline;
-}
-.product-showcase .carousel .tab-control .tab-list li.athena-selected {
-  background-color: #dedede;
-  font-weight: bold;
-}
-.product-showcase .carousel .tab-control .tab-list li a {
-  margin: 0 15px;
-  color: black;
-  text-decoration: none;
-}
-.product-showcase .carousel .tab-control .tab-panels li {
-  display: none;
-}
-.product-showcase .carousel .tab-control .tab-panels li.athena-selected {
-  display: inline;
-}
-.product-showcase .details {
-  position: relative;
-  float: right;
-  width: 30%;
-  height: 330px;
-  background-color: #efefef;
-  border: 1px solid #efefef;
-}
-.product-showcase .details h2 {
-  margin: 5px 15px;
-}
-.product-showcase .details p {
-  margin: 15px;
-  font-size: 110%;
-}
-.product-showcase .controls {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-}*/
 
+.grid-a {
+  margin-top: 20px;
+}
 
 /* TRADITION */
 .tradition {
@@ -100,10 +74,124 @@
 
 
 /* TEAM */
-.team {
+#team {
   margin-bottom: 15px;
 }
-
+#team-lnks{
+  margin: 12px 0;
+  border:1px solid #eaeaea;
+  border-bottom-color: #cacaca;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  list-style:none;
+  padding:0;
+  background: #fafafa; /* Old browsers */
+  background: -moz-linear-gradient(top,  #fafafa 0%, #dadada 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#dadada)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #fafafa 0%,#dadada 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #fafafa 0%,#dadada 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #fafafa 0%,#dadada 100%); /* IE10+ */
+  background: linear-gradient(top,  #fafafa 0%,#dadada 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#dadada',GradientType=0 ); /* IE6-9 */
+}
+#team-lnks .team-lnk{
+  list-style-type: none;
+  margin: 0;
+  display: table-cell;
+  width: 1%;
+}
+#team-lnks .team-lnk button{
+  background-color:transparent;
+  padding:0;
+  width:100%;
+  border:0 none;
+  display: block;
+  height: 30px;
+  text-align: center;
+  font:bold 12px/32px Helvetica;
+  color: #777;
+  text-shadow: 0 1px 0 rgba(255,255,255,1.0);
+  border-right: 1px solid rgba(0,0,0,0.04);
+  border-left: 1px solid rgba(255,255,255,0.7);
+  cursor:pointer;
+}
+#team-lnks .team-lnk button:hover{
+  color:#4183c4;
+  background: #fafbfd; /* Old browsers */
+  background: -moz-linear-gradient(top, #fafbfd 0%, #eff3f7 55%, #e7edf4 58%, #dde6ef 94%, #d0dce9 97%, #d0dce9 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafbfd), color-stop(55%,#eff3f7), color-stop(58%,#e7edf4), color-stop(94%,#dde6ef), color-stop(97%,#d0dce9), color-stop(100%,#d0dce9)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #fafbfd 0%,#eff3f7 55%,#e7edf4 58%,#dde6ef 94%,#d0dce9 97%,#d0dce9 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #fafbfd 0%,#eff3f7 55%,#e7edf4 58%,#dde6ef 94%,#d0dce9 97%,#d0dce9 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #fafbfd 0%,#eff3f7 55%,#e7edf4 58%,#dde6ef 94%,#d0dce9 97%,#d0dce9 100%); /* IE10+ */
+  background: linear-gradient(top, #fafbfd 0%,#eff3f7 55%,#e7edf4 58%,#dde6ef 94%,#d0dce9 97%,#d0dce9 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafbfd', endColorstr='#d0dce9',GradientType=0 ); /* IE6-9 */
+}
+/*selected*/
+#team.athena-switch-inject .team-lnk.inject button,
+#team.athena-switch-athena .team-lnk.athena button,
+#team.athena-switch-all .team-lnk.all button{
+  color: #000;
+  cursor:default;
+  background: -moz-linear-gradient(top,  #dadada 0%, #e4e4e4 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dadada), color-stop(100%,#e4e4e4)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #dadada 0%,#e4e4e4 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #dadada 0%,#e4e4e4 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #dadada 0%,#e4e4e4 100%); /* IE10+ */
+  background: linear-gradient(top,  #dadada 0%,#e4e4e4 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dadada', endColorstr='#e4e4e4',GradientType=0 ); /* IE6-9 */
+}
+#team-members{
+  overflow: hidden;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+#team-members .team-member{
+  float:left;
+  margin: 4px;
+  opacity: 0.25;
+  filter: alpha(opacity=25);
+}
+#team.athena-switch-inject .inject,
+#team.athena-switch-athena .athena,
+#team.athena-switch-all .team-member{
+  opacity: 1;
+  filter: none;
+}
+/* TEAM MINIPROFILE TIP */
+/* straight from miniprofile.css*/
+.tip.team-member{
+  position: absolute;
+  margin-top: -30px;
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  width: 386px;
+}
+.tip.team-member .minipanel {
+  background: url(http://static02.linkedin.com/scds/common/u/img/bg/bg_miniprofile_left_386x683.png) no-repeat right 0 transparent;
+  padding: 10px 20px 0 20px;
+  border: 0;
+  zoom: 1;
+  overflow: hidden;
+  width: 346px;
+}
+.tip.team-member .minipanel-content {
+  background: url('http://static02.linkedin.com/scds/common/u/img/bg/bg_miniprofile_left_386x683.png') 0 100% no-repeat;
+  padding: 0 20px 20px 20px;
+  margin: 0;
+}
+.tip.team-member a:hover{
+  text-decoration:underline;
+}
+.tip.team-member .arrow,
+#miniprofile-close{
+  display:none;
+}
+.minipanel.miniprofile{
+  overflow:hidden;
+}
 
 /* SOURCE */
 .source {

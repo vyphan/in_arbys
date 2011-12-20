@@ -1,5 +1,5 @@
 var Class = require( 'class' ),
-  Button = require( 'athena/Button' ),
+  Abstract = require( 'athena/Abstract' ),
   Checkbox;
 
 /**
@@ -7,10 +7,10 @@ var Class = require( 'class' ),
  * from a checkbox or other single element.
  * @class Checkbox
  * @constructor
- * @extends Container
+ * @extends Abstract
  * @requires ptclass, Container
  */
-Checkbox = Class.create( Button,  ( function () {
+Checkbox = Class.create( Abstract,  ( function () {
 
   // RETURN METHODS OBJECT
   return {
@@ -43,14 +43,21 @@ Checkbox = Class.create( Button,  ( function () {
        */
       defaults = {
         on: 'change',
+        action: 'select',
         actionCheck: 'select',
         actionUncheck: 'unselect',
-        ariaAttrib: 'aria-controls'
-      };
+        ariaAttrib: 'aria-controls',
+        states: ['unchecked', 'checked']
+      },
+      /**
+       * Describes the current state of the checkbox
+       * @property checkedState
+       * @type String
+       */
+      checkedState;
 
 
       // Get the notify target from the config or from the ARIA-controls attribute
-
       settings.notify = settings.notify || ( "#" + $element.attr(defaults.ariaAttrib) );
             
       // MIX THE DEFAULTS INTO THE SETTINGS VALUES
@@ -71,22 +78,45 @@ Checkbox = Class.create( Button,  ( function () {
         return !!( $element.prop("checked") );
       };
       
-      // PRIVILEDGED METHODS
+      // PRIVILEGED METHODS
       Checkbox.triggerAction = function () {
-        var action = ( isChecked() ) ? settings.actionCheck : settings.actionUncheck;
-        _.log("Checkbox", action, $element);
+        var action = settings.actionUncheck,
+          index = 0;
+        
+        if ( isChecked() ) {
+         action = settings.actionCheck;
+         index = 1;
+        }
+
+        checkedState = settings.states[index];
+
+        settings.action = ( isChecked() ) ? settings.actionUnCheck : settings.action;
+
+        
+        _.log("Checkbox", action, checkedState, $element);
         Checkbox.trigger(action);
       };
 
 
       // Initially hide the extra content unless the checkbox is checked
       Checkbox.triggerAction();
+      
+      // EVENT LISTENERS
+      Checkbox.on(settings.on, function(event) {
+        event.stopPropagation();
+        Checkbox.triggerAction();
+      });
+      
  
     }
   };  
 }() ));
 
-//Export to CommonJS Loader
-if( module && module.exports ) {
-  module.exports = Checkbox;
+//Export to Common JS Loader
+if( module ) {
+  if( typeof module.setExports === 'function' ){
+    module.setExports( Checkbox );
+  } else if( module.exports ) {
+    module.exports = Checkbox; 
+  }
 }

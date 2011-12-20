@@ -20,6 +20,7 @@ List =  Class.create( Abstract, ( function () {
     MAXED_EVENT = 'maxed',
     SELECT_EVENT = 'select',
     SELECTED_EVENT = 'selected',
+    OUT_OF_BOUNDS_EVENT = 'out-of-bounds',
     VERTICAL = 'vertical',
     HORIZONTAL = 'horizontal',
     SELECTED_FLAG = 'athena-selected';
@@ -85,7 +86,7 @@ List =  Class.create( Abstract, ( function () {
             item = $( event.target );
 
         // A "vertical" list orentation means that the up and down arrow keys work
-        if ( settings.orentation === VERTICAL ) {  
+        if ( settings.orientation === VERTICAL ) {  
           switch ( keyCode ) {
             case 38: // Up arrow
               List.previous();
@@ -96,7 +97,7 @@ List =  Class.create( Abstract, ( function () {
               break;
           }
         } else {
-          // By default, list orentation is "horizontal" and left and right arrows work 
+          // By default, list orientation is "horizontal" and left and right arrows work 
           switch ( keyCode ) {
             case 37: // Left arrow
               List.previous();
@@ -129,7 +130,7 @@ List =  Class.create( Abstract, ( function () {
       //Scan for items from the provided selector, or default to the children of the container.
       if ( settings.items ) {
         if( typeof settings.items === 'string' ) {
-          $items =  $element.children( settings.items ).children();
+          $items = $element.children( settings.items ).children();
         } else {
           $items = settings.items.children();
         }
@@ -170,7 +171,7 @@ List =  Class.create( Abstract, ( function () {
        */  
       List.select = function( item ) {
         var $item,
-            $links;
+          $links;
 
         if ( item !== undefined ) {
 
@@ -181,6 +182,7 @@ List =  Class.create( Abstract, ( function () {
           }
 
           if( $item.hasClass( SELECTED_FLAG ) === false && $item.is( $items ) ) {
+
             // Not selected
             // aria-selected applies to the link _not_ the list item!!!
             $items.filter( '.' + SELECTED_FLAG ).removeClass( SELECTED_FLAG );
@@ -194,8 +196,17 @@ List =  Class.create( Abstract, ( function () {
               $links.eq( 0 ).attr( 'aria-selected', 'true' );
             }
 
-            // Selected
-            $element.trigger( SELECTED_EVENT, [ $item.addClass( SELECTED_FLAG ) ] );
+            $item.addClass( SELECTED_FLAG );
+
+            if( !List.hasPrevious() ) {
+              List.trigger( FLOORED_EVENT, [ $element ] )
+            }
+
+            if( !List.hasNext() ) {
+              List.trigger( MAXED_EVENT, [ $element ] )
+            }
+
+            List.trigger( SELECTED_EVENT, [ $item, List.index() ] );
 
           }
 
@@ -215,14 +226,11 @@ List =  Class.create( Abstract, ( function () {
        * @return {Object} List
        */
       List.next = function() {
-        var increment = 0;
-        if(  List.hasNext() ) {
-          increment = 1;
+        if( List.hasNext() ) {
+          List.select( List.index() + 1 );
         } else {
-          List.trigger( MAXED_EVENT, $element );
+          List.trigger( OUT_OF_BOUNDS_EVENT + '.' + NEXT_EVENT );
         }
-        List.select( $items.eq( List.index() + increment ) );
-
         return List;
       };
 
@@ -233,15 +241,11 @@ List =  Class.create( Abstract, ( function () {
        * @return {Object} List
        */  
       List.previous = function() {
-        var decrement = 0;
-
         if( List.hasPrevious() ) {
-          decrement = 1;
+          List.select( List.index() - 1 );
         } else {
-           List.trigger( FLOORED_EVENT, $element );
+          List.trigger( OUT_OF_BOUNDS_EVENT + '.' + PREVIOUS_EVENT );
         }
-
-        List.select( $items.eq( List.index() - decrement ) );
         return List;
       };
 
@@ -294,15 +298,7 @@ List =  Class.create( Abstract, ( function () {
        * @return {Number} The index of the selected item
        */
       List.index = function() {
-        var ndx = -1;
-        _.each( $items, function( item, index ) {
-          var $item = $( item );
-          if( $item.hasClass( SELECTED_FLAG ) ) {
-            ndx = index;
-            return;
-          }
-        } );
-        return ndx;
+        return $items.index( $items.filter( '.' + SELECTED_FLAG ) );
       };
 
       /**
@@ -335,32 +331,34 @@ List =  Class.create( Abstract, ( function () {
         return $items.length;
       };
 
-
       // EVENT BINDINGS
-      $element.on( SELECT_EVENT, function( event, item ) {
+      List.on( SELECT_EVENT, function( event, item ) {
         event.stopPropagation();
         if( item || item === 0 ) {
           List.select( item );
         }
       } );
-      $element.on( NEXT_EVENT, function( event ) {
+      List.on( NEXT_EVENT, function( event ) {
         event.stopPropagation();
         List.next();
       } );
-      $element.on( PREVIOUS_EVENT, function( event ) {
+      List.on( PREVIOUS_EVENT, function( event ) {
         event.stopPropagation();
         List.previous();
       } );
-      $element.on( FIRST_EVENT, function( event ) {
+      List.on( FIRST_EVENT, function( event ) {
         event.stopPropagation();
         List.first();
       } );
-      $element.on( LAST_EVENT, function( event ) {
+      List.on( LAST_EVENT, function( event ) {
         event.stopPropagation();
         List.last();
       } );
-      $element.on( 'keyup', handleKeyup );
+      List.on( 'keyup', handleKeyup );
+      List.trigger( SELECTED_EVENT, [ List.current(), List.index() ] );
+
     }
+
   };
 
 }() ));

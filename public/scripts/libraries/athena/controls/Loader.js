@@ -15,7 +15,8 @@ Loader = Class.create( Abstract, ( function () {
   // GLOBAL STATICS
 
   var LOADED_EVENT = 'LOADED',
-    LOADING_EVENT = 'LOADING';
+    LOADING_EVENT = 'LOADING',
+    LOADING_FLAG = 'athena-loading';
 
   // RETURN METHODS OBJECT
   return {
@@ -49,7 +50,7 @@ Loader = Class.create( Abstract, ( function () {
            * @property method 
            * @type {String}
            */
-          method: 'replace'
+          method: 'append'
         },
         /**
          * The node that the content is put into
@@ -80,7 +81,7 @@ Loader = Class.create( Abstract, ( function () {
           $content;
 
         Loader.trigger( LOADING_EVENT );
-        $element.addClass( 'athena-loading' );
+        $element.addClass( LOADING_FLAG );
 
         function inject( content ) {
           switch( settings.method ) {
@@ -89,12 +90,13 @@ Loader = Class.create( Abstract, ( function () {
               break;
             case 'append':
               $node.append( content );
+              console.log( $node )
               break;
             default:
               $node.html( content );
               break;
           }
-          $element.removeClass( settings.loadingFlag );
+          $element.removeClass( LOADING_FLAG );
           Loader.trigger( LOADED_EVENT );
         }
 
