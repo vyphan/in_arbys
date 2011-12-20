@@ -13,9 +13,9 @@ $(".product-showcase *[data-athena*='Carousel']")
 </script>
 
 <div data-athena="Tabs" class="product-showcase">
-  <ul class="tab-panels">
+  <ul class="tab-panels" data-athena="List">
     <!-- this is a menu section -->
-    <li id="classics" class="athena-selected">
+    <li id="classics" class="athena-selected" data-athena="Container">
       <ul data-athena="Carousel" data-config="{
         'Carousel': {
           observe: '.controls button'
@@ -59,7 +59,7 @@ $(".product-showcase *[data-athena*='Carousel']")
     </li>
     <!-- end menu section -->
     <!-- this is a menu section -->
-    <li id="melts">
+    <li id="melts" data-athena="Container">
       <ul data-athena="Carousel" data-config="{
         'Carousel': {
           observe: '.controls button'
@@ -103,7 +103,7 @@ $(".product-showcase *[data-athena*='Carousel']")
     </li>
     <!-- end menu section -->
     <!-- this is a menu section -->
-    <li id="marketfresh">
+    <li id="marketfresh" data-athena="Container">
       <ul data-athena="Carousel" data-config="{
         'Carousel': {
           observe: '.controls button'
@@ -147,7 +147,7 @@ $(".product-showcase *[data-athena*='Carousel']")
     </li>
     <!-- end menu section -->
   </ul>
-  <ul class="tab-list">
+  <ul class="tab-list" data-athena="List">
     <li class="athena-selected"><a href="#classics" data-athena="Button:Select">Classic Sandwiches</a></li>
     <li><a href="#melts" data-athena="Button:Select">Melty Goodness</a></li>
     <li><a href="#marketfresh" data-athena="Button:Select">Market Fresh Ideas</a></li>

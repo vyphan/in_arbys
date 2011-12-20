@@ -24,6 +24,8 @@
 .product-showcase .sandwich {
   float: left;
   width: 640px;
+  height: 260px;
+  overflow: hidden;
 }
 .product-showcase .description {
   float: right;
