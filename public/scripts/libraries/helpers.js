@@ -29,8 +29,9 @@ _.explodeURL = function ( url ) {
 
 };
 
-_.log = function (msg) {
-  if ( li.environment.debug && console && !!console.log ) {
-    console.log( 'FRAMEWORK: ' + msg );
+_.log = function () {
+  var args = arguments;
+  if ( window.ATHENA_CONFIG && window.ATHENA_CONFIG.debug && console && !!console.log ) {
+    console.log( "ATHENA: ", args );
   }
 };
