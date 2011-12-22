@@ -159,7 +159,6 @@ Button = Class.create( Abstract, ( function() {
 
       // EVENT BINDINGS
       Button.on( settings.on, function( event ) {
-
         event.preventDefault();
 
         var parameters = [];
@@ -192,7 +191,6 @@ Button = Class.create( Abstract, ( function() {
 
       // Setup accessibility - ally 
       setupAlly();
-      Button.enable();
 
     }
   };
