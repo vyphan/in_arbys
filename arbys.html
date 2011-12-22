@@ -6,16 +6,15 @@ $(".product-showcase *[data-athena*='Carousel']")
 .on("overflowMax", function() {
   $(".product-showcase").trigger("next");
 })
-.on("overflowMin", function() {
+.ofn("overflowMin", function() {
   $(".product-showcase").trigger("previous");
 });
 */
 </script>
 
 <div data-athena="Tabs" class="product-showcase">
-  <ul class="tab-panels" data-athena="List">
     <!-- this is a menu section -->
-    <li id="classics" class="athena-selected" data-athena="Container">
+    <div id="classics" class="athena-selected" data-athena="Container">
       <ul class="carousel" data-athena="Carousel">
         <li class="athena-selected">
           <div class="description">
@@ -65,10 +64,10 @@ $(".product-showcase *[data-athena*='Carousel']")
           }
         }">Next</button>
       </div>
-    </li>
+    </div>
     <!-- end menu section -->
     <!-- this is a menu section -->
-    <li id="melts" data-athena="Container">
+    <div class="athena-hidden" id="melts" data-athena="Container">
       <ul class="carousel" data-athena="Carousel">
         <li class="athena-selected">
           <div class="description">
@@ -118,10 +117,10 @@ $(".product-showcase *[data-athena*='Carousel']")
           }
         }">Next</button>
       </div>
-    </li>
+    </div>
     <!-- end menu section -->
     <!-- this is a menu section -->
-    <li id="marketfresh" data-athena="Container">
+    <div class="athena-hidden" id="marketfresh" data-athena="Container">
       <ul class="carousel" data-athena="Carousel">
         <li class="athena-selected">
           <div class="description">
@@ -171,9 +170,9 @@ $(".product-showcase *[data-athena*='Carousel']")
           }
         }">Next</button>
       </div>
-    </li>
+    </div>
     <!-- end menu section -->
-  </ul>
+
   <ul class="tab-list" data-athena="List">
     <li class="athena-selected"><a href="#classics" data-athena="Button:Select">Classic Sandwiches</a></li>
     <li><a href="#melts" data-athena="Button:Select">Melty Goodness</a></li>
@@ -239,12 +238,12 @@ $(".product-showcase *[data-athena*='Carousel']")
     </div>
   </div>
   <div id="extra">
-    <div id="team" class="" data-athena="Switcher" data-athena-config="{ 'Switcher': { 'states': 'all inject athena' } }">
+    <div id="team" class="" data-athena="Switcher" data-athena-config="{ 'Switcher': { 'states': 'athena inject all' } }">
       <h2>The Team</h2>
       <ul id="team-lnks">
-        <li class="team-lnk inject"><button data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'inject' } }">Inject</button></li>
-        <li class="team-lnk athena"><button data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'athena' } }">Athena</button></li>
-        <li class="team-lnk all"><button data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'all' } }">All</button></li>
+        <li class="team-lnk inject"><button type="button" data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'inject' } }">Inject</button></li>
+        <li class="team-lnk athena"><button type="button" data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'athena' } }">Athena</button></li>
+        <li class="team-lnk all"><button type="button" data-athena="Button:Switch" data-athena-config="{ 'Button:Switch': { states: 'all' } }">All</button></li>
       </ul>      
       <ul id="team-members">
         <li class="team-member inject" data-athena="Tip:Left" data-athena-config="{ 'Tip:Left': { uri:'miniprofile.html', threshold: 0, delay: 150 } }">
