@@ -13,7 +13,7 @@ Carousel =  Class.create( List, ( function() {
 
   var MAXED_EVENT = 'maxed',
     FLOORED_EVENT = 'floored',
-    PLAY_EVENT = 'play'
+    PLAY_EVENT = 'play',
     PLAYING_EVENT = 'playing',
     PAUSE_EVENT = 'pause',
     PAUSED_EVENT = 'paused',
@@ -22,7 +22,8 @@ Carousel =  Class.create( List, ( function() {
     SELECT_EVENT = 'select',
     SELECTED_EVENT = 'selected',
     PREVIOUS_EVENT = 'previous',
-    NEXT_EVENT = 'next';
+    NEXT_EVENT = 'next',
+    OUT_OF_BOUNDS_EVENT = 'out-of-bounds';
 
   // RETURN METHODS OBJECT
   return {
@@ -75,33 +76,7 @@ Carousel =  Class.create( List, ( function() {
            * @private
            * @final
            */
-          delay: 3000,
-          /**
-           * A selector scoped to the $element that matches carousel panels
-           * @property repeat
-           * @type String
-           * @private
-           * @final
-           */
-          panels: '.panels',
-          /**
-           * A selector scoped to the $element that matches carousel items
-           * @property repeat
-           * @type String
-           * @private
-           * @final
-           */
-          items: '.items',
-          /**
-           * The CSS class that designates a selected panel
-           * @property selectFlag
-           * @default 'selected'
-           * @type String
-           * @final
-           * @private
-          */
-          activeFlag: 'active'
-
+          delay: 3000
         },
         /**
          * Integer value signalling whether the carousel is set to repeat
@@ -117,25 +92,12 @@ Carousel =  Class.create( List, ( function() {
          * @default false
          * @private
          */
-        playing = false,
-        /**
-         * The collection of panels in the carousel
-         * @property $panels
-         * @type Object
-         * @private
-         */
-        $panels;
+        playing = false;
 
       // MIX THE DEFAULTS INTO THE SETTINGS VALUES
       _.defaults( settings, defaults );
 
       repeat = settings.repeat;
-
-      $panels = $element.children( settings.panels ).children();
-
-      if( $panels.length > 0 ) {
-        settings.items = $panels.children( settings.items );
-      }
 
       // CALL THE PARENT'S CONSTRUCTOR
       $super( $element, settings );
@@ -205,11 +167,11 @@ Carousel =  Class.create( List, ( function() {
        * @return {Object} List
        */
       Carousel.next = function() {
-          if( Carousel.size() === Carousel.index() + 1 ) {
-            Carousel.select( 0 );
-          } else {
-            Carousel.select( Carousel.index() + 1 ); 
-          }
+        if( Carousel.size() === Carousel.index() + 1 ) {
+          Carousel.select( 0 );
+        } else {
+          Carousel.select( Carousel.index() + 1 ); 
+        }
         return Carousel;
       };
 
@@ -220,6 +182,7 @@ Carousel =  Class.create( List, ( function() {
        * @return {Object} List
        */  
       Carousel.previous = function() {
+        console.log( 'previous' );
         Carousel.select( Carousel.index() - 1 );
         return Carousel;
       };
@@ -231,6 +194,43 @@ Carousel =  Class.create( List, ( function() {
       Carousel.on( [PAUSE_EVENT, NEXT_EVENT, PREVIOUS_EVENT, FIRST_EVENT, LAST_EVENT, SELECT_EVENT].join( ' ' ), function( event, item ) {
         event.stopPropagation();
         Carousel.pause();
+      } );
+      Carousel.on( OUT_OF_BOUNDS_EVENT + '.' + NEXT_EVENT, function( event ) {
+        var controls;
+
+        event.stopPropagation();
+
+        Carousel.next();
+
+        controls = Carousel.current().athena( 'getControls' );
+        _.each( controls, function( item, index ) {
+          if ( typeof item.first === 'function' ) {
+            item.first();
+          }
+        } );
+
+      } );
+      Carousel.on( OUT_OF_BOUNDS_EVENT + '.' + PREVIOUS_EVENT, function( event ) {
+        var controls;
+
+        event.stopPropagation();
+
+        Carousel.previous();
+
+        controls = Carousel.current().athena( 'getControls' );
+        _.each( controls, function( item, index ) {
+          if ( typeof item.last === 'function' ) {
+            item.last();
+          }
+        } );
+      } );
+      Carousel.on( SELECTED_EVENT, function( event, $item ) {
+        console.log( Carousel.items(), $item );
+        if( $item.is( Carousel.items() ) ) {
+          event.stopPropagation();
+          console.log( 'YAY!!!', $item );
+          Carousel.select( $item );
+        }
       } );
 
       // Play if autoplay was true in settings

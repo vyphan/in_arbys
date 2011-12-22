@@ -15,6 +15,8 @@ List =  Class.create( Abstract, ( function () {
   var NEXT_EVENT = 'next',
     LAST_EVENT = 'last',
     FIRST_EVENT = 'first',
+    PAUSED_EVENT = 'paused',
+    PLAYING_EVENT = 'playing',
     PREVIOUS_EVENT = 'previous',
     FLOORED_EVENT = 'floored',
     MAXED_EVENT = 'maxed',
@@ -23,7 +25,8 @@ List =  Class.create( Abstract, ( function () {
     OUT_OF_BOUNDS_EVENT = 'out-of-bounds',
     VERTICAL = 'vertical',
     HORIZONTAL = 'horizontal',
-    SELECTED_FLAG = 'athena-selected';
+    SELECTED_FLAG = 'athena-selected',
+    ITEMS_FLAG = 'athena-carousel-items';
 
   //RETURN METHODS OBJECT 
   return {
@@ -70,7 +73,16 @@ List =  Class.create( Abstract, ( function () {
          * @type Object
          * @private
          */
-        $items;
+        $items,
+        /**
+         * A boolean flag denoting that the list is "autoplaying"; this occurs for Carousel.  Why is it in List, then?
+         * Um...
+         *
+         * @property autoPlay
+         * @type Boolean 
+         * @private
+         */
+        autoPlay = false;
 
       /**
        * Handles the keyup event and looks for keycodes 37, 38, 39 and 40.  These correspond to left, up, right and down
@@ -127,17 +139,28 @@ List =  Class.create( Abstract, ( function () {
       // CALL THE PARENT'S CONSTRUCTOR
       $super( $element, settings );
 
-
       //Scan for items from the provided selector, or default to the children of the container.
       if ( settings.items ) {
         if( typeof settings.items === 'string' ) {
-          $items = $element.children( settings.items ).children();
+          $items = $element.children( settings.items );
         } else {
-          $items = settings.items.children();
+          $items = settings.items;
         }
       } else {
-        $items = $element.children();
+        if( $element.is( ITEMS_FLAG ) ) {
+          $items = $element.children();
+        } else {
+          $items = $element.find(  '.' + ITEMS_FLAG ).children();
+        }
+        if( $items.length === 0 ) {
+          if( $element.is( 'ul, ol' ) ) {
+            $items = $element.addClass( '.' + ITEMS_FLAG ).children();
+          } else {
+            $items = $element.find( 'ul, ol' ).first().addClass( ITEMS_FLAG ).children();
+          }
+        }
       }
+
 
       /**
        * Append a new item to $element
@@ -174,12 +197,15 @@ List =  Class.create( Abstract, ( function () {
         var $item,
           $links;
 
+console.log( item );
+
         if ( item !== undefined ) {
 
           // Item is an index number
           if( typeof item === 'number' ) {
             $item = $items.eq( item );
-          } 
+            console.log( $item );
+          }
           // Item is a string/CSS selector
           else if ( typeof item === 'string' )
             $item = $items.filter( item );
@@ -188,38 +214,50 @@ List =  Class.create( Abstract, ( function () {
             $item = item;
           }
 
-          if( $item.hasClass( SELECTED_FLAG ) === false && $item.is( $items ) ) {
+          if( $item.is( $items ) ) {
 
-            // Not selected
-            // aria-selected applies to the link _not_ the list item!!!
-            $items.filter( '.' + SELECTED_FLAG ).removeClass( SELECTED_FLAG );
-            // Set all links under $items to be aria-selected false
-            $items.find( 'a' ).attr( 'aria-selected', 'false' );
+            if( $item.hasClass( SELECTED_FLAG ) === false ) {
 
-            $links = $item.find( 'a' );
+              // Not selected
+              // aria-selected applies to the link _not_ the list item!!!
+              $items.filter( '.' + SELECTED_FLAG ).removeClass( SELECTED_FLAG );
+              // Set all links under $items to be aria-selected false
+              $items.find( 'a' ).attr( 'aria-selected', 'false' );
 
-            if ( $links.length > 0 ) {
-              // Set aria-selected for the first link to "true"
-              $links.eq( 0 ).attr( 'aria-selected', 'true' );
+              $links = $item.find( 'a' );
+
+              if ( $links.length > 0 ) {
+                // Set aria-selected for the first link to "true"
+                $links.eq( 0 ).attr( 'aria-selected', 'true' );
+              }
+
+              $item.addClass( SELECTED_FLAG );
+
+              if( !List.hasPrevious() ) {
+                List.trigger( FLOORED_EVENT, [ $element ] );
+              }
+
+              if( !List.hasNext() ) {
+                List.trigger( MAXED_EVENT, [ $element ] );
+              }
+
+              // Set focus to the item that you've selected
+              // We do this for a11y
+              if ( !autoPlay ) {
+                // We set focus when we're not auto playing.
+                // Setting focus when auto playing moves the page and that's a bad baby!
+                $item.attr( 'tabindex', '-1' ).focus();
+              }
+
+              List.trigger( SELECTED_EVENT, [ $item, List.index() ] );
+
             }
-
-            $item.addClass( SELECTED_FLAG );
-
-            if( !List.hasPrevious() ) {
-              List.trigger( FLOORED_EVENT, [ $element ] );
-            }
-
-            if( !List.hasNext() ) {
-              List.trigger( MAXED_EVENT, [ $element ] );
-            }
-
-            List.trigger( SELECTED_EVENT, [ $item, List.index() ] );
 
           }
 
-          // Set focus to the item that you've selected
-          // We do this for a11y
-          $item.attr( 'tabindex', '-1' ).focus();
+        } else {
+
+          List.trigger( OUT_OF_BOUNDS_EVENT );
 
         }
 
@@ -227,7 +265,7 @@ List =  Class.create( Abstract, ( function () {
       };
 
       /**
-       * Selects the next item in the list. 
+       * Selects the next item in the list.
        * @method next
        * @public
        * @return {Object} List
@@ -344,18 +382,18 @@ List =  Class.create( Abstract, ( function () {
         
         // Check for number (list index)
         // Check for string (CSS Selector)
-        if ( _.isNumber(item) || _.isString(item) ) {
+        if ( _.isNumber( item ) || _.isString( item ) ) {
           List.select( item );
         }
         // Check for JQuery object
-        else if ( _.isObject(item) ) {
+        else if ( _.isObject( item ) ) {
 
           // We need to ensure that [item] is a descendant of our List
-          item = $element.find(item);
+          item = $element.find( item );
           
           // Now check for empty JQuery object
           if ( item.length < 1) {
-            item = $(event.target).closest('li').index();
+            item = $( event.target ).closest( 'li' ).index();
           }
 
           List.select( item );
@@ -379,7 +417,16 @@ List =  Class.create( Abstract, ( function () {
         event.stopPropagation();
         List.last();
       } );
+      List.on( PLAYING_EVENT, function( event ) {
+        event.stopPropagation();
+        autoPlay = true;
+      } );
+      List.on( PAUSED_EVENT, function( event ) {
+        event.stopPropagation();
+        autoPlay = false;
+      } );
       List.on( 'keyup', handleKeyup );
+
     }
 
   };

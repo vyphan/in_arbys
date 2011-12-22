@@ -13,158 +13,161 @@ $(".product-showcase *[data-athena*='Carousel']")
 </script>
 
 <div data-athena="Tabs" class="product-showcase">
-  <ul class="tab-panels" data-athena="List">
-    <!-- this is a menu section -->
-    <li id="classics" class="athena-selected" data-athena="Container">
-      <ul class="carousel" data-athena="Carousel">
-        <li class="athena-selected">
-          <div class= "sandwich"><img src="/images/roastbeef.png"/></div>
-          <div class="description">
-            <h2>Roast Beef</h2>
-            <p>There's nothing quite as <strong>satisfying</strong> as the classics. You should always
-              remember your roots, and for that there's the Roast Beef. Humble in appearance, this pile
-              of meat will fill you up yet strangely leave you wanting more. This is how it all begins,
-              and if you've never experienced Arby's, start here.</p>
-          </div>
-        </li>
-        <li>
-          <div class= "sandwich"><img src="/images/beefandcheddar.png"/></div>
-          <div class="description">
-            <h2>Beef and Cheddar</h2>
-            <p>Perhaps the greatest invention since the Roast Beef was the addition of cheese and ranch
-              dressing. The Beef and Cheddar is <strong>saucy</strong> and zippy. Mix in some Horsey
-              Sauce for some unexpected zip, or just dip it in your Arby's Sauce for some tang. It's okay,
-              your curly fries won't mind.</p>
-          </div>
-        </li>
-        <li>
-          <div class= "sandwich"><img src="/images/baconbeefandcheddar.png"/></div>
-          <div class="description">
-            <h2>Bacon Beef and Cheddar</h2>
-            <p>This sandwich makes grown men cry. <strong>Pepper bacon</strong> takes already perhaps
-              the greatest thing you can hold in your hand and takes it up a notch. It's bacon, it's
-              beef, it's cheddar, and eating it is like kissing a newborn baby. The happiness that
-              fills you will last for weeks.</p>
-          </div>
-        </li>
-      </ul>
-      <div class="controls">
-        <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
-          'Button:Previous': {
-            notify: '#classics .carousel',
-            bubbles: false
-          }
-        }">Previous</button>
-        <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
-          'Button:Next': {
-            notify: '#classics .carousel',
-            bubbles: false
-          }
-        }">Next</button>
-      </div>
-    </li>
-    <!-- end menu section -->
-    <!-- this is a menu section -->
-    <li id="melts" data-athena="Container">
-      <ul class="carousel" data-athena="Carousel">
-        <li class="athena-selected">
-          <div class= "sandwich"><img src="/images/melt.png"/></div>
-          <div class="description">
-            <h2>Classic Melt</h2>
-            <p>Forget the regular "melt", beef makes a <strong>delicious</strong> melt that will have
-              tuna on the sidelines crying for his mommy. It's not a beef and cheddar, as it lacks the
-              ranch dressing, but it's exactly what you want in your sandwich - meat and zesty cheddar
-              sauce.</p>
-          </div>
-        </li>
-        <li>
-          <div class= "sandwich"><img src="/images/frenchdip.png"/></div>
-          <div class="description">
-            <h2>French Dip, Melted Swiss</h2>
-            <p>You're a <strong>rebel</strong> and we love you for it. The french dip gets a touch of
-              "melt" with a generous portion of swiss cheese to join you on your decent into Au Jus 
-              delight. When you're done, drink the juice! In some states, we believe it should be a crime
-              to leave any of the French Dip behind.</p>
-          </div>
-        </li>
-        <li>
-          <div class= "sandwich"><img src="/images/reuben.png"/></div>
-          <div class="description">
-            <h2>Reuben</h2>
-            <p>Every class of sandwich deserves a title and a crown. The <strong>epic</strong> reuben
-              is the only sandwich known to mankind to deserve the word epic (typically reserved for
-              things like galaxies and oceans). One bite of this delicious corned beef and you'll
-              lose yourself in flavor nirvana. It doesn't smell like teen spirit, it smells like Arby's!</p>
-          </div>
-        </li>
-      </ul>
-      <div class="controls">
-        <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
-          'Button:Previous': {
-            notify: '#melts .carousel',
-            bubbles: false
-          }
-        }">Previous</button>
-        <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
-          'Button:Next': {
-            notify: '#melts .carousel',
-            bubbles: false
-          }
-        }">Next</button>
-      </div>
-    </li>
-    <!-- end menu section -->
-    <!-- this is a menu section -->
-    <li id="marketfresh" data-athena="Container">
-      <ul class="carousel" data-athena="Carousel">
-        <li class="athena-selected">
-          <div class= "sandwich"><img src="/images/turkeywrap.png"/></div>
-          <div class="description">
-            <h2>Roast Turkey Ranch and Bacon Wrap</h2>
-            <p>Market Fresh doesn't mean you have to give up flavor. The Roast Turkey is piled high,
-              and you know it's <strong>healthy</strong> because it's turkey. Ripe tomatoes and whole
-              grain bread make this the go-to item if you feel you can't handle the more awesome beef
-              based sandwiches. We promise not to laugh. Much.</p>
-          </div>
-        </li>
-        <li>
-          <div class= "sandwich"><img src="/images/turkeyswiss.png"/></div>
-          <div class="description">
-            <h2>Roast Turkey and Swiss</h2>
-            <p>Even lighter than the Roast Turkey Ranch is a turkey and swiss. Arby's does it right,
-              not skimping on the sandwich but still <strong>delivering flavor</strong> in every bite.
-              Like all Market Fresh items, this too has 100% whole grain. Like all Market Fresh items,
-              we'll give you a hard time for ordering it.</p>
-          </div>
-        </li>
-        <li>
-          <div class= "sandwich"><img src="/images/farmhouse.png"/></div>
-          <div class="description">
-            <h2>Farmhouse Salad</h2>
-            <p>You're really desperate to get out of here on the healthy side! The Farmhouse Salad is
-              exactly what it's name says- a <strong>salad</strong>. Crispy chicken, thick ranch dressing,
-              and a pile of produce will have you soon realizing that while this says "salad" in its name,
-              it's actually a pile of sandwich goodies tossed in a bowl.</p>
-          </div>
-        </li>
-      </ul>
-      <div class="controls">
-        <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
-          'Button:Previous': {
-            notify: '#marketfresh .carousel',
-            bubbles: false
-          }
-        }">Previous</button>
-        <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
-          'Button:Next': {
-            notify: '#marketfresh .carousel',
-            bubbles: false
-          }
-        }">Next</button>
-      </div>
-    </li>
-    <!-- end menu section -->
-  </ul>
+
+  <!-- this is a menu section -->
+  <div class="" id="classics" data-athena="Container">
+    <ul class="carousel" data-athena="Carousel">
+      <li class="athena-selected">
+        <div class= "sandwich"><img src="/images/roastbeef.png"/></div>
+        <div class="description">
+          <h2>Roast Beef</h2>
+          <p>There's nothing quite as <strong>satisfying</strong> as the classics. You should always
+            remember your roots, and for that there's the Roast Beef. Humble in appearance, this pile
+            of meat will fill you up yet strangely leave you wanting more. This is how it all begins,
+            and if you've never experienced Arby's, start here.</p>
+        </div>
+      </li>
+      <li>
+        <div class= "sandwich"><img src="/images/beefandcheddar.png"/></div>
+        <div class="description">
+          <h2>Beef and Cheddar</h2>
+          <p>Perhaps the greatest invention since the Roast Beef was the addition of cheese and ranch
+            dressing. The Beef and Cheddar is <strong>saucy</strong> and zippy. Mix in some Horsey
+            Sauce for some unexpected zip, or just dip it in your Arby's Sauce for some tang. It's okay,
+            your curly fries won't mind.</p>
+        </div>
+      </li>
+      <li>
+        <div class= "sandwich"><img src="/images/baconbeefandcheddar.png"/></div>
+        <div class="description">
+          <h2>Bacon Beef and Cheddar</h2>
+          <p>This sandwich makes grown men cry. <strong>Pepper bacon</strong> takes already perhaps
+            the greatest thing you can hold in your hand and takes it up a notch. It's bacon, it's
+            beef, it's cheddar, and eating it is like kissing a newborn baby. The happiness that
+            fills you will last for weeks.</p>
+        </div>
+      </li>
+    </ul>
+    <div class="controls">
+      <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
+        'Button:Previous': {
+          notify: '#classics .carousel',
+          bubbles: false
+        }
+      }">Previous</button>
+      <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
+        'Button:Next': {
+          notify: '#classics .carousel',
+          bubbles: false
+        }
+      }">Next</button>
+    </div>
+  </div>
+  <!-- end menu section -->
+
+  <!-- this is a menu section -->
+  <div class="athena-hidden" id="melts" data-athena="Container">
+    <ul class="carousel" data-athena="Carousel">
+      <li class="athena-selected">
+        <div class= "sandwich"><img src="/images/melt.png"/></div>
+        <div class="description">
+          <h2>Classic Melt</h2>
+          <p>Forget the regular "melt", beef makes a <strong>delicious</strong> melt that will have
+            tuna on the sidelines crying for his mommy. It's not a beef and cheddar, as it lacks the
+            ranch dressing, but it's exactly what you want in your sandwich - meat and zesty cheddar
+            sauce.</p>
+        </div>
+      </li>
+      <li>
+        <div class= "sandwich"><img src="/images/frenchdip.png"/></div>
+        <div class="description">
+          <h2>French Dip, Melted Swiss</h2>
+          <p>You're a <strong>rebel</strong> and we love you for it. The french dip gets a touch of
+            "melt" with a generous portion of swiss cheese to join you on your decent into Au Jus 
+            delight. When you're done, drink the juice! In some states, we believe it should be a crime
+            to leave any of the French Dip behind.</p>
+        </div>
+      </li>
+      <li>
+        <div class= "sandwich"><img src="/images/reuben.png"/></div>
+        <div class="description">
+          <h2>Reuben</h2>
+          <p>Every class of sandwich deserves a title and a crown. The <strong>epic</strong> reuben
+            is the only sandwich known to mankind to deserve the word epic (typically reserved for
+            things like galaxies and oceans). One bite of this delicious corned beef and you'll
+            lose yourself in flavor nirvana. It doesn't smell like teen spirit, it smells like Arby's!</p>
+        </div>
+      </li>
+    </ul>
+    <div class="controls">
+      <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
+        'Button:Previous': {
+          notify: '#melts .carousel',
+          bubbles: false
+        }
+      }">Previous</button>
+      <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
+        'Button:Next': {
+          notify: '#melts .carousel',
+          bubbles: false
+        }
+      }">Next</button>
+    </div>
+  </div>
+  <!-- end menu section -->
+
+  <!-- this is a menu section -->
+  <div class="athena-hidden" id="marketfresh" data-athena="Container">
+    <ul class="carousel" data-athena="Carousel">
+      <li class="athena-selected">
+        <div class= "sandwich"><img src="/images/turkeywrap.png"/></div>
+        <div class="description">
+          <h2>Roast Turkey Ranch and Bacon Wrap</h2>
+          <p>Market Fresh doesn't mean you have to give up flavor. The Roast Turkey is piled high,
+            and you know it's <strong>healthy</strong> because it's turkey. Ripe tomatoes and whole
+            grain bread make this the go-to item if you feel you can't handle the more awesome beef
+            based sandwiches. We promise not to laugh. Much.</p>
+        </div>
+      </li>
+      <li>
+        <div class= "sandwich"><img src="/images/turkeyswiss.png"/></div>
+        <div class="description">
+          <h2>Roast Turkey and Swiss</h2>
+          <p>Even lighter than the Roast Turkey Ranch is a turkey and swiss. Arby's does it right,
+            not skimping on the sandwich but still <strong>delivering flavor</strong> in every bite.
+            Like all Market Fresh items, this too has 100% whole grain. Like all Market Fresh items,
+            we'll give you a hard time for ordering it.</p>
+        </div>
+      </li>
+      <li>
+        <div class= "sandwich"><img src="/images/farmhouse.png"/></div>
+        <div class="description">
+          <h2>Farmhouse Salad</h2>
+          <p>You're really desperate to get out of here on the healthy side! The Farmhouse Salad is
+            exactly what it's name says- a <strong>salad</strong>. Crispy chicken, thick ranch dressing,
+            and a pile of produce will have you soon realizing that while this says "salad" in its name,
+            it's actually a pile of sandwich goodies tossed in a bowl.</p>
+        </div>
+      </li>
+    </ul>
+    <div class="controls">
+      <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
+        'Button:Previous': {
+          notify: '#marketfresh .carousel',
+          bubbles: false
+        }
+      }">Previous</button>
+      <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
+        'Button:Next': {
+          notify: '#marketfresh .carousel',
+          bubbles: false
+        }
+      }">Next</button>
+    </div>
+  </div>
+  <!-- end menu section -->
+
+
   <ul class="tab-list" data-athena="List">
     <li class="athena-selected"><a href="#classics" data-athena="Button:Select">Classic Sandwiches</a></li>
     <li><a href="#melts" data-athena="Button:Select">Melty Goodness</a></li>
