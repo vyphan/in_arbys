@@ -17,12 +17,16 @@
 
 /* PRODUCT SHOWCASE */
 .product-showcase {
-  background: #c43a3a;
-  border: 1px solid #000;
+  background: url("/images/redRptBg.jpg") repeat-x scroll center top #DA002A; 
+  border: 1px solid #DA002A;
   -moz-box-shadow: 0 10px 5px #888;
   -webkit-box-shadow: 0 10px 5px #888;
   box-shadow: 0 10px 5px #888;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
   overflow: hidden;
+  color: #fff;
 }
 .product-showcase .sandwich {
   float: left;
@@ -33,6 +37,8 @@
 .product-showcase .description {
   float: right;
   width: 310px;
+  font-size: 115%;
+  margin-top: 15px;
 }
 .product-showcase ul {
   padding: 0;
@@ -49,25 +55,32 @@
   clear: both;
   padding: 0;
   margin: 0;
+  font-size: 140%;
 }
 .product-showcase .tab-list li {
   float: left;
   width: 312px;
   height: 50px;
-  background: #c43a3a;
-  border: 3px solid #c43a3a;
+  border: 3px solid #A3001F;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 .product-showcase .tab-list li.athena-selected {
-  background: #ffffff;
-  border: 3px solid #000;
-  border-top: 3px solid #c43a3a;
+  background: #A3001F;
 }
 .product-showcase .tab-list a {
+  color: #fff;
   display: block;
   width: 100%;
-  height: 100%;
+  text-align: center;
+  margin: 12px 0;
 }
-
+.product-showcase .sandwich img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .grid-a {
   margin-top: 20px;
 }
