@@ -16,11 +16,7 @@ $(".product-showcase *[data-athena*='Carousel']")
   <ul class="tab-panels" data-athena="List">
     <!-- this is a menu section -->
     <li id="classics" class="athena-selected" data-athena="Container">
-      <ul data-athena="Carousel" data-config="{
-        'Carousel': {
-          observe: '.controls button'
-        }
-      }">
+      <ul class="carousel" data-athena="Carousel">
         <li class="athena-selected">
           <div class= "sandwich"><img src="/images/roastbeef.png"/></div>
           <div class="description">
@@ -53,18 +49,24 @@ $(".product-showcase *[data-athena*='Carousel']")
         </li>
       </ul>
       <div class="controls">
-        <button class="showcase-previous" data-athena="Button:Previous">Previous</button>
-        <button class="showcase-next" data-athena="Button:Next">Next</button>
+        <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
+          'Button:Previous': {
+            notify: '#classics .carousel',
+            bubbles: false
+          }
+        }">Previous</button>
+        <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
+          'Button:Next': {
+            notify: '#classics .carousel',
+            bubbles: false
+          }
+        }">Next</button>
       </div>
     </li>
     <!-- end menu section -->
     <!-- this is a menu section -->
     <li id="melts" data-athena="Container">
-      <ul data-athena="Carousel" data-config="{
-        'Carousel': {
-          observe: '.controls button'
-        }
-      }">
+      <ul class="carousel" data-athena="Carousel">
         <li class="athena-selected">
           <div class= "sandwich"><img src="/images/melt.png"/></div>
           <div class="description">
@@ -97,18 +99,24 @@ $(".product-showcase *[data-athena*='Carousel']")
         </li>
       </ul>
       <div class="controls">
-        <button class="showcase-previous" data-athena="Button:Previous">Previous</button>
-        <button class="showcase-next" data-athena="Button:Next">Next</button>
+        <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
+          'Button:Previous': {
+            notify: '#melts .carousel',
+            bubbles: false
+          }
+        }">Previous</button>
+        <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
+          'Button:Next': {
+            notify: '#melts .carousel',
+            bubbles: false
+          }
+        }">Next</button>
       </div>
     </li>
     <!-- end menu section -->
     <!-- this is a menu section -->
     <li id="marketfresh" data-athena="Container">
-      <ul data-athena="Carousel" data-config="{
-        'Carousel': {
-          observe: '.controls button'
-        }
-      }">
+      <ul class="carousel" data-athena="Carousel">
         <li class="athena-selected">
           <div class= "sandwich"><img src="/images/turkeywrap.png"/></div>
           <div class="description">
@@ -141,8 +149,18 @@ $(".product-showcase *[data-athena*='Carousel']")
         </li>
       </ul>
       <div class="controls">
-        <button class="showcase-previous" data-athena="Button:Previous">Previous</button>
-        <button class="showcase-next" data-athena="Button:Next">Next</button>
+        <button class="showcase-previous" data-athena="Button:Previous" data-athena-config="{
+          'Button:Previous': {
+            notify: '#marketfresh .carousel',
+            bubbles: false
+          }
+        }">Previous</button>
+        <button class="showcase-next" data-athena="Button:Next" data-athena-config="{
+          'Button:Next': {
+            notify: '#marketfresh .carousel',
+            bubbles: false
+          }
+        }">Next</button>
       </div>
     </li>
     <!-- end menu section -->
