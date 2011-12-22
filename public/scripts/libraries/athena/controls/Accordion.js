@@ -11,6 +11,9 @@ var Class = require( 'class' ),
 Accordion =  Class.create( List, ( function () {
 
   //CONSTANTS
+  var HIDDEN_CSS = "athena-hidden",
+    HIDE = "hide",
+    SHOW = "show";
 
   //RETURN METHODS OBJECT 
   return {
@@ -41,9 +44,15 @@ Accordion =  Class.create( List, ( function () {
          * @final
          */
         defaults = {
-          orientation: 'horizontal',
-          notify: '[data-athena="ui:Container"]'
+          notify: '[data-athena*="Container"]'
         },
+        /**
+         * JQuery collection of accordion toggle-buttons in the list
+         * @property $buttons
+         * @type Object
+         * @private
+         */
+        $buttons,
         /**
          * JQuery collection of like items in the list
          * @property $panels
@@ -51,6 +60,11 @@ Accordion =  Class.create( List, ( function () {
          * @private
          */
         $panels,
+        /**
+         * The last-selected panel
+         * @property $last
+         * @type Object
+         */
         $last;
 
 
@@ -61,25 +75,32 @@ Accordion =  Class.create( List, ( function () {
       $super( $element, settings );
 
       $panels = $(settings.notify, $element);
+      $buttons = $('[data-athena*="Button:Select"]', $element);
+      
+      $last = $panels.not("." + HIDDEN_CSS).eq(0);
         
-      $element.on("select", function (event, item) {
+      Accordion.on("select", function (event, item) {
+        _.log("Accordion.on", $element, event, item);
         event.stopPropagation();
-        $panels.trigger("hide");
         
-        if ( item.is($last) ) {
-          if ( item.data("open") ) {
-            $last = item.trigger("hide").data("open", false);
-          }
-          else {
-            $last = item.trigger("show").data("open", true);
-          }
-        } 
+        if ( !item.is($last) ) {
+          $panels.trigger(HIDE);
+          $last = item.trigger(SHOW);
+        }
+        else if ( item.hasClass(HIDDEN_CSS) ) {
+          $panels.trigger(HIDE);
+          $last = item.trigger(SHOW);
+        }
         else {
-          $last = item.trigger("show").data("open", true);
+          $panels.trigger(HIDE);
+          // "null" out the item to force the buttons to all become enabled
+          item = $([]);
         }
 
-      });
+        $buttons.trigger("selected", [item]);
 
+      });
+        
     }
 
   };

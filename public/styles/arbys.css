@@ -11,6 +11,9 @@
     height: 0;
 }
 
+.athena-hidden {
+  display: none;
+}
 
 /* PRODUCT SHOWCASE */
 .product-showcase {
@@ -198,4 +201,13 @@
 /* SOURCE */
 .source {
 
+}
+
+#content h2 a:before {
+  content: "[+] ";
+  font-size: 0.5em;
+}
+#content h2 a.athena-disabled:before {
+  content: "[-] ";
+  font-size: 0.5em;
 }
