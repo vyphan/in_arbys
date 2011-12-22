@@ -17,28 +17,34 @@
 
 /* PRODUCT SHOWCASE */
 .product-showcase {
-  background: url("/images/redRptBg.jpg") repeat-x scroll center top #DA002A; 
-  border: 1px solid #DA002A;
+  /* background: url("/images/redRptBg.jpg") repeat-x scroll center top #DA002A;  */
+  border: 1px solid #DDD;
   -moz-box-shadow: 0 10px 5px #888;
   -webkit-box-shadow: 0 10px 5px #888;
   box-shadow: 0 10px 5px #888;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
   overflow: hidden;
-  color: #fff;
 }
 .product-showcase .sandwich {
-  float: left;
-  width: 640px;
+  /* width: 640px; */
   height: 260px;
   overflow: hidden;
+  display: inline-block;
 }
 .product-showcase .description {
-  float: right;
-  width: 310px;
-  font-size: 115%;
-  margin-top: 15px;
+  width: 450px;
+  margin: 20px 30px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+.product-showcase .description h2 {
+  font-family: "Times New Roman";
+  font-size: 300%;
+  font-weight: normal;
+}
+.product-showcase .description h3 {
+  margin-top: 0;
+  font-weight: normal;
+  font-size: 140%;
 }
 .product-showcase ul {
   padding: 0;
@@ -55,31 +61,47 @@
   clear: both;
   padding: 0;
   margin: 0;
-  font-size: 140%;
+  font-size: 110%;
 }
 .product-showcase .tab-list li {
   float: left;
-  width: 312px;
-  height: 50px;
-  border: 3px solid #A3001F;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+  width: 200px;
+  border: 1px solid #DDD;
+  border-bottom-style: none;
 }
-.product-showcase .tab-list li.athena-selected {
-  background: #A3001F;
+.product-showcase .tab-list li:first-child{
+  border-left-style: none;
+  border-right-style: none;
+}
+.product-showcase .tab-list li:last-child{
+  border-left-style: none;
+}
+.product-showcase .tab-list li.athena-selected a {
+  color: #000;
 }
 .product-showcase .tab-list a {
-  color: #fff;
   display: block;
   width: 100%;
   text-align: center;
-  margin: 12px 0;
+  margin: 8px 0;
+  text-transform: uppercase;
 }
 .product-showcase .sandwich img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+.product-showcase .controls {
+  margin: -40px 30px 40px;
+}
+.product-showcase .controls button {
+  background-color: #E0E0E0;
+  border: 1px solid #A3A3A3;
+  padding: 5px 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 105%;
 }
 .grid-a {
   margin-top: 20px;
