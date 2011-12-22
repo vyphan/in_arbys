@@ -11,6 +11,9 @@
     height: 0;
 }
 
+.athena-hidden {
+  display: none;
+}
 
 /* PRODUCT SHOWCASE */
 .product-showcase {
